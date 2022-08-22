@@ -2,7 +2,8 @@ import { Category } from "./Category"
 import { Product } from "./Product"
 
 export interface Planning {
-  id: number,
+  id: string,
+  startDate: string,
   planningCategories: {
     category: Category,
     products: Product[]

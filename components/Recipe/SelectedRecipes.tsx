@@ -1,13 +1,8 @@
+import Button from "components/Button";
 import React, { useEffect, useState } from "react";
 import { Product } from "types/Product";
-import Recipe from "./Recipe";
-import {
-  Button,
-  Container,
-  Item,
-  Items,
-  Title,
-} from "./selectedRecipes.styles";
+import Recipe from ".";
+import { Container, Item, Items, Title } from "./selectedRecipes.styles";
 
 const allQuantityTypes = ["g", "mL", ""];
 
@@ -42,7 +37,6 @@ const SelectedRecipes = ({
       })
     );
     setProducts(newProducts);
-    console.log(newQuantityTypes);
     setQuantityTypes(newQuantityTypes);
   }, [recipes]);
   return (
@@ -63,21 +57,25 @@ const SelectedRecipes = ({
         </>
       ) : (
         <Items>
-          {Object.entries(products).map(([name, weight]) => {
-            const existingType = quantityTypes[name];
-            const roundedWeight = +parseFloat(weight.toString()).toFixed(2);
-            const roundedBase = +parseFloat((weight * existingType.base).toString()).toFixed(2);
-            const quantity = existingType.type
-              ? `${roundedBase} ${existingType.type}`
-              : `${roundedWeight} (${roundedBase}g)`;
-            return (
-              <Item key={name}>
-                <>
-                  {name}: {quantity}
-                </>
-              </Item>
-            );
-          })}
+          {Object.entries(products)
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([name, weight]) => {
+              const existingType = quantityTypes[name];
+              const roundedWeight = +parseFloat(weight.toString()).toFixed(2);
+              const roundedBase = +parseFloat(
+                (weight * existingType.base).toString()
+              ).toFixed(2);
+              const quantity = existingType.type
+                ? `${roundedBase} ${existingType.type}`
+                : `${roundedWeight} (${roundedBase}g)`;
+              return (
+                <Item key={name}>
+                  <>
+                    {name}: {quantity}
+                  </>
+                </Item>
+              );
+            })}
         </Items>
       )}
       <Button onClick={() => setSeeRecipes(!seeRecipes)}>

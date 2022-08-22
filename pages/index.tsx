@@ -1,29 +1,30 @@
+import Recipes from "components/Recipe/Recipes";
+import SelectedRecipes from "components/Recipe/SelectedRecipes";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
+import { getLocalStorageItem } from "services/dates";
 import { getRecipes } from "services/recipes";
 import { Product } from "types/Product";
-import Recipes from "../components/Recipes";
-import SelectedRecipes from "../components/SelectedRecipes";
 
 export default function Home({
   recipes,
-  id,
+  startDate,
 }: {
   recipes: Product[];
-  id: number;
+  startDate: string;
 }): JSX.Element {
   const [selectedRecipes, setSelectedRecipes] = useState([]);
 
   useEffect(() => {
-    const existingSelectedRecipes = localStorage.getItem(`recipes-${id}`);
+    const existingSelectedRecipes = localStorage.getItem(getLocalStorageItem(new Date(startDate)));
     if (existingSelectedRecipes) {
       setSelectedRecipes(existingSelectedRecipes.split(","));
     }
-  }, [id]);
+  }, [startDate]);
 
   useEffect(() => {
-    localStorage.setItem(`recipes-${id}`, selectedRecipes.join(","));
-  }, [id, selectedRecipes]);
+    localStorage.setItem(getLocalStorageItem(new Date(startDate)), selectedRecipes.join(","));
+  }, [startDate, selectedRecipes]);
 
   return (
     <div className="main-container">
@@ -38,6 +39,7 @@ export default function Home({
         />
       )}
       <Recipes
+        startDate={startDate}
         recipes={recipes.filter(
           (recipe) => !selectedRecipes.includes(recipe.id)
         )}
@@ -51,13 +53,13 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps<{
   recipes: Product[];
-  id: number;
+  startDate: string;
 }> = async () => {
-  const { recipes, id } = await getRecipes();
+  const { recipes, startDate } = await getRecipes();
   return {
     props: {
       recipes,
-      id,
+      startDate,
     },
   };
 };

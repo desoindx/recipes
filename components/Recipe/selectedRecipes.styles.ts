@@ -5,9 +5,9 @@ export const Title = styled.span`
 `;
 
 export const Container = styled.div`
-  overflow: scroll;
+  overflow: auto;
   min-width: fit-content;
-  max-height: 100vh;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -15,19 +15,9 @@ export const Container = styled.div`
   border-right: solid 1px white;
 `;
 
-export const Button = styled.button`
-  cursor: pointer;
-  background-color: white;
-  color: black;
-  padding: 16px;
-  &:hover {
-    background-color: #999999;
-  }
-`;
-
 export const Items = styled.div`
   margin-bottom: 8px;
-  width: calc((100vw - 280px) / 4);
+  width: calc((100vw - 195px) / 4);
   display: flex;
   flex-direction: column;
 `

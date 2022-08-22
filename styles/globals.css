@@ -1,7 +1,10 @@
 body {
   background-color: black;
+  color: white;
+  margin: 0;
 }
 
 .main-container {
   display: flex;
+  max-height: calc(100vh - 67.5px);
 }
