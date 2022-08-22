@@ -1,5 +1,7 @@
 import { gql, GraphQLClient } from "graphql-request";
 import { CategorySlug } from "types/Enums/Category";
+import { Product } from "types/Product";
+import { Recipe } from "types/Recipe";
 import { PlanningResponse, RecipeResponse } from "types/Response";
 import { getBackDate } from "./dates";
 
@@ -11,7 +13,13 @@ const graphQLClient = new GraphQLClient("https://mgs.quitoque.fr/graphql", {
 
 const excludedFacets = ["Poisson", "Crustacés"];
 
+const recipes: Record<string, { recipes: Product[]; startDate: string }> = {};
 export const getRecipes = async (startDate?: string) => {
+  const cached = recipes[startDate || "now"];
+  if (cached) {
+    return cached;
+  }
+
   const query = gql`
     query planning($id: ID!) {
       planning(id: $id) {
@@ -47,12 +55,12 @@ export const getRecipes = async (startDate?: string) => {
     }
   `;
   try {
-    const result = (await graphQLClient.request(query, {
+    const { planning } = (await graphQLClient.request(query, {
       id: getBackDate(startDate),
     })) as PlanningResponse;
-    return {
-      startDate: result.planning.startDate,
-      recipes: result.planning.planningCategories
+    const result = {
+      startDate: planning.startDate,
+      recipes: planning.planningCategories
         .find((planning) => planning.category.slug === CategorySlug.TO_COOK)
         .products.filter((product) => product.nbPerson === 2)
         .filter(
@@ -60,12 +68,20 @@ export const getRecipes = async (startDate?: string) => {
             !product.facets.some((facet) => excludedFacets.includes(facet.name))
         ),
     };
+    recipes[startDate || "now"] = result;
+    return result;
   } catch (err) {
     console.error("API has returned error", err);
   }
 };
 
+const recipe: Record<string, Recipe> = {};
 export const getRecipe = async (id: string) => {
+  const cached = recipe[id];
+  if (cached) {
+    return cached;
+  }
+
   const query = gql`
     query recipe($id: ID!) {
       recipe(id: $id) {
@@ -82,14 +98,14 @@ export const getRecipe = async (id: string) => {
             }
           }
         }
-      
       }
     }
   `;
   try {
     const result = (await graphQLClient.request(query, {
-      id: id.split('-')[1],
+      id: id.split("-")[1],
     })) as RecipeResponse;
+    recipe[id] = result.recipe;
     return result.recipe;
   } catch (err) {
     console.error("API has returned error", err);
