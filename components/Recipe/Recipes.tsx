@@ -3,45 +3,8 @@ import { Product } from "types/Product";
 import Recipe from ".";
 import { Container, AllRecipes, Header, Select } from "./recipes.styles";
 import { useEffect, useState } from "react";
-
-const filterOptions = [
-  {
-    label: "Poisson",
-    value: "Poisson",
-  },
-  {
-    label: "Crustacés",
-    value: "Crustacés",
-  },
-  {
-    label: "Végétarien",
-    value: "Végétarien",
-  },
-  {
-    label: "Viande",
-    value: "Viande",
-  },
-];
-
-const selectStyles = {
-  control: (provided) => ({
-    ...provided,
-    border: "none",
-    boxShadow: "none",
-    cursor: "pointer",
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    backgroundColor: "white",
-    color: "black",
-  }),
-  option: (provided, state) => {
-    if (state.isFocused) {
-      return { ...provided, cursor: "pointer", backgroundColor: "#c8c8c8" };
-    }
-    return { ...provided, cursor: "pointer" };
-  },
-};
+import selectStyles from "components/Select/styles";
+import { facetOptions, facets } from "components/Select/facets";
 
 const Recipes = ({
   startDate,
@@ -59,10 +22,7 @@ const Recipes = ({
   const [filter, setFilter] = useState<string[]>();
 
   useEffect(() => {
-    setFilter(
-      localStorage.getItem("filter")?.split(",") ||
-        filterOptions.map((option) => option.value)
-    );
+    setFilter(localStorage.getItem("filter")?.split(",") || facets);
   }, []);
 
   useEffect(() => {
@@ -78,10 +38,10 @@ const Recipes = ({
         {withFilter && filter && (
           <Select
             isMulti
-            defaultValue={filterOptions.filter((option) =>
+            defaultValue={facetOptions.filter((option) =>
               filter.includes(option.value)
             )}
-            options={filterOptions}
+            options={facetOptions}
             onChange={(value: any[]) =>
               setFilter(value.map((option) => option.value))
             }

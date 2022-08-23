@@ -7,6 +7,7 @@ const Header = () => {
     <NavBar>
       <Link href={"/"}>Faire mes courses</Link>
       <Link href={"/recipes/now"}>Voir mes recettes</Link>
+      <Link href={"/restes"}>Utiliser mes restes</Link>
     </NavBar>
   );
 };

@@ -60,7 +60,7 @@ export const getRecipes = async (startDate?: string) => {
       startDate: planning.startDate,
       recipes: planning.planningCategories
         .find((planning) => planning.category.slug === CategorySlug.TO_COOK)
-        .products.filter((product) => product.nbPerson === 2)
+        .products.filter((product) => product.nbPerson === 2),
     };
     recipes[startDate || "now"] = result;
     return result;
@@ -72,9 +72,11 @@ export const getRecipes = async (startDate?: string) => {
 const recipe: Record<string, Recipe> = {};
 export const getRecipe = async (startDate: string, id: string) => {
   const cachedRecipe = recipe[id];
-  const product = (await getRecipes(startDate)).recipes.find(product => product.id === id);
+  const product = (await getRecipes(startDate)).recipes.find(
+    (product) => product.id === id
+  );
   if (cachedRecipe) {
-    cachedRecipe.product = product
+    cachedRecipe.product = product;
     return cachedRecipe;
   }
 
@@ -107,4 +109,22 @@ export const getRecipe = async (startDate: string, id: string) => {
   } catch (err) {
     console.error("API has returned error", err);
   }
+};
+
+export const getAllRecipes = async () => {
+  const initialRecipes = await getRecipes();
+  const recipes = [initialRecipes];
+  const now = new Date(initialRecipes.startDate);
+  now.setDate(now.getDate() - 28);
+  for (let i = 0; i < 6; i++) {
+    now.setDate(now.getDate() + 7);
+    if (i === 4) {
+      continue;
+    }
+
+    const result = await getRecipes(now.toISOString());
+    recipes.push(result);
+  }
+
+  return recipes.filter(recipe => recipe);
 };
