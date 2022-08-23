@@ -11,8 +11,8 @@ const recipe = ({ recipe }: { recipe: Recipe }) => {
 export const getServerSideProps: GetServerSideProps<{
   recipe: Recipe;
 }> = async (context) => {
-  const { id } = context.params;
-  const recipe = await getRecipe(id as string);
+  const { startDate, id } = context.params;
+  const recipe = await getRecipe(startDate as string, id as string);
   return {
     props: {
       recipe,

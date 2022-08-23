@@ -76,10 +76,12 @@ export const getRecipes = async (startDate?: string) => {
 };
 
 const recipe: Record<string, Recipe> = {};
-export const getRecipe = async (id: string) => {
-  const cached = recipe[id];
-  if (cached) {
-    return cached;
+export const getRecipe = async (startDate: string, id: string) => {
+  const cachedRecipe = recipe[id];
+  const product = (await getRecipes(startDate)).recipes.find(product => product.id === id);
+  if (cachedRecipe) {
+    cachedRecipe.product = product
+    return cachedRecipe;
   }
 
   const query = gql`
@@ -105,6 +107,7 @@ export const getRecipe = async (id: string) => {
     const result = (await graphQLClient.request(query, {
       id: id.split("-")[1],
     })) as RecipeResponse;
+    result.recipe.product = product;
     recipe[id] = result.recipe;
     return result.recipe;
   } catch (err) {

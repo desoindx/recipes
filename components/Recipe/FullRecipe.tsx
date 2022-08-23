@@ -7,6 +7,8 @@ import {
   PreviousButton,
   Subtitle,
   Title,
+  Image,
+  Item,
 } from "./fullRecipe.styles";
 
 const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
@@ -20,18 +22,28 @@ const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
     newSteps.sort((a, b) => a.position - b.position);
     setSteps(newSteps);
   }, [recipe]);
-  
+
   return (
     <Container>
-      <Title>{recipe.name}</Title>
-      {steps.map((step) => {
-        return (
-          <>
-            <Subtitle>{step.title}</Subtitle>
-            <Description>{step.description}</Description>
-          </>
-        );
-      })}
+      <div>
+        <Image src={recipe.product.images[0]} alt={recipe.name} />
+        {recipe.product.subProducts.map((product) => (
+          <Item key={product.product.name}>
+            {product.product.name}: {product.literalQuantity}
+          </Item>
+        ))}
+      </div>
+      <div>
+        <Title>{recipe.name}</Title>
+        {steps.map((step) => {
+          return (
+            <>
+              <Subtitle>{step.title}</Subtitle>
+              <Description>{step.description}</Description>
+            </>
+          );
+        })}
+      </div>
       <PreviousButton
         onClick={() => {
           router.back();

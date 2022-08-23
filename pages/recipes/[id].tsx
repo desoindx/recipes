@@ -63,7 +63,7 @@ const WeeklyRecipes = ({
           selectedRecipes.includes(recipe.id)
         )}
         selectRecipe={(recipe: string) => {
-          router.push(`/recipe/${recipe}`);
+          router.push(`/recipe/${startDate}/${recipe}`);
         }}
         showRecipe
       />

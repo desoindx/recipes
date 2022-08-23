@@ -1,3 +1,5 @@
+import { Product } from "./Product";
+
 export interface Recipe {
   id: number;
   name: string;
@@ -12,4 +14,5 @@ export interface Recipe {
       }[];
     }[];
   }[];
+  product: Product
 }
