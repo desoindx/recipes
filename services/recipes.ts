@@ -11,8 +11,6 @@ const graphQLClient = new GraphQLClient("https://mgs.quitoque.fr/graphql", {
   },
 });
 
-const excludedFacets = ["Poisson", "Crustacés"];
-
 const recipes: Record<string, { recipes: Product[]; startDate: string }> = {};
 export const getRecipes = async (startDate?: string) => {
   const cached = recipes[startDate || "now"];
@@ -63,10 +61,6 @@ export const getRecipes = async (startDate?: string) => {
       recipes: planning.planningCategories
         .find((planning) => planning.category.slug === CategorySlug.TO_COOK)
         .products.filter((product) => product.nbPerson === 2)
-        .filter(
-          (product) =>
-            !product.facets.some((facet) => excludedFacets.includes(facet.name))
-        ),
     };
     recipes[startDate || "now"] = result;
     return result;

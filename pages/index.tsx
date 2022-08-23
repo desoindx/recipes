@@ -46,6 +46,7 @@ export default function Home({
         selectRecipe={(recipe) => {
           setSelectedRecipes([...selectedRecipes, recipe]);
         }}
+        withFilter
       />
     </div>
   );
