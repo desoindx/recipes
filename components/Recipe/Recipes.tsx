@@ -23,6 +23,26 @@ const filterOptions = [
   },
 ];
 
+const selectStyles = {
+  control: (provided) => ({
+    ...provided,
+    border: "none",
+    boxShadow: "none",
+    cursor: "pointer",
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    backgroundColor: "white",
+    color: "black",
+  }),
+  option: (provided, state) => {
+    if (state.isFocused) {
+      return { ...provided, cursor: "pointer", backgroundColor: "#c8c8c8" };
+    }
+    return { ...provided, cursor: "pointer" };
+  },
+};
+
 const Recipes = ({
   startDate,
   recipes,
@@ -62,7 +82,10 @@ const Recipes = ({
               filter.includes(option.value)
             )}
             options={filterOptions}
-            onChange={(value: any[]) => setFilter(value.map((option) => option.value))}
+            onChange={(value: any[]) =>
+              setFilter(value.map((option) => option.value))
+            }
+            styles={selectStyles}
           />
         )}
       </Header>

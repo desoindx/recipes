@@ -6,6 +6,6 @@ export default styled.button`
   color: black;
   padding: 16px;
   &:hover {
-    background-color: #999999;
+    background-color: #c8c8c8;
   }
 `;

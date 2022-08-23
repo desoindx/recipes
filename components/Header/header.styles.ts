@@ -10,7 +10,7 @@ export const NavBar = styled.nav`
     margin: 32px;
     padding: 16px;
     &:hover {
-      color: #999999;
+      color: #c8c8c8;
     }
   }
 `;

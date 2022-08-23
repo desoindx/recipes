@@ -8,7 +8,7 @@ export const Box = styled.div`
   color: black;
   cursor: pointer;
   &:hover {
-    background-color: #999999;
+    background-color: #c8c8c8;
   }
 `
 export const Title = styled.p`
