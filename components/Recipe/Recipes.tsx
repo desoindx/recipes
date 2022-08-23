@@ -1,7 +1,7 @@
 import { getFrontDate } from "services/dates";
 import { Product } from "types/Product";
 import Recipe from ".";
-import { Title, Container } from "./recipes.styles";
+import { Title, Container, AllRecipes } from "./recipes.styles";
 
 const Recipes = ({
   startDate,
@@ -15,9 +15,9 @@ const Recipes = ({
   showRecipe?: boolean;
 }) => {
   return (
-    <div>
+    <Container>
       <Title>Recettes de la semaine du {getFrontDate(startDate)}</Title>
-      <Container>
+      <AllRecipes>
         {recipes.map((recipe) => (
           <Recipe
             key={recipe.id}
@@ -26,8 +26,8 @@ const Recipes = ({
             withProducts={!showRecipe}
           />
         ))}
-      </Container>
-    </div>
+      </AllRecipes>
+    </Container>
   );
 };
 
