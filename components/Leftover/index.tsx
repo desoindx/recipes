@@ -72,29 +72,37 @@ const Leftover = ({
         )}
       </Selects>
       <AllRecipes>
-        {plannings.flatMap((planning) =>
-          planning.recipes
-            .filter((product) =>
-              product.facets.some(
-                (facet) => filter && filter.includes(facet.name)
-              )
+        {products.length > 0 &&
+          plannings
+            .flatMap((planning) =>
+              planning.recipes
+                .filter((product) =>
+                  product.facets.some(
+                    (facet) => filter && filter.includes(facet.name)
+                  )
+                )
+                .filter((recipe) =>
+                  products.every((product) =>
+                    recipe.subProducts.find(
+                      (recipeProduct) => recipeProduct.product.name === product
+                    )
+                  )
+                )
+                .map((recipe) => ({ recipe, startDate: planning.startDate }))
             )
-            .filter((recipe) =>
-              recipe.subProducts.some((product) =>
-                products.includes(product.product.name)
-              )
-            )
-            .map((recipe) => (
+            .filter(({ recipe }, index, recipes) => {
+              return (
+                recipes.findIndex((r) => r.recipe.id === recipe.id) === index
+              );
+            })
+            .map(({ recipe, startDate }) => (
               <Recipe
                 key={recipe.id}
                 recipe={recipe}
-                onClick={() =>
-                  router.push(`/recipe/${planning.startDate}/${recipe.id}`)
-                }
+                onClick={() => router.push(`/recipe/${startDate}/${recipe.id}`)}
                 withProducts
               />
-            ))
-        )}
+            ))}
       </AllRecipes>
     </div>
   );

@@ -126,5 +126,5 @@ export const getAllRecipes = async () => {
     recipes.push(result);
   }
 
-  return recipes.filter(recipe => recipe);
+  return recipes.filter((recipe) => recipe);
 };
