@@ -1,10 +1,10 @@
-import { getFrontDate } from "services/dates";
 import { Product } from "types/Product";
 import Recipe from ".";
 import { Container, AllRecipes, Header, Select } from "./recipes.styles";
 import { useEffect, useState } from "react";
 import selectStyles from "components/Select/styles";
 import { facetOptions, facets } from "components/Select/facets";
+import { getFrontDate } from "services/dates";
 
 const Recipes = ({
   startDate,

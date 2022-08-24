@@ -62,7 +62,7 @@ export const getRecipes = async (startDate?: string) => {
         .find((planning) => planning.category.slug === CategorySlug.TO_COOK)
         .products.filter((product) => product.nbPerson === 2),
     };
-    recipes[startDate || "now"] = result;
+    recipes[planning.startDate || "now"] = result;
     return result;
   } catch (err) {
     console.error("API has returned error", err);
