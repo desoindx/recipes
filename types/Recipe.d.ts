@@ -1,18 +1,28 @@
+import { Ingredient } from "./Ingredient";
 import { Product } from "./Product";
+
+export interface Cooking {
+  name: string;
+  stacks: {
+    cupboardIngredients: Ingredient[];
+    ingredients: Ingredient[];
+  };
+  steps: {
+    position: number;
+    title: string;
+    description: string;
+  }[];
+
+}
+
+export interface Pool {
+  nbPerson: number;
+  cookingModes: Cooking[];
+}
 
 export interface Recipe {
   id: number;
   name: string;
-  pools: {
-    nbPerson: number;
-    cookingModes: {
-      name: string;
-      steps: {
-        position: number;
-        title: string;
-        description: string;
-      }[];
-    }[];
-  }[];
-  product: Product
+  image: string;
+  pools: Pool[];
 }

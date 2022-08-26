@@ -70,13 +70,9 @@ export const getRecipes = async (startDate?: string) => {
 };
 
 const recipe: Record<string, Recipe> = {};
-export const getRecipe = async (startDate: string, id: string) => {
+export const getRecipe = async (id: string) => {
   const cachedRecipe = recipe[id];
-  const product = (await getRecipes(startDate)).recipes.find(
-    (product) => product.id === id
-  );
   if (cachedRecipe) {
-    cachedRecipe.product = product;
     return cachedRecipe;
   }
 
@@ -85,10 +81,29 @@ export const getRecipe = async (startDate: string, id: string) => {
       recipe(id: $id) {
         id
         name
+        image
         pools {
           nbPerson
           cookingModes {
             name
+            stacks {
+              cupboardIngredients {
+                literalQuantity
+                quantity
+                product {
+                  name
+                  weight
+                }
+              }
+              ingredients {
+                literalQuantity
+                quantity
+                product {
+                  name
+                  weight
+                }
+              }
+            }
             steps {
               position
               title
@@ -103,7 +118,6 @@ export const getRecipe = async (startDate: string, id: string) => {
     const result = (await graphQLClient.request(query, {
       id: id.split("-")[1],
     })) as RecipeResponse;
-    result.recipe.product = product;
     recipe[id] = result.recipe;
     return result.recipe;
   } catch (err) {

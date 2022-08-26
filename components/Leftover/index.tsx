@@ -43,8 +43,6 @@ const Leftover = ({
     );
   }, [plannings]);
 
-  useEffect(() => {}, [products, filter]);
-
   return (
     <div>
       <Selects>
@@ -95,11 +93,11 @@ const Leftover = ({
                 recipes.findIndex((r) => r.recipe.id === recipe.id) === index
               );
             })
-            .map(({ recipe, startDate }) => (
+            .map(({ recipe }) => (
               <Recipe
                 key={recipe.id}
                 recipe={recipe}
-                onClick={() => router.push(`/recipe/${startDate}/${recipe.id}`)}
+                onClick={() => router.push(`/recipe/${recipe.id}`)}
                 withProducts
               />
             ))}

@@ -1,3 +1,5 @@
+import { Ingredient } from "./Ingredient";
+
 export interface Product {
   id: string;
   nbPerson: number;
@@ -6,14 +8,7 @@ export interface Product {
   nutritionalInformation: {
     kiloCalorie: number;
   };
-  subProducts: {
-    literalQuantity: string;
-    quantity: number;
-    product: {
-      name: string;
-      weight: number;
-    };
-  }[];
+  subProducts: Ingredient[];
   facets: {
     name: string;
   }[];
