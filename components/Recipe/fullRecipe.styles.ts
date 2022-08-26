@@ -1,25 +1,34 @@
 import Button from "components/Button";
+import { MediaDesktop, MediaMobile } from "components/responsive";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 900px;
-  margin: 48px auto;
+  width: calc(100% - 64px);
   padding: 32px;
   background-color: white;
   color: black;
   position: relative;
   display: flex;
   gap: 32px;
+  ${MediaDesktop} {
+    max-width: 900px;
+    margin: 48px auto;
+  }
+  ${MediaMobile} {
+    flex-direction: column;
+    margin-bottom: 100px;
+  }
 `;
 
 export const Image = styled.img`
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   margin-bottom: 16px;
 `;
 
 export const Item = styled.p`
   margin: 4px 0;
-`
+`;
 
 export const Title = styled.div`
   font-size: 24px;
@@ -39,4 +48,7 @@ export const PreviousButton = styled(Button)`
   position: absolute;
   bottom: -64px;
   right: 0;
+  ${MediaMobile} {
+    right: 32px;
+  }
 `;

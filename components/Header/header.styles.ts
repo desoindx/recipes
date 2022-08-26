@@ -1,7 +1,7 @@
+import { MediaDesktop, MediaMobile } from "components/responsive";
 import styled from "styled-components";
 
 export const NavBar = styled.nav`
-  width: 100vw;
   border-bottom: 1px solid white;
   padding: 16px 32px;
   a {
@@ -12,5 +12,18 @@ export const NavBar = styled.nav`
     &:hover {
       color: #c8c8c8;
     }
+  }
+`;
+
+export const Container = styled.div`
+  ${MediaMobile} {
+    display: none;
+  }
+`;
+
+export const BurgerContainer = styled.div`
+  height: fit-content;
+  ${MediaDesktop} {
+    display: none;
   }
 `;
