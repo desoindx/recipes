@@ -48,3 +48,24 @@ export const HideButton = styled.button<{ hide: boolean }>`
     display: none;
   }
 `;
+
+export const CopyButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  cursor: pointer;
+`;
+
+export const Copied = styled.div`
+  position: absolute;
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  right: 13px;
+  padding: 4px;
+  border-radius: 4px;
+  top: 50px;
+`;

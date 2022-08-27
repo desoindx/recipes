@@ -4,6 +4,8 @@ import { Product } from "types/Product";
 import Recipe from ".";
 import {
   Container,
+  Copied,
+  CopyButton,
   HideButton,
   Item,
   Items,
@@ -20,31 +22,43 @@ const SelectedRecipes = ({
   unselectRecipe: (id: string) => void;
 }) => {
   const [seeRecipes, setSeeRecipes] = useState(true);
+  const [copied, setCopied] = useState(false);
   const [hide, setHide] = useState(true);
-  const [products, setProducts] = useState<Record<string, number>>({});
-  const [quantityTypes, setQuantityTypes] = useState<
-    Record<string, { type: string; base: number }>
-  >({});
+  const [shoppingList, setShoppingList] = useState<string[]>([]);
+
   useEffect(() => {
-    const newProducts = {};
-    const newQuantityTypes = {};
+    const products: Record<string, number> = {};
+    const quantityTypes = {};
     recipes.forEach((recipe) =>
       recipe.subProducts.forEach((product) => {
-        const existingQuantity = newProducts[product.product.name] || 0;
-        newProducts[product.product.name] =
+        const existingQuantity = products[product.product.name] || 0;
+        products[product.product.name] =
           existingQuantity + product.quantity / product.product.weight;
 
         const quantityType = allQuantityTypes.find((type) =>
           product.literalQuantity.includes(type)
         );
-        newQuantityTypes[product.product.name] = {
+        quantityTypes[product.product.name] = {
           type: quantityType,
           base: product.product.weight,
         };
       })
     );
-    setProducts(newProducts);
-    setQuantityTypes(newQuantityTypes);
+    setShoppingList(
+      Object.entries(products)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([name, weight]) => {
+          const existingType = quantityTypes[name];
+          const roundedWeight = +parseFloat(weight.toString()).toFixed(2);
+          const roundedBase = +parseFloat(
+            (existingType.base * weight).toString()
+          ).toFixed(2);
+          const quantity = existingType.type
+            ? `${roundedBase} ${existingType.type}`
+            : `${roundedWeight} (${roundedBase}g)`;
+          return `${name}: ${quantity}`;
+        })
+    );
   }, [recipes]);
   return (
     <>
@@ -74,27 +88,26 @@ const SelectedRecipes = ({
             ))}
           </>
         ) : (
-          <Items>
-            {Object.entries(products)
-              .sort((a, b) => a[0].localeCompare(b[0]))
-              .map(([name, weight]) => {
-                const existingType = quantityTypes[name];
-                const roundedWeight = +parseFloat(weight.toString()).toFixed(2);
-                const roundedBase = +parseFloat(
-                  (weight * existingType.base).toString()
-                ).toFixed(2);
-                const quantity = existingType.type
-                  ? `${roundedBase} ${existingType.type}`
-                  : `${roundedWeight} (${roundedBase}g)`;
-                return (
-                  <Item key={name}>
-                    <>
-                      {name}: {quantity}
-                    </>
-                  </Item>
-                );
-              })}
-          </Items>
+          <>
+            <CopyButton
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(shoppingList.join("\r\n"))
+                  .then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 750);
+                  });
+              }}
+            >
+              <img src={"./copy.svg"} alt="copier la liste" />
+            </CopyButton>
+            {copied && <Copied>Copié</Copied>}
+            <Items>
+              {shoppingList.map((item) => (
+                <Item key={item}>{item} </Item>
+              ))}
+            </Items>
+          </>
         )}
         <Button onClick={() => setSeeRecipes(!seeRecipes)}>
           Voir {seeRecipes ? "la liste de course" : "les recettes choisies"}
