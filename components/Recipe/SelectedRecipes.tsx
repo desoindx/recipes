@@ -62,16 +62,18 @@ const SelectedRecipes = ({
   }, [recipes]);
   return (
     <>
-      <HideButton hide={hide} onClick={() => setHide(!hide)}>
-        <img
-          src={hide ? "./right-arrow.svg" : "./left-arrow.svg"}
-          alt={
-            hide
-              ? "Ouvrir les recettes choisies"
-              : "Fermer les recettes choisies"
-          }
-        />
-      </HideButton>
+      {recipes.length > 0 && (
+        <HideButton hide={hide} onClick={() => setHide(!hide)}>
+          <img
+            src={hide ? "./right-arrow.svg" : "./left-arrow.svg"}
+            alt={
+              hide
+                ? "Ouvrir les recettes choisies"
+                : "Fermer les recettes choisies"
+            }
+          />
+        </HideButton>
+      )}
       <Container hide={hide}>
         {seeRecipes ? (
           <>
