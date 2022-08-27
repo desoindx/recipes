@@ -87,7 +87,7 @@ export const SidePanel = styled.div`
   width: 250px;
   border-right: 1px solid white;
   background-color: black;
-  z-index: 1;
+  z-index: 3;
   height: 100vh;
   display: flex;
   flex-direction: column;
