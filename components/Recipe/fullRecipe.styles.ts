@@ -21,9 +21,11 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.img`
-  max-width: 400px;
-  width: 100%;
+  width: 250px;
   margin-bottom: 16px;
+  ${MediaMobile} {
+    width: 100%;
+  }
 `;
 
 export const Item = styled.p`
