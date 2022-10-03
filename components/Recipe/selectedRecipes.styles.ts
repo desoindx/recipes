@@ -24,7 +24,7 @@ export const Container = styled.div<{ hide: boolean }>`
 
 export const Items = styled.div`
   margin-bottom: 8px;
-  width: calc((100vw - 195px) / 4);
+  width: calc((100vw - 225px) / 4);
   min-width: 300px;
   display: flex;
   flex-direction: column;

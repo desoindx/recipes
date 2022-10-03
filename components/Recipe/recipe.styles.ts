@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Box = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc((100vw - 195px) / 4);
+  width: calc((100vw - 225px) / 4);
   min-width: 300px;
   background-color: white;
   color: black;
