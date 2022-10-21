@@ -29,7 +29,7 @@ export const Image = styled.img`
 `;
 
 export const Item = styled.p`
-  margin: 4px 0;
+  margin: 2px 0;
 `;
 
 export const Title = styled.div`

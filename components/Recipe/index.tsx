@@ -20,7 +20,7 @@ const Recipe = ({
       {withProducts &&
         recipe.subProducts.map((product) => (
           <Item key={product.product.name}>
-            {product.product.name}: {product.literalQuantity}
+            <b>{product.product.name}</b> : {product.literalQuantity}
           </Item>
         ))}
     </Box>

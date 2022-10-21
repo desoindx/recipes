@@ -29,16 +29,16 @@ const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
         {cooking &&
           cooking.stacks.ingredients.map((ingredient) => (
             <Item key={ingredient.product.name}>
-              {ingredient.product.name}: {ingredient.literalQuantity}
+              <b>{ingredient.product.name}</b> : {ingredient.literalQuantity}
             </Item>
           ))}
         {cooking &&
           cooking.stacks.cupboardIngredients.map((ingredient) => (
             <Item key={ingredient.product.name}>
-              {ingredient.product.name}
+              <b>{ingredient.product.name}</b>
               {ingredient.literalQuantity === "0"
                 ? ""
-                : `: ${ingredient.literalQuantity}`}
+                : ` : ${ingredient.literalQuantity}`}
             </Item>
           ))}
       </div>

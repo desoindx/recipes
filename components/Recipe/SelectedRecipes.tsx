@@ -1,5 +1,5 @@
 import Button from "components/Button";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Product } from "types/Product";
 import Recipe from ".";
 import {
@@ -24,7 +24,7 @@ const SelectedRecipes = ({
   const [seeRecipes, setSeeRecipes] = useState(true);
   const [copied, setCopied] = useState(false);
   const [hide, setHide] = useState(true);
-  const [shoppingList, setShoppingList] = useState<string[]>([]);
+  const [shoppingList, setShoppingList] = useState<{key: string, element: ReactNode}[]>([]);
 
   useEffect(() => {
     const products: Record<string, number> = {};
@@ -54,9 +54,10 @@ const SelectedRecipes = ({
             (existingType.base * weight).toString()
           ).toFixed(2);
           const quantity = existingType.type
-            ? `${roundedBase} ${existingType.type}`
-            : `${roundedWeight} (${roundedBase}g)`;
-          return `${name}: ${quantity}`;
+            ? `${roundedBase} ${existingType.type}`
+            : `${roundedWeight} (${roundedBase} g)`;
+          return {key: name,
+            element: <><b>{name}</b> : {quantity}</>};
         })
     );
   }, [recipes]);
@@ -105,8 +106,8 @@ const SelectedRecipes = ({
             </CopyButton>
             {copied && <Copied>Copié</Copied>}
             <Items>
-              {shoppingList.map((item) => (
-                <Item key={item}>{item} </Item>
+              {shoppingList.map(({key, element}) => (
+                <Item key={key}>{element}</Item>
               ))}
             </Items>
           </>

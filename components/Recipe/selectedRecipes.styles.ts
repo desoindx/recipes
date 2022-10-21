@@ -32,6 +32,7 @@ export const Items = styled.div`
 
 export const Item = styled.span`
   color: white;
+  margin: 2px 0;
 `;
 
 export const HideButton = styled.button<{ hide: boolean }>`

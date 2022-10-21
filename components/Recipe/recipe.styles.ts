@@ -23,7 +23,7 @@ export const Title = styled.p`
 `
 
 export const Item = styled.span`
-  padding: 0 8px;
+  margin: 2px 8px;
   &:last-child {
     margin-bottom: 16px;
   }
