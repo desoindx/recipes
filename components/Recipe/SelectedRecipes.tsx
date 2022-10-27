@@ -24,7 +24,9 @@ const SelectedRecipes = ({
   const [seeRecipes, setSeeRecipes] = useState(true);
   const [copied, setCopied] = useState(false);
   const [hide, setHide] = useState(true);
-  const [shoppingList, setShoppingList] = useState<{key: string, element: ReactNode}[]>([]);
+  const [shoppingList, setShoppingList] = useState<
+    { key: string; element: ReactNode, stringValue: string }[]
+  >([]);
 
   useEffect(() => {
     const products: Record<string, number> = {};
@@ -56,8 +58,15 @@ const SelectedRecipes = ({
           const quantity = existingType.type
             ? `${roundedBase} ${existingType.type}`
             : `${roundedWeight} (${roundedBase} g)`;
-          return {key: name,
-            element: <><b>{name}</b> : {quantity}</>};
+          return {
+            key: name,
+            stringValue: `${name} : ${quantity}`,
+            element: (
+              <>
+                <b>{name}</b> : {quantity}
+              </>
+            ),
+          };
         })
     );
   }, [recipes]);
@@ -95,7 +104,7 @@ const SelectedRecipes = ({
             <CopyButton
               onClick={() => {
                 navigator.clipboard
-                  .writeText(shoppingList.join("\r\n"))
+                  .writeText(shoppingList.map(list => list.stringValue).join("\r\n"))
                   .then(() => {
                     setCopied(true);
                     setTimeout(() => setCopied(false), 750);
@@ -106,7 +115,7 @@ const SelectedRecipes = ({
             </CopyButton>
             {copied && <Copied>Copié</Copied>}
             <Items>
-              {shoppingList.map(({key, element}) => (
+              {shoppingList.map(({ key, element }) => (
                 <Item key={key}>{element}</Item>
               ))}
             </Items>
