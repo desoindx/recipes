@@ -50,12 +50,12 @@ const Recipes = ({
         )}
       </Header>
       <AllRecipes>
-        {recipes
+        {(withFilter ? recipes
           .filter((product) =>
             product.facets.some(
               (facet) => filter && filter.includes(facet.name)
             )
-          )
+          ) : recipes)
           .map((recipe) => (
             <Recipe
               key={recipe.id}
