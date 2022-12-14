@@ -62,9 +62,16 @@ const Leftover = ({
             defaultValue={facetOptions.filter((option) =>
               filter.includes(option.value)
             )}
-            onChange={(value: any[]) =>
-              setFilter(value.map((option) => option.value))
+            onChange={(values) =>
+              setFilter(
+                values.length > 0
+                  ? values.map((option) => option.value)
+                  : facetOptions.map((option) => option.value)
+              )
             }
+            value={facetOptions.filter((option) =>
+              filter.includes(option.value)
+            )}
             styles={selectStyles}
           />
         )}

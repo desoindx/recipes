@@ -42,28 +42,36 @@ const Recipes = ({
               filter.includes(option.value)
             )}
             options={facetOptions}
-            onChange={(value: any[]) =>
-              setFilter(value.map((option) => option.value))
+            onChange={(values: any[]) =>
+              setFilter(
+                values.length > 0
+                  ? values.map((option) => option.value)
+                  : facetOptions.map((option) => option.value)
+              )
             }
+            value={facetOptions.filter((option) =>
+              filter.includes(option.value)
+            )}
             styles={selectStyles}
           />
         )}
       </Header>
       <AllRecipes>
-        {(withFilter ? recipes
-          .filter((product) =>
-            product.facets.some(
-              (facet) => filter && filter.includes(facet.name)
+        {(withFilter
+          ? recipes.filter((product) =>
+              product.facets.some(
+                (facet) => filter && filter.includes(facet.name)
+              )
             )
-          ) : recipes)
-          .map((recipe) => (
-            <Recipe
-              key={recipe.id}
-              recipe={recipe}
-              onClick={selectRecipe}
-              withProducts={!showRecipe}
-            />
-          ))}
+          : recipes
+        ).map((recipe) => (
+          <Recipe
+            key={recipe.id}
+            recipe={recipe}
+            onClick={selectRecipe}
+            withProducts={!showRecipe}
+          />
+        ))}
       </AllRecipes>
     </Container>
   );
