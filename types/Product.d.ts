@@ -5,6 +5,7 @@ export interface Product {
   nbPerson: number;
   name: string;
   images: string[];
+  nutriscore: string;
   nutritionalInformation: {
     kiloCalorie: number;
   };

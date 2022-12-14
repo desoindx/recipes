@@ -33,6 +33,7 @@ export const getRecipes = async (startDate?: string) => {
             nbPerson
             name
             images
+            nutriscore
             nutritionalInformation {
               kiloCalorie
             }
@@ -63,6 +64,7 @@ export const getRecipes = async (startDate?: string) => {
         .products.filter((product) => product.nbPerson === 2),
     };
     recipes[planning.startDate || "now"] = result;
+    console.log(result);
     return result;
   } catch (err) {
     console.error("API has returned error", err);
