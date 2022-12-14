@@ -14,10 +14,12 @@ const Recipe = ({
   return (
     <Box key={recipe.name} onClick={() => onClick(recipe.id)}>
       <img src={recipe.images[0]} alt={recipe.name} />
-      <Nutriscore
-        src={`https://www.quitoque.fr/static/images/picto/nutri-score-${recipe.nutriscore.toLowerCase()}.svg`}
-        alt={`Nutriscore: ${recipe.nutriscore}`}
-      />
+      {recipe.nutriscore && (
+        <Nutriscore
+          src={`https://www.quitoque.fr/static/images/picto/nutri-score-${recipe.nutriscore.toLowerCase()}.svg`}
+          alt={`Nutriscore: ${recipe.nutriscore}`}
+        />
+      )}
       <Title>
         {recipe.name} ({recipe.nutritionalInformation.kiloCalorie} kcal)
       </Title>
