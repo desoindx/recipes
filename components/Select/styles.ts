@@ -4,6 +4,8 @@ const style = {
     border: "none",
     boxShadow: "none",
     cursor: "pointer",
+    margin: "auto",
+    maxWidth: "500px"
   }),
   menuList: (provided) => ({
     ...provided,

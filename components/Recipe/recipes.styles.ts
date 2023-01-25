@@ -31,6 +31,6 @@ export const AllRecipes = styled.div`
   gap: 32px;
   justify-content: center;
   ${MediaDesktop} {
-    justify-content: flex-start;
+    justify-content: space-evenly;
   }
 `;
