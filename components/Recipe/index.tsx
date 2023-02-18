@@ -1,6 +1,6 @@
 import React from "react";
 import { Product } from "types/Product";
-import { Box, Item, Nutriscore, Title } from "./recipe.styles";
+import { Box, Description, Item, Nutriscore, Title } from "./recipe.styles";
 
 const Recipe = ({
   recipe,
@@ -21,8 +21,12 @@ const Recipe = ({
         />
       )}
       <Title>
-        {recipe.name} ({recipe.nutritionalInformation.kiloCalorie} kcal)
+        {recipe.name}
       </Title>
+      {withProducts && <Description>
+        {recipe.waitingTime}min ({recipe.cookingTime} de prépa), {recipe.nutritionalInformation.kiloCalorie} kcal
+      </Description>
+      }
       {withProducts &&
         recipe.subProducts.map((product) => (
           <Item key={product.product.name}>

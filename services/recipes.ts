@@ -34,6 +34,8 @@ export const getRecipes = async (startDate?: string) => {
             name
             images
             nutriscore
+            cookingTime
+            waitingTime
             nutritionalInformation {
               kiloCalorie
             }
@@ -86,6 +88,8 @@ export const getRecipe = async (id: string) => {
         pools {
           nbPerson
           cookingModes {
+            cookingTime
+            waitingTime    
             name
             stacks {
               cupboardIngredients {

@@ -35,7 +35,12 @@ export const Item = styled.p`
 export const Title = styled.div`
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 4px;
 `;
+
+export const TitleInfo = styled.div`
+  color: #9b9b9b;
+`
 
 export const Subtitle = styled.p`
   font-size: 20px;

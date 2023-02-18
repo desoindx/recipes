@@ -3,6 +3,8 @@ import { Product } from "./Product";
 
 export interface Cooking {
   name: string;
+  cookingTime: number;
+  waitingTime: number;
   stacks: {
     cupboardIngredients: Ingredient[];
     ingredients: Ingredient[];
@@ -23,6 +25,6 @@ export interface Pool {
 export interface Recipe {
   id: number;
   name: string;
-  image: string;
+  image: string;  
   pools: Pool[];
 }

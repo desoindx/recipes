@@ -9,6 +9,7 @@ import {
   Title,
   Image,
   Item,
+  TitleInfo,
 } from "./fullRecipe.styles";
 
 const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
@@ -44,6 +45,9 @@ const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
       </div>
       <div>
         <Title>{recipe.name}</Title>
+        {cooking && <TitleInfo>
+          {cooking.waitingTime}min ({cooking.cookingTime} de prépa)
+        </TitleInfo>}
         {cooking &&
           cooking.steps.map((step) => {
             return (

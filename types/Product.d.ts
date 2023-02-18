@@ -6,6 +6,8 @@ export interface Product {
   name: string;
   images: string[];
   nutriscore?: string;
+  cookingTime: number;
+  waitingTime: number;
   nutritionalInformation: {
     kiloCalorie: number;
   };
