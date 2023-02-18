@@ -1,6 +1,6 @@
-import React from "react";
-import { Product } from "types/Product";
-import { Box, Description, Item, Nutriscore, Title } from "./recipe.styles";
+import React from 'react';
+import { Product } from 'types/Product';
+import { Box, Description, Item, Nutriscore, Title } from './recipe.styles';
 
 const Recipe = ({
   recipe,
@@ -20,13 +20,13 @@ const Recipe = ({
           alt={`Nutriscore: ${recipe.nutriscore}`}
         />
       )}
-      <Title>
-        {recipe.name}
-      </Title>
-      {withProducts && <Description>
-        {recipe.waitingTime}min ({recipe.cookingTime} de prépa), {recipe.nutritionalInformation.kiloCalorie} kcal
-      </Description>
-      }
+      <Title>{recipe.name}</Title>
+      {withProducts && (
+        <Description>
+          {recipe.waitingTime}min ({recipe.cookingTime} de prépa),{' '}
+          {recipe.nutritionalInformation.kiloCalorie} kcal
+        </Description>
+      )}
       {withProducts &&
         recipe.subProducts.map((product) => (
           <Item key={product.product.name}>

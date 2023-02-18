@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import ReactSelect from "react-select";
-import { MediaDesktop, MediaMobile } from "components/responsive";
+import styled from 'styled-components';
+import ReactSelect from 'react-select';
+import { MediaDesktop, MediaMobile } from 'components/responsive';
 
 export const Container = styled.div`
   overflow: auto;

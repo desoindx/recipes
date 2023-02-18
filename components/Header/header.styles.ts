@@ -1,5 +1,5 @@
-import { MediaDesktop, MediaMobile } from "components/responsive";
-import styled from "styled-components";
+import { MediaDesktop, MediaMobile } from 'components/responsive';
+import styled from 'styled-components';
 
 export const NavBar = styled.nav`
   border-bottom: 1px solid white;

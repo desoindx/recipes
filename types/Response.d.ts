@@ -1,9 +1,9 @@
-import { Planning } from "./Planning";
+import { Planning } from './Planning';
 
 export interface PlanningResponse {
-  planning: Planning
+  planning: Planning;
 }
 
 export interface RecipeResponse {
-  recipe: Recipe
+  recipe: Recipe;
 }

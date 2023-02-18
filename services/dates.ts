@@ -1,14 +1,18 @@
 export const getFrontDate = (startDate: string): string => {
+  if (!startDate) {
+    return '...';
+  }
+
   const idDate = new Date(startDate);
   idDate.setDate(idDate.getDate() - 7);
-  return `${String(idDate.getDate()).padStart(2, "0")}/${String(
-    idDate.getMonth() + 1
-  ).padStart(2, "0")}/${idDate.getFullYear()}`;
+  return `${String(idDate.getDate()).padStart(2, '0')}/${String(
+    idDate.getMonth() + 1,
+  ).padStart(2, '0')}/${idDate.getFullYear()}`;
 };
 
 export const getBackDate = (startDate?: string): string => {
   let date;
-  if (!startDate || startDate === "now") {
+  if (!startDate || startDate === 'now') {
     date = new Date();
     date.setDate(date.getDate() + 7);
   } else {

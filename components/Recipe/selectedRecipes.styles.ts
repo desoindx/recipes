@@ -1,5 +1,5 @@
-import { MediaDesktop, MediaMobile } from "components/responsive";
-import styled from "styled-components";
+import { MediaDesktop, MediaMobile } from 'components/responsive';
+import styled from 'styled-components';
 
 export const Title = styled.span`
   text-align: center;
@@ -18,7 +18,7 @@ export const Container = styled.div<{ hide: boolean }>`
   padding: 32px;
   border-right: solid 1px white;
   ${MediaMobile} {
-    ${({ hide }) => hide && "display: none;"}
+    ${({ hide }) => hide && 'display: none;'}
   }
 `;
 
@@ -39,7 +39,7 @@ export const HideButton = styled.button<{ hide: boolean }>`
   z-index: 1;
   position: absolute;
   top: 50%;
-  left: ${({ hide }) => (hide ? "-25px" : "340px")};
+  left: ${({ hide }) => (hide ? '-25px' : '340px')};
   padding-left: 25px;
   height: 50px;
   width: 50px;

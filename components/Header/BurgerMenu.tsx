@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { Container, Button, Icon, Line, SidePanel } from "./BurgerMenu.styles";
-import { menu } from ".";
-import Link from "next/link";
+import React, { useEffect } from 'react';
+import { Container, Button, Icon, Line, SidePanel } from './BurgerMenu.styles';
+import { menu } from '.';
+import Link from 'next/link';
 
 interface BurgerMenuProps {
   burgerMenuCollapse: (value: boolean) => void;
@@ -14,9 +14,9 @@ const BurgerMenu = ({
 }: BurgerMenuProps): JSX.Element => {
   useEffect(() => {
     if (isBurgerMenuOpen) {
-      document.body.style.overflowY = "hidden";
+      document.body.style.overflowY = 'hidden';
     } else {
-      document.body.style.overflowY = "auto";
+      document.body.style.overflowY = 'auto';
     }
   }, [isBurgerMenuOpen]);
 
@@ -27,8 +27,8 @@ const BurgerMenu = ({
         <Button
           type="button"
           onClick={() => burgerMenuCollapse(!isBurgerMenuOpen)}
-          aria-label={isBurgerMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={isBurgerMenuOpen ? "true" : "false"}
+          aria-label={isBurgerMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-expanded={isBurgerMenuOpen ? 'true' : 'false'}
           aria-controls="menu-principal"
         >
           <Icon isBurgerMenuOpen={isBurgerMenuOpen}>

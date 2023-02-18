@@ -1,31 +1,37 @@
-import Button from "components/Button";
-import Buttons from "components/Button/Buttons";
-import Recipes from "components/Recipe/Recipes";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { getLocalStorageItem } from "services/dates";
-import { getRecipes } from "services/recipes";
-import { Product } from "types/Product";
+import Button from 'components/Button';
+import Buttons from 'components/Button/Buttons';
+import Recipes from 'components/Recipe/Recipes';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { getLocalStorageItem } from 'services/dates';
+import { Product } from 'types/Product';
 
-const WeeklyRecipes = ({
-  recipes,
-  startDate,
-}: {
-  recipes: Product[];
-  startDate: string;
-}) => {
+const WeeklyRecipes = () => {
   const router = useRouter();
+  const [recipes, setRecipes] = useState<Product[]>([]);
+  const [startDate, setStartDate] = useState('');
+
   const [selectedRecipes, setSelectedRecipes] = useState([]);
   const [nextPath, setNextPath] = useState<string>();
   const [previousPath, setPreviousPath] = useState<string>();
 
   useEffect(() => {
+    if (router.query.id) {
+      fetch(`/api/recipes/${router.query.id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setRecipes(data.recipes);
+          setStartDate(data.startDate);
+        });
+    }
+  }, [router]);
+
+  useEffect(() => {
     const weekRecipes = localStorage.getItem(
-      getLocalStorageItem(new Date(startDate))
+      getLocalStorageItem(new Date(startDate)),
     );
     if (weekRecipes) {
-      setSelectedRecipes(weekRecipes.split(","));
+      setSelectedRecipes(weekRecipes.split(','));
     } else {
       setSelectedRecipes([]);
     }
@@ -40,7 +46,7 @@ const WeeklyRecipes = ({
         return;
       }
     }
-    setNextPath('')
+    setNextPath('');
   }, [startDate]);
 
   useEffect(() => {
@@ -52,7 +58,7 @@ const WeeklyRecipes = ({
         return;
       }
     }
-    setPreviousPath('')
+    setPreviousPath('');
   }, [startDate]);
 
   return (
@@ -60,7 +66,7 @@ const WeeklyRecipes = ({
       <Recipes
         startDate={startDate}
         recipes={recipes.filter((recipe) =>
-          selectedRecipes.includes(recipe.id)
+          selectedRecipes.includes(recipe.id),
         )}
         selectRecipe={(recipe: string) => {
           router.push(`/recipe/${recipe}`);
@@ -83,20 +89,6 @@ const WeeklyRecipes = ({
       )}
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps<{
-  recipes: Product[];
-  startDate: string;
-}> = async (context) => {
-  const { id } = context.params;
-  const { recipes, startDate } = await getRecipes(id as string);
-  return {
-    props: {
-      recipes,
-      startDate,
-    },
-  };
 };
 
 export default WeeklyRecipes;

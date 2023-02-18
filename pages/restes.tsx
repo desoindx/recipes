@@ -1,32 +1,15 @@
-import Leftover from "components/Leftover";
-import { GetServerSideProps } from "next";
-import React from "react";
-import { getAllRecipes } from "services/recipes";
-import { Product } from "types/Product";
+import Leftover from 'components/Leftover';
+import React, { useEffect, useState } from 'react';
 
-const Restes = ({
-  plannings,
-}: {
-  plannings: {
-    recipes: Product[];
-    startDate: string;
-  }[];
-}) => {
+const Restes = () => {
+  const [plannings, setPlannings] = useState([]);
+  useEffect(() => {
+    fetch('/api/restes')
+      .then((response) => response.json())
+      .then(setPlannings);
+  }, []);
+
   return <Leftover plannings={plannings} />;
-};
-
-export const getServerSideProps: GetServerSideProps<{
-  plannings: {
-    recipes: Product[];
-    startDate: string;
-  }[];
-}> = async () => {
-  const plannings = await getAllRecipes();
-  return {
-    props: {
-      plannings,
-    },
-  };
 };
 
 export default Restes;

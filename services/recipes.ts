@@ -1,19 +1,19 @@
-import { gql, GraphQLClient } from "graphql-request";
-import { CategorySlug } from "types/Enums/Category";
-import { Product } from "types/Product";
-import { Recipe } from "types/Recipe";
-import { PlanningResponse, RecipeResponse } from "types/Response";
-import { getBackDate } from "./dates";
+import { gql, GraphQLClient } from 'graphql-request';
+import { CategorySlug } from 'types/Enums/Category';
+import { Product } from 'types/Product';
+import { Recipe } from 'types/Recipe';
+import { PlanningResponse, RecipeResponse } from 'types/Response';
+import { getBackDate } from './dates';
 
-const graphQLClient = new GraphQLClient("https://mgs.quitoque.fr/graphql", {
+const graphQLClient = new GraphQLClient('https://mgs.quitoque.fr/graphql', {
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
 const recipes: Record<string, { recipes: Product[]; startDate: string }> = {};
 export const getRecipes = async (startDate?: string) => {
-  const cached = recipes[startDate || "now"];
+  const cached = recipes[startDate || 'now'];
   if (cached) {
     return cached;
   }
@@ -65,10 +65,10 @@ export const getRecipes = async (startDate?: string) => {
         .find((planning) => planning.category.slug === CategorySlug.TO_COOK)
         .products.filter((product) => product.nbPerson === 2),
     };
-    recipes[planning.startDate || "now"] = result;
+    recipes[planning.startDate || 'now'] = result;
     return result;
   } catch (err) {
-    console.error("API has returned error", err);
+    console.error('API has returned error', err);
   }
 };
 
@@ -89,7 +89,7 @@ export const getRecipe = async (id: string) => {
           nbPerson
           cookingModes {
             cookingTime
-            waitingTime    
+            waitingTime
             name
             stacks {
               cupboardIngredients {
@@ -121,12 +121,12 @@ export const getRecipe = async (id: string) => {
   `;
   try {
     const result = (await graphQLClient.request(query, {
-      id: id.split("-")[1],
+      id: id.split('-')[1],
     })) as RecipeResponse;
     recipe[id] = result.recipe;
     return result.recipe;
   } catch (err) {
-    console.error("API has returned error", err);
+    console.error('API has returned error', err);
   }
 };
 

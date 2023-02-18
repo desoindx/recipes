@@ -1,6 +1,6 @@
-import Button from "components/Button";
-import { MediaDesktop, MediaMobile } from "components/responsive";
-import styled from "styled-components";
+import Button from 'components/Button';
+import { MediaDesktop, MediaMobile } from 'components/responsive';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   width: calc(100% - 64px);
@@ -28,27 +28,32 @@ export const Image = styled.img`
   }
 `;
 
-export const Item = styled.p`
+export const Item = styled.p<{ blurred: boolean }>`
   margin: 2px 0;
+  ${({ blurred }) => blurred && 'filter: blur(5px);'}
 `;
 
-export const Title = styled.div`
+export const Title = styled.div<{ blurred: boolean }>`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 4px;
+  ${({ blurred }) => blurred && 'filter: blur(5px);'}
 `;
 
-export const TitleInfo = styled.div`
+export const TitleInfo = styled.div<{ blurred: boolean }>`
   color: #9b9b9b;
-`
+  ${({ blurred }) => blurred && 'filter: blur(5px);'}
+`;
 
-export const Subtitle = styled.p`
+export const Subtitle = styled.p<{ blurred: boolean }>`
   font-size: 20px;
   font-weight: bold;
+  ${({ blurred }) => blurred && 'filter: blur(5px);'}
 `;
 
-export const Description = styled.p`
+export const Description = styled.p<{ blurred: boolean }>`
   text-align: justify;
+  ${({ blurred }) => blurred && 'filter: blur(5px);'}
 `;
 
 export const PreviousButton = styled(Button)`

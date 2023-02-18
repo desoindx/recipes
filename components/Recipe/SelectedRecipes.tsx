@@ -1,7 +1,7 @@
-import Button from "components/Button";
-import React, { ReactNode, useEffect, useState } from "react";
-import { Product } from "types/Product";
-import Recipe from ".";
+import Button from 'components/Button';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { Product } from 'types/Product';
+import Recipe from '.';
 import {
   Container,
   Copied,
@@ -10,9 +10,9 @@ import {
   Item,
   Items,
   Title,
-} from "./selectedRecipes.styles";
+} from './selectedRecipes.styles';
 
-const allQuantityTypes = ["g", "mL", ""];
+const allQuantityTypes = ['g', 'mL', ''];
 
 const SelectedRecipes = ({
   recipes,
@@ -25,7 +25,7 @@ const SelectedRecipes = ({
   const [copied, setCopied] = useState(false);
   const [hide, setHide] = useState(true);
   const [shoppingList, setShoppingList] = useState<
-    { key: string; element: ReactNode, stringValue: string }[]
+    { key: string; element: ReactNode; stringValue: string }[]
   >([]);
 
   useEffect(() => {
@@ -38,13 +38,13 @@ const SelectedRecipes = ({
           existingQuantity + product.quantity / product.product.weight;
 
         const quantityType = allQuantityTypes.find((type) =>
-          product.literalQuantity.includes(type)
+          product.literalQuantity.includes(type),
         );
         quantityTypes[product.product.name] = {
           type: quantityType,
           base: product.product.weight,
         };
-      })
+      }),
     );
     setShoppingList(
       Object.entries(products)
@@ -53,7 +53,7 @@ const SelectedRecipes = ({
           const existingType = quantityTypes[name];
           const roundedWeight = +parseFloat(weight.toString()).toFixed(2);
           const roundedBase = +parseFloat(
-            (existingType.base * weight).toString()
+            (existingType.base * weight).toString(),
           ).toFixed(2);
           const quantity = existingType.type
             ? `${roundedBase} ${existingType.type}`
@@ -67,7 +67,7 @@ const SelectedRecipes = ({
               </>
             ),
           };
-        })
+        }),
     );
   }, [recipes]);
   return (
@@ -75,11 +75,11 @@ const SelectedRecipes = ({
       {recipes.length > 0 && (
         <HideButton hide={hide} onClick={() => setHide(!hide)}>
           <img
-            src={hide ? "./right-arrow.svg" : "./left-arrow.svg"}
+            src={hide ? './right-arrow.svg' : './left-arrow.svg'}
             alt={
               hide
-                ? "Ouvrir les recettes choisies"
-                : "Fermer les recettes choisies"
+                ? 'Ouvrir les recettes choisies'
+                : 'Fermer les recettes choisies'
             }
           />
         </HideButton>
@@ -88,8 +88,8 @@ const SelectedRecipes = ({
         {seeRecipes ? (
           <>
             <Title>
-              {recipes.length} recette{recipes.length > 1 && "s"} sélectionée
-              {recipes.length > 1 && "s"}
+              {recipes.length} recette{recipes.length > 1 && 's'} sélectionée
+              {recipes.length > 1 && 's'}
             </Title>
             {recipes.map((recipe) => (
               <Recipe
@@ -104,14 +104,16 @@ const SelectedRecipes = ({
             <CopyButton
               onClick={() => {
                 navigator.clipboard
-                  .writeText(shoppingList.map(list => list.stringValue).join("\r\n"))
+                  .writeText(
+                    shoppingList.map((list) => list.stringValue).join('\r\n'),
+                  )
                   .then(() => {
                     setCopied(true);
                     setTimeout(() => setCopied(false), 750);
                   });
               }}
             >
-              <img src={"./copy.svg"} alt="copier la liste" />
+              <img src={'./copy.svg'} alt="copier la liste" />
             </CopyButton>
             {copied && <Copied>Copié</Copied>}
             <Items>
@@ -122,7 +124,7 @@ const SelectedRecipes = ({
           </>
         )}
         <Button onClick={() => setSeeRecipes(!seeRecipes)}>
-          Voir {seeRecipes ? "la liste de course" : "les recettes choisies"}
+          Voir {seeRecipes ? 'la liste de course' : 'les recettes choisies'}
         </Button>
       </Container>
     </>

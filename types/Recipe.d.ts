@@ -1,5 +1,5 @@
-import { Ingredient } from "./Ingredient";
-import { Product } from "./Product";
+import { Ingredient } from './Ingredient';
+import { Product } from './Product';
 
 export interface Cooking {
   name: string;
@@ -14,7 +14,6 @@ export interface Cooking {
     title: string;
     description: string;
   }[];
-
 }
 
 export interface Pool {
@@ -25,6 +24,6 @@ export interface Pool {
 export interface Recipe {
   id: number;
   name: string;
-  image: string;  
+  image: string;
   pools: Pool[];
 }

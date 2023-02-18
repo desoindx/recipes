@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export interface IconProps {
   isBurgerMenuOpen: boolean;
@@ -24,22 +24,22 @@ export const Icon = styled.div`
   height: 54px;
   transition: transform 0.5s;
   transform: ${(props: IconProps) =>
-    props.isBurgerMenuOpen ? "transform: rotate(180deg)" : "none"};
+    props.isBurgerMenuOpen ? 'transform: rotate(180deg)' : 'none'};
   background-color: black;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 14px;
     left: 16px;
     display: ${(props: IconProps) =>
-      props.isBurgerMenuOpen ? "none" : "block"};
+      props.isBurgerMenuOpen ? 'none' : 'block'};
     background: white;
     width: 22px;
     height: 2px;
     transform: ${(props: IconProps) =>
       props.isBurgerMenuOpen
-        ? "translateY(0) rotate(45deg)"
-        : "translateY(6px)"};
+        ? 'translateY(0) rotate(45deg)'
+        : 'translateY(6px)'};
   }
 `;
 
@@ -52,11 +52,11 @@ export const Line = styled.span`
   width: 22px;
   height: 2px;
   background-color: ${(props: IconProps) =>
-    props.isBurgerMenuOpen ? "transparent" : "white"};
+    props.isBurgerMenuOpen ? 'transparent' : 'white'};
   transition: background 0.5s;
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -69,14 +69,14 @@ export const Line = styled.span`
   &:before {
     transform: ${(props: IconProps) =>
       props.isBurgerMenuOpen
-        ? "translateY(0) rotate(45deg)"
-        : "translateY(6px)"};
+        ? 'translateY(0) rotate(45deg)'
+        : 'translateY(6px)'};
   }
   &:after {
     transform: ${(props: IconProps) =>
       props.isBurgerMenuOpen
-        ? "translateY(0) rotate(-45deg)"
-        : "translateY(6px)"};
+        ? 'translateY(0) rotate(-45deg)'
+        : 'translateY(6px)'};
   }
 `;
 

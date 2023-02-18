@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Box = styled.div`
+export const Box = styled.div<{ empty?: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,12 +9,16 @@ export const Box = styled.div`
   min-width: 300px;
   background-color: white;
   color: black;
-  cursor: pointer;
-  &:hover {
-    background-color: #c8c8c8;
-  }
+  ${({ empty }) =>
+    !empty &&
+    `
+    cursor: pointer;
+    &:hover {
+      background-color: #c8c8c8;
+    }
+  `}
 `;
-export const Title = styled.p`
+export const Title = styled.p<{ blurred?: boolean }>`
   font-size: 18px;
   text-align: justify;
   margin: 0 auto;
@@ -22,13 +26,14 @@ export const Title = styled.p`
   text-align: center;
   font-weight: bold;
   font-size: 18px;
+  ${({ blurred }) => blurred && 'filter: blur(5px);'}
 `;
 
 export const Description = styled.p`
   color: #9b9b9b;
   margin: 0 auto;
   padding: 4px 0 16px 0;
-`
+`;
 
 export const Item = styled.span`
   margin: 2px 8px;

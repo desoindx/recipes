@@ -1,6 +1,6 @@
-import { CategorySlug } from "./Enums/Category";
+import { CategorySlug } from './Enums/Category';
 
 export interface Category {
-  slug: CategorySlug,
-  name: string,
+  slug: CategorySlug;
+  name: string;
 }
