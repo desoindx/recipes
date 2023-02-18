@@ -17,6 +17,8 @@ const WeeklyRecipes = () => {
 
   useEffect(() => {
     if (router.query.id) {
+      setRecipes([]);
+      setStartDate('');
       fetch(`/api/recipes/${router.query.id}`)
         .then((response) => response.json())
         .then((data) => {
