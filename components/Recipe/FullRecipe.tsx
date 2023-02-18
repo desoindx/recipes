@@ -30,7 +30,7 @@ const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
         {cooking &&
           cooking.stacks.ingredients.map((ingredient) => (
             <Item key={ingredient.product.name}>
-              <b>{ingredient.product.name}</b> : {ingredient.literalQuantity}
+              <b>{ingredient.product.name}</b> : {ingredient.literalQuantity.replace(' ', ' ')}
             </Item>
           ))}
         {cooking &&
@@ -39,7 +39,7 @@ const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
               <b>{ingredient.product.name}</b>
               {ingredient.literalQuantity === "0"
                 ? ""
-                : ` : ${ingredient.literalQuantity}`}
+                : ` : ${ingredient.literalQuantity.replace(' ', ' ')}`}
             </Item>
           ))}
       </div>
@@ -51,10 +51,10 @@ const FullRecipe = ({ recipe }: { recipe: Recipe }) => {
         {cooking &&
           cooking.steps.map((step) => {
             return (
-              <>
+              <div key={step.title}>
                 <Subtitle>{step.title}</Subtitle>
                 <Description>{step.description}</Description>
-              </>
+              </div>
             );
           })}
       </div>
