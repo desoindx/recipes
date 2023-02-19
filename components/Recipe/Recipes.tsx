@@ -58,7 +58,7 @@ const Recipes = ({
         )}
       </Header>
       <AllRecipes>
-        {recipes.length > 0 ? (
+        {startDate ? (
           (withFilter
             ? recipes.filter((product) =>
                 product.facets.some(
