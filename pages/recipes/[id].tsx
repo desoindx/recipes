@@ -3,6 +3,7 @@ import Buttons from 'components/Button/Buttons';
 import Recipes from 'components/Recipe/Recipes';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { fetchCached } from 'services/agent';
 import { getLocalStorageItem } from 'services/dates';
 import { Product } from 'types/Product';
 
@@ -19,12 +20,10 @@ const WeeklyRecipes = () => {
     if (router.query.id) {
       setRecipes([]);
       setStartDate('');
-      fetch(`/api/recipes/${router.query.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setRecipes(data.recipes);
-          setStartDate(data.startDate);
-        });
+      fetchCached(`/api/recipes/${router.query.id}`).then((data) => {
+        setRecipes(data.recipes);
+        setStartDate(data.startDate);
+      });
     }
   }, [router]);
 

@@ -1,6 +1,7 @@
 import FullRecipe from 'components/Recipe/FullRecipe';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { fetchCached } from 'services/agent';
 import { Recipe as RecipeType } from 'types/Recipe';
 
 const defaultRecipe: RecipeType = {
@@ -113,9 +114,7 @@ const Recipe = () => {
   const [recipe, setRecipe] = useState<RecipeType>(defaultRecipe);
   useEffect(() => {
     if (router.query.id) {
-      fetch(`/api/recipe/${router.query.id}`)
-        .then((response) => response.json())
-        .then(setRecipe);
+      fetchCached(`/api/recipe/${router.query.id}`).then(setRecipe);
     }
   }, [router]);
 

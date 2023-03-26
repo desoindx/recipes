@@ -1,6 +1,7 @@
 import Recipes from 'components/Recipe/Recipes';
 import SelectedRecipes from 'components/Recipe/SelectedRecipes';
 import { useEffect, useState } from 'react';
+import { fetchCached } from 'services/agent';
 import { getLocalStorageItem } from 'services/dates';
 import { Product } from 'types/Product';
 
@@ -10,12 +11,10 @@ export default function Home(): JSX.Element {
   const [startDate, setStartDate] = useState('');
 
   useEffect(() => {
-    fetch('/api/recipes')
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipes(data.recipes);
-        setStartDate(data.startDate);
-      });
+    fetchCached('/api/recipes').then((data) => {
+      setRecipes(data.recipes);
+      setStartDate(data.startDate);
+    });
   }, []);
 
   useEffect(() => {
