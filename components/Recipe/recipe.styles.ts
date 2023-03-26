@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+export const ProductsList = styled.div<{ withProducts: boolean }>`
+  display: flex;
+  flex-direction: column;
+  ${({ withProducts }) => !withProducts && 'display: none;'}
+`;
+
+export const Description = styled.p<{ withProducts: boolean }>`
+  color: #9b9b9b;
+  margin: 0 auto;
+  padding: 4px 0 16px 0;
+  ${({ withProducts }) => !withProducts && 'display: none;'}
+`;
+
 export const Box = styled.div<{ empty?: boolean }>`
   position: relative;
   display: flex;
@@ -14,9 +27,17 @@ export const Box = styled.div<{ empty?: boolean }>`
     `
     cursor: pointer;
     &:hover {
-      background-color: #c8c8c8;
+      background-color: #dddddd;
     }
   `}
+  &:hover {
+    ${ProductsList} {
+      display: flex;
+    }
+    ${Description} {
+      display: block;
+    }
+  }
 `;
 export const Title = styled.p<{ blurred?: boolean }>`
   font-size: 18px;
@@ -27,12 +48,6 @@ export const Title = styled.p<{ blurred?: boolean }>`
   font-weight: bold;
   font-size: 18px;
   ${({ blurred }) => blurred && 'filter: blur(5px);'}
-`;
-
-export const Description = styled.p`
-  color: #9b9b9b;
-  margin: 0 auto;
-  padding: 4px 0 16px 0;
 `;
 
 export const Item = styled.span`

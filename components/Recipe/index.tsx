@@ -1,6 +1,13 @@
 import React from 'react';
 import { Product } from 'types/Product';
-import { Box, Description, Item, Nutriscore, Title } from './recipe.styles';
+import {
+  Box,
+  Description,
+  ProductsList,
+  Item,
+  Nutriscore,
+  Title,
+} from './recipe.styles';
 
 const Recipe = ({
   recipe,
@@ -21,18 +28,17 @@ const Recipe = ({
         />
       )}
       <Title>{recipe.name}</Title>
-      {withProducts && (
-        <Description>
-          {recipe.waitingTime}min ({recipe.cookingTime} de prépa),{' '}
-          {recipe.nutritionalInformation.kiloCalorie} kcal
-        </Description>
-      )}
-      {withProducts &&
-        recipe.subProducts.map((product) => (
+      <Description withProducts={withProducts}>
+        {recipe.waitingTime}min ({recipe.cookingTime} de prépa),{' '}
+        {recipe.nutritionalInformation.kiloCalorie} kcal
+      </Description>
+      <ProductsList withProducts={withProducts}>
+        {recipe.subProducts.map((product) => (
           <Item key={product.product.name}>
             <b>{product.product.name}</b> : {product.literalQuantity}
           </Item>
         ))}
+      </ProductsList>
     </Box>
   );
 };
