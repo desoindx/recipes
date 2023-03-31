@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 
-export const ProductsList = styled.div<{ withProducts: boolean }>`
+export const ProductsList = styled.div<{
+  withProducts: boolean;
+}>`
   display: flex;
   flex-direction: column;
   ${({ withProducts }) => !withProducts && 'display: none;'}
 `;
 
-export const Description = styled.p<{ withProducts: boolean }>`
+export const Description = styled.p<{ detailOnHover: boolean }>`
   color: #9b9b9b;
   margin: 0 auto;
   padding: 4px 0 16px 0;
-  ${({ withProducts }) => !withProducts && 'display: none;'}
+  ${({ detailOnHover }) => detailOnHover && 'display: none;'}
 `;
 
-export const Box = styled.div<{ empty?: boolean }>`
+export const Box = styled.div<{ empty?: boolean; detailOnHover?: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,14 +32,16 @@ export const Box = styled.div<{ empty?: boolean }>`
       background-color: #dddddd;
     }
   `}
-  &:hover {
+  ${({ detailOnHover }) =>
+    detailOnHover &&
+    `&:hover {
     ${ProductsList} {
       display: flex;
     }
     ${Description} {
       display: block;
     }
-  }
+  }`}
 `;
 export const Title = styled.p<{ blurred?: boolean }>`
   font-size: 18px;

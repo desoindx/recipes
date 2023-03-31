@@ -13,13 +13,19 @@ const Recipe = ({
   recipe,
   onClick,
   withProducts,
+  detailOnHover,
 }: {
   recipe: Product;
   onClick: (id: string) => void;
   withProducts?: boolean;
+  detailOnHover?: boolean;
 }) => {
   return (
-    <Box key={recipe.name} onClick={() => onClick(recipe.id)}>
+    <Box
+      key={recipe.name}
+      onClick={() => onClick(recipe.id)}
+      detailOnHover={detailOnHover}
+    >
       <img src={recipe.images[0]} alt={recipe.name} />
       {recipe.nutriscore && (
         <Nutriscore
@@ -28,7 +34,7 @@ const Recipe = ({
         />
       )}
       <Title>{recipe.name}</Title>
-      <Description withProducts={withProducts}>
+      <Description detailOnHover={detailOnHover}>
         {recipe.waitingTime}min ({recipe.cookingTime} de prépa),{' '}
         {recipe.nutritionalInformation.kiloCalorie} kcal
       </Description>
