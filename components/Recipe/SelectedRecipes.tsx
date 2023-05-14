@@ -1,6 +1,6 @@
-import Button from 'components/Button'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Product } from 'types/Product'
+import Button from 'components/Button'
 import Recipe from '.'
 import {
   Container,

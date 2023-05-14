@@ -1,3 +1,7 @@
+import ReactSelect from 'react-select'
+import styled from 'styled-components'
+import { MediaMobile } from 'components/responsive'
+
 const style = {
   control: (provided) => ({
     ...provided,
@@ -19,5 +23,12 @@ const style = {
     return { ...provided, cursor: 'pointer' }
   },
 }
+
+export const Select = styled(ReactSelect)`
+  width: 460px;
+  ${MediaMobile} {
+    width: 100%;
+  }
+`
 
 export default style

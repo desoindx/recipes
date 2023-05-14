@@ -1,5 +1,5 @@
-import { MediaDesktop, MediaMobile } from 'components/responsive'
 import styled from 'styled-components'
+import { MediaDesktop, MediaMobile } from 'components/responsive'
 
 export const Container = styled.div`
   width: calc(100% - 64px);

@@ -1,5 +1,5 @@
-import { MediaDesktop, MediaMobile } from 'components/responsive'
 import styled from 'styled-components'
+import { MediaDesktop, MediaMobile } from 'components/responsive'
 
 export const Title = styled.span`
   text-align: center;

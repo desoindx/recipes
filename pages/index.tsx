@@ -1,9 +1,9 @@
-import Recipes from 'components/Recipe/Recipes'
-import SelectedRecipes from 'components/Recipe/SelectedRecipes'
 import { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
+import Recipes from 'components/Recipe/Recipes'
+import SelectedRecipes from 'components/Recipe/SelectedRecipes'
 
 const Home = () => {
   const [selectedRecipes, setSelectedRecipes] = useState([])

@@ -1,11 +1,11 @@
-import Recipe from 'components/Recipe'
-import { AllRecipes } from 'components/Recipe/recipes.styles'
-import { facetOptions, facets } from 'components/Select/facets'
-import selectStyles from 'components/Select/styles'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Product } from 'types/Product'
+import { facetOptions, facets } from 'components/Filter/facets'
+import Recipe from 'components/Recipe'
+import { AllRecipes } from 'components/Recipe/recipes.styles'
+import selectStyles from 'components/Select/styles'
 import { Selects } from './leftover.styles'
 
 const Leftover = ({

@@ -1,6 +1,6 @@
-import Leftover from 'components/Leftover'
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
+import Leftover from 'components/Leftover'
 
 const Restes = () => {
   const [plannings, setPlannings] = useState([])

@@ -1,8 +1,8 @@
-import FullRecipe from 'components/Recipe/FullRecipe'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { Recipe as RecipeType } from 'types/Recipe'
+import FullRecipe from 'components/Recipe/FullRecipe'
 
 const defaultRecipe: RecipeType = {
   id: 0,

@@ -1,5 +1,5 @@
-import { MediaDesktop } from 'components/responsive'
 import styled from 'styled-components'
+import { MediaDesktop } from 'components/responsive'
 
 export const Selects = styled.div`
   display: flex;

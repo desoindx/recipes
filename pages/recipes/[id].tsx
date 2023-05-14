@@ -1,11 +1,11 @@
-import Button from 'components/Button'
-import Buttons from 'components/Button/Buttons'
-import Recipes from 'components/Recipe/Recipes'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
+import Button from 'components/Button'
+import Buttons from 'components/Button/Buttons'
+import Recipes from 'components/Recipe/Recipes'
 
 const WeeklyRecipes = () => {
   const router = useRouter()

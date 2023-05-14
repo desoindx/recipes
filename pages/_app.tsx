@@ -1,5 +1,5 @@
-import { Header } from 'components/Header'
 import Head from 'next/head'
+import { Header } from 'components/Header'
 import '../styles/globals.css'
 
 const MyApp = ({ Component, pageProps }) => (

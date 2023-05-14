@@ -1,11 +1,11 @@
-import { facetOptions, facets } from 'components/Select/facets'
-import selectStyles from 'components/Select/styles'
 import { useEffect, useState } from 'react'
 import { getFrontDate } from 'services/dates'
 import { Product } from 'types/Product'
+import Filter from 'components/Filter/Filter'
+import { facetOptions, facets } from 'components/Filter/facets'
 import Recipe from '.'
 import EmptyRecipe from './EmptyRecipe'
-import { AllRecipes, Container, Header, Select } from './recipes.styles'
+import { AllRecipes, Container, Header } from './recipes.styles'
 
 const Recipes = ({
   startDate,
@@ -37,23 +37,22 @@ const Recipes = ({
       <Header>
         <span>Recettes de la semaine du {getFrontDate(startDate)}</span>
         {withFilter && filter && (
-          <Select
-            isMulti
-            defaultValue={facetOptions.filter((option) =>
-              filter.includes(option.value),
-            )}
-            options={facetOptions}
-            onChange={(values: any[]) =>
-              setFilter(
-                values.length > 0
-                  ? values.map((option) => option.value)
-                  : facetOptions.map((option) => option.value),
-              )
-            }
-            value={facetOptions.filter((option) =>
-              filter.includes(option.value),
-            )}
-            styles={selectStyles}
+          <Filter
+            values={filter}
+            setValues={(e) => {
+              if (e.target.checked) {
+                setFilter([...filter, e.target.name])
+              } else {
+                const newFilter = filter.filter(
+                  (value) => value !== e.target.name,
+                )
+                setFilter(
+                  newFilter.length > 0
+                    ? newFilter
+                    : facetOptions.map((option) => option.value),
+                )
+              }
+            }}
           />
         )}
       </Header>
