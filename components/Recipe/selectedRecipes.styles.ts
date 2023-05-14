@@ -1,9 +1,9 @@
-import { MediaDesktop, MediaMobile } from 'components/responsive';
-import styled from 'styled-components';
+import { MediaDesktop, MediaMobile } from 'components/responsive'
+import styled from 'styled-components'
 
 export const Title = styled.span`
   text-align: center;
-`;
+`
 
 export const Container = styled.div<{ hide: boolean }>`
   z-index: 2;
@@ -20,7 +20,7 @@ export const Container = styled.div<{ hide: boolean }>`
   ${MediaMobile} {
     ${({ hide }) => hide && 'display: none;'}
   }
-`;
+`
 
 export const Items = styled.div`
   margin-bottom: 8px;
@@ -28,12 +28,12 @@ export const Items = styled.div`
   min-width: 300px;
   display: flex;
   flex-direction: column;
-`;
+`
 
 export const Item = styled.span`
   color: white;
   margin: 2px 0;
-`;
+`
 
 export const HideButton = styled.button<{ hide: boolean }>`
   z-index: 1;
@@ -48,7 +48,7 @@ export const HideButton = styled.button<{ hide: boolean }>`
   ${MediaDesktop} {
     display: none;
   }
-`;
+`
 
 export const CopyButton = styled.button`
   position: absolute;
@@ -58,15 +58,15 @@ export const CopyButton = styled.button`
   height: 32px;
   padding: 4px;
   cursor: pointer;
-`;
+`
 
 export const Copied = styled.div`
   position: absolute;
   background-color: white;
   color: black;
   font-size: 12px;
-  right: 13px;
   padding: 4px;
   border-radius: 4px;
-  top: 50px;
-`;
+  top: 21px;
+  right: 52px;
+`
