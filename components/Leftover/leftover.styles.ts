@@ -6,6 +6,7 @@ export const Selects = styled.div`
   padding: 32px;
   gap: 16px 32px;
   flex-direction: column;
+  align-items: center;
   ${MediaDesktop} {
     flex-direction: row;
     > div {

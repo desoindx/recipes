@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Product } from 'types/Product'
+import Filter from 'components/Filter/Filter'
 import { facetOptions, facets } from 'components/Filter/facets'
 import Recipe from 'components/Recipe'
 import { AllRecipes } from 'components/Recipe/recipes.styles'
@@ -89,26 +90,23 @@ const Leftover = ({
               }
               styles={selectStyles}
             />
-            {filter && (
-              <Select
-                isMulti
-                options={facetOptions}
-                defaultValue={facetOptions.filter((option) =>
-                  filter.includes(option.value),
-                )}
-                onChange={(values) =>
+            <Filter
+              values={filter}
+              setValues={(e) => {
+                if (e.target.checked) {
+                  setFilter([...filter, e.target.name])
+                } else {
+                  const newFilter = filter.filter(
+                    (value) => value !== e.target.name,
+                  )
                   setFilter(
-                    values.length > 0
-                      ? values.map((option) => option.value)
+                    newFilter.length > 0
+                      ? newFilter
                       : facetOptions.map((option) => option.value),
                   )
                 }
-                value={facetOptions.filter((option) =>
-                  filter.includes(option.value),
-                )}
-                styles={selectStyles}
-              />
-            )}
+              }}
+            />
           </Selects>
           <AllRecipes>
             {toDisplay.map(({ recipe }) => (
