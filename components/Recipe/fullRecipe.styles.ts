@@ -1,4 +1,3 @@
-import Button from 'components/Button'
 import { MediaDesktop, MediaMobile } from 'components/responsive'
 import styled from 'styled-components'
 
@@ -56,10 +55,16 @@ export const Description = styled.p<{ blurred: boolean }>`
   ${({ blurred }) => blurred && 'filter: blur(5px);'}
 `
 
-export const PreviousButton = styled(Button)`
+export const PreviousButton = styled.button`
+  cursor: pointer;
   position: absolute;
-  bottom: -64px;
-  right: 0;
+  top: 4px;
+  right: 4px;
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  font-size: 16px;
   ${MediaMobile} {
     right: 32px;
   }
