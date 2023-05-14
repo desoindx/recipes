@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import ReactSelect from 'react-select';
-import { MediaDesktop, MediaMobile } from 'components/responsive';
+import { MediaDesktop, MediaMobile } from 'components/responsive'
+import ReactSelect from 'react-select'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   overflow: auto;
   max-height: 100%;
-`;
+`
 
 export const Header = styled.div`
   margin: 32px;
@@ -15,14 +15,14 @@ export const Header = styled.div`
   ${MediaMobile} {
     flex-direction: column;
   }
-`;
+`
 
 export const Select = styled(ReactSelect)`
   width: 460px;
   ${MediaMobile} {
     width: 100%;
   }
-`;
+`
 
 export const AllRecipes = styled.div`
   padding: 0 32px;
@@ -33,4 +33,4 @@ export const AllRecipes = styled.div`
   ${MediaDesktop} {
     justify-content: space-evenly;
   }
-`;
+`

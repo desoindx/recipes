@@ -1,48 +1,48 @@
-import Recipe from 'components/Recipe';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import Select from 'react-select';
-import { Product } from 'types/Product';
-import selectStyles from 'components/Select/styles';
-import { AllRecipes } from 'components/Recipe/recipes.styles';
-import { facetOptions, facets } from 'components/Select/facets';
-import { Selects } from './leftover.styles';
+import Recipe from 'components/Recipe'
+import { AllRecipes } from 'components/Recipe/recipes.styles'
+import { facetOptions, facets } from 'components/Select/facets'
+import selectStyles from 'components/Select/styles'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import Select from 'react-select'
+import { Product } from 'types/Product'
+import { Selects } from './leftover.styles'
 
 const Leftover = ({
   plannings,
 }: {
   plannings: {
-    recipes: Product[];
-    startDate: string;
-  }[];
+    recipes: Product[]
+    startDate: string
+  }[]
 }) => {
-  const router = useRouter();
-  const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [filter, setFilter] = useState<string[]>();
-  const [toDisplay, setToDisplay] = useState([]);
+  const router = useRouter()
+  const [allProducts, setAllProducts] = useState([])
+  const [products, setProducts] = useState([])
+  const [filter, setFilter] = useState<string[]>()
+  const [toDisplay, setToDisplay] = useState([])
 
   useEffect(() => {
-    setFilter(localStorage.getItem('filter')?.split(',') || facets);
-  }, []);
+    setFilter(localStorage.getItem('filter')?.split(',') || facets)
+  }, [])
 
   useEffect(() => {
     if (filter) {
-      localStorage.setItem('filter', filter.join(','));
+      localStorage.setItem('filter', filter.join(','))
     }
-  }, [filter]);
+  }, [filter])
 
   useEffect(() => {
     const planningsProduct = plannings.flatMap((planning) =>
       planning.recipes.flatMap((recipe) =>
         recipe.subProducts.map((product) => product.product.name),
       ),
-    );
+    )
 
     setAllProducts(
       [...new Set(planningsProduct)].sort((a, b) => a.localeCompare(b)),
-    );
-  }, [plannings]);
+    )
+  }, [plannings])
 
   useEffect(() => {
     setToDisplay(
@@ -67,10 +67,10 @@ const Leftover = ({
             })),
         )
         .filter(({ recipe }, index, recipes) => {
-          return recipes.findIndex((r) => r.recipe.id === recipe.id) === index;
+          return recipes.findIndex((r) => r.recipe.id === recipe.id) === index
         }),
-    );
-  }, [plannings, filter, products]);
+    )
+  }, [plannings, filter, products])
 
   return (
     <>
@@ -124,7 +124,7 @@ const Leftover = ({
         <h1>Chargement de votre placard en cours...</h1>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Leftover;
+export default Leftover

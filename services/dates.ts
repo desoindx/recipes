@@ -1,28 +1,28 @@
 export const getFrontDate = (startDate: string): string => {
   if (!startDate) {
-    return '...';
+    return '...'
   }
 
-  const idDate = new Date(startDate);
-  idDate.setDate(idDate.getDate() - 7);
+  const idDate = new Date(startDate)
+  idDate.setDate(idDate.getDate() - 7)
   return `${String(idDate.getDate()).padStart(2, '0')}/${String(
     idDate.getMonth() + 1,
-  ).padStart(2, '0')}/${idDate.getFullYear()}`;
-};
+  ).padStart(2, '0')}/${idDate.getFullYear()}`
+}
 
 export const getBackDate = (startDate?: string): string => {
-  let date;
+  let date
   if (!startDate || startDate === 'now') {
-    date = new Date();
-    date.setDate(date.getDate() + 7);
+    date = new Date()
+    date.setDate(date.getDate() + 7)
   } else {
-    date = new Date(startDate);
+    date = new Date(startDate)
   }
-  date.setDate(date.getDate() + 1);
+  date.setDate(date.getDate() + 1)
 
-  return date.toISOString().split('T')[0];
-};
+  return date.toISOString().split('T')[0]
+}
 
 export const getLocalStorageItem = (date: Date): string => {
-  return `recipes-${date.toDateString()}`;
-};
+  return `recipes-${date.toDateString()}`
+}

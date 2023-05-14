@@ -14,10 +14,10 @@ const style = {
   }),
   option: (provided, state) => {
     if (state.isFocused) {
-      return { ...provided, cursor: 'pointer', backgroundColor: '#c8c8c8' };
+      return { ...provided, cursor: 'pointer', backgroundColor: '#c8c8c8' }
     }
-    return { ...provided, cursor: 'pointer' };
+    return { ...provided, cursor: 'pointer' }
   },
-};
+}
 
-export default style;
+export default style

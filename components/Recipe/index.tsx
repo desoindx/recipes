@@ -1,13 +1,13 @@
-import React from 'react';
-import { Product } from 'types/Product';
+import React from 'react'
+import { Product } from 'types/Product'
 import {
   Box,
   Description,
-  ProductsList,
   Item,
   Nutriscore,
+  ProductsList,
   Title,
-} from './recipe.styles';
+} from './recipe.styles'
 
 const Recipe = ({
   recipe,
@@ -15,10 +15,10 @@ const Recipe = ({
   withProducts,
   detailOnHover,
 }: {
-  recipe: Product;
-  onClick: (id: string) => void;
-  withProducts?: boolean;
-  detailOnHover?: boolean;
+  recipe: Product
+  onClick: (id: string) => void
+  withProducts?: boolean
+  detailOnHover?: boolean
 }) => {
   return (
     <Box
@@ -46,7 +46,7 @@ const Recipe = ({
         ))}
       </ProductsList>
     </Box>
-  );
-};
+  )
+}
 
-export default Recipe;
+export default Recipe

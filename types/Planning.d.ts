@@ -1,11 +1,11 @@
-import { Category } from './Category';
-import { Product } from './Product';
+import { Category } from './Category'
+import { Product } from './Product'
 
 export interface Planning {
-  id: string;
-  startDate: string;
+  id: string
+  startDate: string
   planningCategories: {
-    category: Category;
-    products: Product[];
-  }[];
+    category: Category
+    products: Product[]
+  }[]
 }

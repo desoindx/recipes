@@ -1,33 +1,33 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { Cooking, Recipe } from 'types/Recipe';
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import { Cooking, Recipe } from 'types/Recipe'
 import {
   Container,
   Description,
+  Image,
+  Item,
   PreviousButton,
   Subtitle,
   Title,
-  Image,
-  Item,
   TitleInfo,
-} from './fullRecipe.styles';
+} from './fullRecipe.styles'
 
 const FullRecipe = ({
   recipe,
   blurred,
 }: {
-  recipe: Recipe;
-  blurred: boolean;
+  recipe: Recipe
+  blurred: boolean
 }) => {
-  const router = useRouter();
-  const [cooking, setCooking] = useState<Cooking>();
+  const router = useRouter()
+  const [cooking, setCooking] = useState<Cooking>()
 
   useEffect(() => {
     const cookingMode = recipe.pools
       .find((pool) => pool.nbPerson === 2)
-      .cookingModes.find((cookingMode) => cookingMode.name === 'Aucun');
-    setCooking(cookingMode);
-  }, [recipe]);
+      .cookingModes.find((cookingMode) => cookingMode.name === 'Aucun')
+    setCooking(cookingMode)
+  }, [recipe])
 
   return (
     <Container>
@@ -64,18 +64,18 @@ const FullRecipe = ({
                 <Subtitle blurred={blurred}>{step.title}</Subtitle>
                 <Description blurred={blurred}>{step.description}</Description>
               </div>
-            );
+            )
           })}
       </div>
       <PreviousButton
         onClick={() => {
-          router.back();
+          router.back()
         }}
       >
         Retour
       </PreviousButton>
     </Container>
-  );
-};
+  )
+}
 
-export default FullRecipe;
+export default FullRecipe

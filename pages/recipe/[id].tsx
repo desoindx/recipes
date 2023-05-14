@@ -1,8 +1,8 @@
-import FullRecipe from 'components/Recipe/FullRecipe';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { fetchCached } from 'services/agent';
-import { Recipe as RecipeType } from 'types/Recipe';
+import FullRecipe from 'components/Recipe/FullRecipe'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import { fetchCached } from 'services/agent'
+import { Recipe as RecipeType } from 'types/Recipe'
 
 const defaultRecipe: RecipeType = {
   id: 0,
@@ -107,18 +107,18 @@ const defaultRecipe: RecipeType = {
       ],
     },
   ],
-};
+}
 
 const Recipe = () => {
-  const router = useRouter();
-  const [recipe, setRecipe] = useState<RecipeType>(defaultRecipe);
+  const router = useRouter()
+  const [recipe, setRecipe] = useState<RecipeType>(defaultRecipe)
   useEffect(() => {
     if (router.query.id) {
-      fetchCached(`/api/recipe/${router.query.id}`).then(setRecipe);
+      fetchCached(`/api/recipe/${router.query.id}`).then(setRecipe)
     }
-  }, [router]);
+  }, [router])
 
-  return <FullRecipe recipe={recipe} blurred={recipe.id === 0} />;
-};
+  return <FullRecipe recipe={recipe} blurred={recipe.id === 0} />
+}
 
-export default Recipe;
+export default Recipe

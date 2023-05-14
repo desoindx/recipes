@@ -1,11 +1,11 @@
-import { Product } from 'types/Product';
-import Recipe from '.';
-import { Container, AllRecipes, Header, Select } from './recipes.styles';
-import { useEffect, useState } from 'react';
-import selectStyles from 'components/Select/styles';
-import { facetOptions, facets } from 'components/Select/facets';
-import { getFrontDate } from 'services/dates';
-import EmptyRecipe from './EmptyRecipe';
+import { facetOptions, facets } from 'components/Select/facets'
+import selectStyles from 'components/Select/styles'
+import { useEffect, useState } from 'react'
+import { getFrontDate } from 'services/dates'
+import { Product } from 'types/Product'
+import Recipe from '.'
+import EmptyRecipe from './EmptyRecipe'
+import { AllRecipes, Container, Header, Select } from './recipes.styles'
 
 const Recipes = ({
   startDate,
@@ -14,23 +14,23 @@ const Recipes = ({
   showRecipe,
   withFilter,
 }: {
-  startDate: string;
-  recipes: Product[];
-  selectRecipe: (id: string) => void;
-  showRecipe?: boolean;
-  withFilter?: boolean;
+  startDate: string
+  recipes: Product[]
+  selectRecipe: (id: string) => void
+  showRecipe?: boolean
+  withFilter?: boolean
 }) => {
-  const [filter, setFilter] = useState<string[]>();
+  const [filter, setFilter] = useState<string[]>()
 
   useEffect(() => {
-    setFilter(localStorage.getItem('filter')?.split(',') || facets);
-  }, []);
+    setFilter(localStorage.getItem('filter')?.split(',') || facets)
+  }, [])
 
   useEffect(() => {
     if (filter) {
-      localStorage.setItem('filter', filter.join(','));
+      localStorage.setItem('filter', filter.join(','))
     }
-  }, [filter]);
+  }, [filter])
 
   return (
     <Container>
@@ -84,7 +84,7 @@ const Recipes = ({
         )}
       </AllRecipes>
     </Container>
-  );
-};
+  )
+}
 
-export default Recipes;
+export default Recipes

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Container, Button, Icon, Line, SidePanel } from './BurgerMenu.styles';
-import { menu } from '.';
-import Link from 'next/link';
+import Link from 'next/link'
+import React, { useEffect } from 'react'
+import { menu } from '.'
+import { Button, Container, Icon, Line, SidePanel } from './BurgerMenu.styles'
 
 interface BurgerMenuProps {
-  burgerMenuCollapse: (value: boolean) => void;
-  isBurgerMenuOpen: boolean;
+  burgerMenuCollapse: (value: boolean) => void
+  isBurgerMenuOpen: boolean
 }
 
 const BurgerMenu = ({
@@ -14,11 +14,11 @@ const BurgerMenu = ({
 }: BurgerMenuProps): JSX.Element => {
   useEffect(() => {
     if (isBurgerMenuOpen) {
-      document.body.style.overflowY = 'hidden';
+      document.body.style.overflowY = 'hidden'
     } else {
-      document.body.style.overflowY = 'auto';
+      document.body.style.overflowY = 'auto'
     }
-  }, [isBurgerMenuOpen]);
+  }, [isBurgerMenuOpen])
 
   return (
     <>
@@ -46,6 +46,6 @@ const BurgerMenu = ({
         </SidePanel>
       )}
     </>
-  );
-};
-export default BurgerMenu;
+  )
+}
+export default BurgerMenu

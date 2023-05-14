@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.button`
   cursor: pointer;
@@ -8,4 +8,4 @@ export default styled.button`
   &:hover {
     background-color: #c8c8c8;
   }
-`;
+`

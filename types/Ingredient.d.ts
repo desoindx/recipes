@@ -1,8 +1,8 @@
 export interface Ingredient {
-  literalQuantity: string;
-  quantity: number;
+  literalQuantity: string
+  quantity: number
   product: {
-    name: string;
-    weight: number;
-  };
+    name: string
+    weight: number
+  }
 }

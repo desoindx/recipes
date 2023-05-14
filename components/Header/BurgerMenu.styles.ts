@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export interface IconProps {
-  isBurgerMenuOpen: boolean;
+  isBurgerMenuOpen: boolean
 }
 
 export const Container = styled.div`
@@ -11,11 +11,11 @@ export const Container = styled.div`
   h1 {
     margin: 0;
   }
-`;
+`
 
 export const Button = styled.button`
   padding: 0;
-`;
+`
 
 export const Icon = styled.div`
   cursor: pointer;
@@ -41,7 +41,7 @@ export const Icon = styled.div`
         ? 'translateY(0) rotate(45deg)'
         : 'translateY(6px)'};
   }
-`;
+`
 
 export const Line = styled.span`
   position: absolute;
@@ -78,7 +78,7 @@ export const Line = styled.span`
         ? 'translateY(0) rotate(-45deg)'
         : 'translateY(6px)'};
   }
-`;
+`
 
 export const SidePanel = styled.div`
   position: absolute;
@@ -91,4 +91,4 @@ export const SidePanel = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-`;
+`

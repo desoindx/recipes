@@ -1,66 +1,66 @@
-import Button from 'components/Button';
-import Buttons from 'components/Button/Buttons';
-import Recipes from 'components/Recipe/Recipes';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { fetchCached } from 'services/agent';
-import { getLocalStorageItem } from 'services/dates';
-import { Product } from 'types/Product';
+import Button from 'components/Button'
+import Buttons from 'components/Button/Buttons'
+import Recipes from 'components/Recipe/Recipes'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import { fetchCached } from 'services/agent'
+import { getLocalStorageItem } from 'services/dates'
+import { Product } from 'types/Product'
 
 const WeeklyRecipes = () => {
-  const router = useRouter();
-  const [recipes, setRecipes] = useState<Product[]>([]);
-  const [startDate, setStartDate] = useState('');
+  const router = useRouter()
+  const [recipes, setRecipes] = useState<Product[]>([])
+  const [startDate, setStartDate] = useState('')
 
-  const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const [nextPath, setNextPath] = useState<string>();
-  const [previousPath, setPreviousPath] = useState<string>();
+  const [selectedRecipes, setSelectedRecipes] = useState([])
+  const [nextPath, setNextPath] = useState<string>()
+  const [previousPath, setPreviousPath] = useState<string>()
 
   useEffect(() => {
     if (router.query.id) {
-      setRecipes([]);
-      setStartDate('');
+      setRecipes([])
+      setStartDate('')
       fetchCached(`/api/recipes/${router.query.id}`).then((data) => {
-        setRecipes(data.recipes);
-        setStartDate(data.startDate);
-      });
+        setRecipes(data.recipes)
+        setStartDate(data.startDate)
+      })
     }
-  }, [router]);
+  }, [router])
 
   useEffect(() => {
     const weekRecipes = localStorage.getItem(
       getLocalStorageItem(new Date(startDate)),
-    );
+    )
     if (weekRecipes) {
-      setSelectedRecipes(weekRecipes.split(','));
+      setSelectedRecipes(weekRecipes.split(','))
     } else {
-      setSelectedRecipes([]);
+      setSelectedRecipes([])
     }
-  }, [startDate]);
+  }, [startDate])
 
   useEffect(() => {
-    const now = new Date(startDate);
+    const now = new Date(startDate)
     for (let i = 0; i < 200; i++) {
-      now.setDate(now.getDate() + 7);
+      now.setDate(now.getDate() + 7)
       if (localStorage.getItem(getLocalStorageItem(now))) {
-        setNextPath(now.toISOString());
-        return;
+        setNextPath(now.toISOString())
+        return
       }
     }
-    setNextPath('');
-  }, [startDate]);
+    setNextPath('')
+  }, [startDate])
 
   useEffect(() => {
-    const now = new Date(startDate);
+    const now = new Date(startDate)
     for (let i = 0; i < 200; i++) {
-      now.setDate(now.getDate() - 7);
+      now.setDate(now.getDate() - 7)
       if (localStorage.getItem(getLocalStorageItem(now))) {
-        setPreviousPath(now.toISOString());
-        return;
+        setPreviousPath(now.toISOString())
+        return
       }
     }
-    setPreviousPath('');
-  }, [startDate]);
+    setPreviousPath('')
+  }, [startDate])
 
   return (
     <>
@@ -70,7 +70,7 @@ const WeeklyRecipes = () => {
           selectedRecipes.includes(recipe.id),
         )}
         selectRecipe={(recipe: string) => {
-          router.push(`/recipe/${recipe}`);
+          router.push(`/recipe/${recipe}`)
         }}
         showRecipe
       />
@@ -89,7 +89,7 @@ const WeeklyRecipes = () => {
         </Buttons>
       )}
     </>
-  );
-};
+  )
+}
 
-export default WeeklyRecipes;
+export default WeeklyRecipes
