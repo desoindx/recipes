@@ -2,14 +2,9 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import BurgerMenu from './BurgerMenu'
 import { BurgerContainer, Container, NavBar } from './header.styles'
+import menu from './menu.config'
 
-export const menu = [
-  { href: '/', label: 'Faire mes courses' },
-  { href: '/recipes/now', label: 'Voir mes recettes' },
-  { href: '/restes', label: 'Utiliser mes restes' },
-]
-
-const Header = () => {
+export const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (

@@ -25,7 +25,7 @@ const FullRecipe = ({
   useEffect(() => {
     const cookingMode = recipe.pools
       .find((pool) => pool.nbPerson === 2)
-      .cookingModes.find((cookingMode) => cookingMode.name === 'Aucun')
+      .cookingModes.find((mode) => mode.name === 'Aucun')
     setCooking(cookingMode)
   }, [recipe])
 
@@ -58,14 +58,12 @@ const FullRecipe = ({
           </TitleInfo>
         )}
         {cooking &&
-          cooking.steps.map((step) => {
-            return (
-              <div key={step.title}>
-                <Subtitle blurred={blurred}>{step.title}</Subtitle>
-                <Description blurred={blurred}>{step.description}</Description>
-              </div>
-            )
-          })}
+          cooking.steps.map((step) => (
+            <div key={step.title}>
+              <Subtitle blurred={blurred}>{step.title}</Subtitle>
+              <Description blurred={blurred}>{step.description}</Description>
+            </div>
+          ))}
       </div>
       <PreviousButton
         onClick={() => {

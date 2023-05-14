@@ -66,9 +66,10 @@ const Leftover = ({
               startDate: planning.startDate,
             })),
         )
-        .filter(({ recipe }, index, recipes) => {
-          return recipes.findIndex((r) => r.recipe.id === recipe.id) === index
-        }),
+        .filter(
+          ({ recipe }, index, recipes) =>
+            recipes.findIndex((r) => r.recipe.id === recipe.id) === index,
+        ),
     )
   }, [plannings, filter, products])
 

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-import { menu } from '.'
 import { Button, Container, Icon, Line, SidePanel } from './BurgerMenu.styles'
+import menu from './menu.config'
 
 interface BurgerMenuProps {
   burgerMenuCollapse: (value: boolean) => void

@@ -5,7 +5,7 @@ import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
 
-export default function Home(): JSX.Element {
+const Home = () => {
   const [selectedRecipes, setSelectedRecipes] = useState([])
   const [recipes, setRecipes] = useState<Product[]>([])
   const [startDate, setStartDate] = useState('')
@@ -58,3 +58,5 @@ export default function Home(): JSX.Element {
     </div>
   )
 }
+
+export default Home

@@ -9,6 +9,7 @@
     "build:analyze": "ANALYZE=true npm run build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "prettier": "prettier --write .",
     "prettier-check": "prettier --check ."
   },
@@ -31,8 +32,9 @@
     "eslint": "8.40.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.8.0",
     "eslint-config-next": "13.4.2",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8"
   }
 }

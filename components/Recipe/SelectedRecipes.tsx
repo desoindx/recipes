@@ -97,7 +97,7 @@ const SelectedRecipes = ({
               })
           }}
         >
-          <img src={'./copy.svg'} alt="copier la liste" />
+          <img src="./copy.svg" alt="copier la liste" />
         </CopyButton>
         {copied && <Copied>Copié</Copied>}
         {seeRecipes ? (

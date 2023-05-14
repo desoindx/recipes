@@ -1,3 +1,26 @@
 {
-  "extends": ["airbnb/base", "airbnb/hooks", "prettier"]
+  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "extends": [
+    "next",
+    "airbnb/base",
+    "airbnb-typescript/base",
+    "airbnb/hooks",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-irregular-whitespace": "off",
+    "import/prefer-default-export": "off",
+    "no-plusplus": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
+  }
 }
