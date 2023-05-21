@@ -18,6 +18,18 @@ const WeeklyRecipes = () => {
 
   useEffect(() => {
     if (router.query.id) {
+      if (router.query.id === 'now') {
+        const now = new Date()
+        now.setDate(now.getDate() + 7)
+        for (let i = 0; i < 200; i++) {
+          if (localStorage.getItem(getLocalStorageItem(now))) {
+            router.push(`/recipes/${now.toISOString()}`)
+            return
+          }
+          now.setDate(now.getDate() - 1)
+        }
+      }
+
       setRecipes([])
       setStartDate('')
       fetchCached(`/api/recipes/${router.query.id}`).then((data) => {
