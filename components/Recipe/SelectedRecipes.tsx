@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Product } from 'types/Product'
 import Button from 'components/Button'
@@ -74,7 +75,9 @@ const SelectedRecipes = ({
     <>
       {recipes.length > 0 && (
         <HideButton hide={hide} onClick={() => setHide(!hide)}>
-          <img
+          <Image
+            width={15}
+            height={15}
             src={hide ? './right-arrow.svg' : './left-arrow.svg'}
             alt={
               hide
@@ -97,7 +100,12 @@ const SelectedRecipes = ({
               })
           }}
         >
-          <img src="./copy.svg" alt="copier la liste" />
+          <Image
+            width={20}
+            height={20}
+            src="./copy.svg"
+            alt="copier la liste"
+          />
         </CopyButton>
         {copied && <Copied>Copié</Copied>}
         {seeRecipes ? (

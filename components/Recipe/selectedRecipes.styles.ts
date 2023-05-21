@@ -36,6 +36,7 @@ export const Item = styled.span`
 `
 
 export const HideButton = styled.button<{ hide: boolean }>`
+  cursor: pointer;
   z-index: 1;
   position: absolute;
   top: 50%;
