@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Product } from 'types/Product'
@@ -17,7 +16,6 @@ const Leftover = ({
     startDate: string
   }[]
 }) => {
-  const router = useRouter()
   const [allProducts, setAllProducts] = useState([])
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState<string[]>()
@@ -113,7 +111,6 @@ const Leftover = ({
               <Recipe
                 key={recipe.id}
                 recipe={recipe}
-                onClick={() => router.push(`/recipe/${recipe.id}`)}
                 withProducts
               />
             ))}

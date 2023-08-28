@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
-import Button from 'components/Button'
+import { ButtonLink } from 'components/Button'
 import Buttons from 'components/Button/Buttons'
 import Recipes from 'components/Recipe/Recipes'
 
@@ -81,22 +81,17 @@ const WeeklyRecipes = () => {
         recipes={recipes.filter((recipe) =>
           selectedRecipes.includes(recipe.id),
         )}
-        selectRecipe={(recipe: string) => {
-          router.push(`/recipe/${recipe}`)
-        }}
         showRecipe
       />
       {(nextPath || previousPath) && (
         <Buttons>
           {previousPath && (
-            <Button onClick={() => router.push(previousPath)}>
+            <ButtonLink href={previousPath}>
               Voir la semaine précendante
-            </Button>
+            </ButtonLink>
           )}
           {nextPath && (
-            <Button onClick={() => router.push(nextPath)}>
-              Voir la semaine suivante
-            </Button>
+            <ButtonLink href={nextPath}>Voir la semaine suivante</ButtonLink>
           )}
         </Buttons>
       )}

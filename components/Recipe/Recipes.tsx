@@ -3,8 +3,8 @@ import { getFrontDate } from 'services/dates'
 import { Product } from 'types/Product'
 import Filter from 'components/Filter/Filter'
 import { facetOptions, facets } from 'components/Filter/facets'
-import Recipe from '.'
 import EmptyRecipe from './EmptyRecipe'
+import Recipe from './index'
 import { AllRecipes, Container, Header } from './recipes.styles'
 
 const Recipes = ({
@@ -16,7 +16,7 @@ const Recipes = ({
 }: {
   startDate: string
   recipes: Product[]
-  selectRecipe: (id: string) => void
+  selectRecipe?: (id: string) => void
   showRecipe?: boolean
   withFilter?: boolean
 }) => {

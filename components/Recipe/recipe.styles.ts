@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export const ProductsList = styled.div<{
@@ -13,6 +14,10 @@ export const Description = styled.p<{ detailOnHover: boolean }>`
   margin: 0 auto;
   padding: 4px 0 16px 0;
   ${({ detailOnHover }) => detailOnHover && 'display: none;'}
+`
+
+export const BoxLink = styled(Link)`
+  text-decoration: none;
 `
 
 export const Box = styled.div<{ empty?: boolean; detailOnHover?: boolean }>`
