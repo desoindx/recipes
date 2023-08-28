@@ -17,14 +17,14 @@ export const Button = styled.button`
   padding: 0;
 `
 
-export const Icon = styled.div`
+export const Icon = styled.div<IconProps>`
   cursor: pointer;
   position: relative;
   width: 54px;
   height: 54px;
   transition: transform 0.5s;
-  transform: ${(props: IconProps) =>
-    props.isBurgerMenuOpen ? 'transform: rotate(180deg)' : 'none'};
+  transform: ${({isBurgerMenuOpen}) =>
+    isBurgerMenuOpen ? 'transform: rotate(180deg)' : 'none'};
   background-color: black;
   &:before {
     content: '';
@@ -43,7 +43,7 @@ export const Icon = styled.div`
   }
 `
 
-export const Line = styled.span`
+export const Line = styled.span<IconProps>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -51,8 +51,8 @@ export const Line = styled.span`
   display: block;
   width: 22px;
   height: 2px;
-  background-color: ${(props: IconProps) =>
-    props.isBurgerMenuOpen ? 'transparent' : 'white'};
+  background-color: ${({isBurgerMenuOpen}) =>
+    isBurgerMenuOpen ? 'transparent' : 'white'};
   transition: background 0.5s;
   &:before,
   &:after {
