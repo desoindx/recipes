@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
+import Meta from 'components/Meta'
 import Recipes from 'components/Recipe/Recipes'
 import SelectedRecipes from 'components/Recipe/SelectedRecipes'
 
@@ -35,6 +36,7 @@ const Home = () => {
 
   return (
     <div className="main-container">
+      <Meta />
       {recipes.length > 0 && selectedRecipes.length > 0 && (
         <SelectedRecipes
           recipes={recipes.filter((recipe) =>

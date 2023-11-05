@@ -5,6 +5,7 @@ import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
 import { ButtonLink } from 'components/Button'
 import Buttons from 'components/Button/Buttons'
+import Meta from 'components/Meta'
 import Recipes from 'components/Recipe/Recipes'
 
 const WeeklyRecipes = () => {
@@ -76,6 +77,7 @@ const WeeklyRecipes = () => {
 
   return (
     <>
+      <Meta title="Vos recettes de la semaine" />
       <Recipes
         startDate={startDate}
         recipes={recipes.filter((recipe) =>

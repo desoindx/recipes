@@ -2,12 +2,13 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { Recipe as RecipeType } from 'types/Recipe'
+import Meta from 'components/Meta'
 import FullRecipe from 'components/Recipe/FullRecipe'
 
 const defaultRecipe: RecipeType = {
   id: 0,
   name: 'Chargement en cours',
-  image: '/loading.jpg',
+  image: '/loading.jpeg',
   pools: [
     {
       nbPerson: 2,
@@ -118,7 +119,12 @@ const Recipe = () => {
     }
   }, [router])
 
-  return <FullRecipe recipe={recipe} blurred={recipe.id === 0} />
+  return (
+    <>
+      <Meta title="Votre recette du jour" />
+      <FullRecipe recipe={recipe} blurred={recipe.id === 0} />
+    </>
+  )
 }
 
 export default Recipe
