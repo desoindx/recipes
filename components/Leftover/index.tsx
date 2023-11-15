@@ -108,7 +108,11 @@ const Leftover = ({
           </Selects>
           <AllRecipes>
             {toDisplay.map(({ recipe }) => (
-              <Recipe key={recipe.id} recipe={recipe} withProducts />
+              <Recipe
+                key={recipe.id}
+                recipe={recipe}
+                withProducts
+              />
             ))}
           </AllRecipes>
         </>

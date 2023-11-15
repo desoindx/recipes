@@ -23,7 +23,7 @@ export const Icon = styled.div<IconProps>`
   width: 54px;
   height: 54px;
   transition: transform 0.5s;
-  transform: ${({ isBurgerMenuOpen }) =>
+  transform: ${({isBurgerMenuOpen}) =>
     isBurgerMenuOpen ? 'transform: rotate(180deg)' : 'none'};
   background-color: black;
   &:before {
@@ -51,7 +51,7 @@ export const Line = styled.span<IconProps>`
   display: block;
   width: 22px;
   height: 2px;
-  background-color: ${({ isBurgerMenuOpen }) =>
+  background-color: ${({isBurgerMenuOpen}) =>
     isBurgerMenuOpen ? 'transparent' : 'white'};
   transition: background 0.5s;
   &:before,
