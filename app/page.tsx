@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     const existingSelectedRecipes = localStorage.getItem(
       getLocalStorageItem(new Date(startDate)),
-    ) 
+    )
     if (existingSelectedRecipes) {
       setSelectedRecipes(existingSelectedRecipes.split(','))
     }

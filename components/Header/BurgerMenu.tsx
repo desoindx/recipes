@@ -1,12 +1,10 @@
-
 'use client'
 
+import classNames from 'classnames'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import classNames from 'classnames'
 import styles from './BurgerMenu.module.css'
 import menu from './menu.config'
-
 
 const BurgerMenu = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,15 +21,20 @@ const BurgerMenu = (): JSX.Element => {
     <>
       <div className={styles.container}>
         <h1>Weekly recipes</h1>
-        <button className={styles.button}
+        <button
+          className={styles.button}
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={isOpen ? 'true' : 'false'}
           aria-controls="menu-principal"
         >
-          <div className={classNames(styles.icon, { [styles.iconOpen]: isOpen })}>
-            <div className={classNames(styles.line, { [styles.lineOpen]: isOpen })} />
+          <div
+            className={classNames(styles.icon, { [styles.iconOpen]: isOpen })}
+          >
+            <div
+              className={classNames(styles.line, { [styles.lineOpen]: isOpen })}
+            />
           </div>
         </button>
       </div>

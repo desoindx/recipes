@@ -19,7 +19,9 @@ const Leftover = ({
   const [allProducts, setAllProducts] = useState<string[]>([])
   const [products, setProducts] = useState<string[]>([])
   const [filter, setFilter] = useState<string[]>([])
-  const [toDisplay, setToDisplay] = useState<{ recipe: Product; startDate: string; }[]>([])
+  const [toDisplay, setToDisplay] = useState<
+    { recipe: Product; startDate: string }[]
+  >([])
 
   useEffect(() => {
     setFilter(localStorage.getItem('filter')?.split(',') || facets)
@@ -108,11 +110,7 @@ const Leftover = ({
           </div>
           <div className={recipesStyles.allRecipes}>
             {toDisplay.map(({ recipe }) => (
-              <Recipe
-                key={recipe.id}
-                recipe={recipe}
-                withProducts
-              />
+              <Recipe key={recipe.id} recipe={recipe} withProducts />
             ))}
           </div>
         </>

@@ -1,8 +1,8 @@
+import classNames from 'classnames'
 import Image from 'next/image'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Product } from 'types/Product'
 import buttonStyles from 'components/Button/button.module.css'
-import classNames from 'classnames'
 import Recipe from '.'
 import styles from './selectedRecipes.module.css'
 
@@ -67,7 +67,10 @@ const SelectedRecipes = ({
   return (
     <>
       {recipes.length > 0 && (
-        <button className={classNames(styles.button, {[styles.hiddenButton]: hide})}  onClick={() => setHide(!hide)}>
+        <button
+          className={classNames(styles.button, { [styles.hiddenButton]: hide })}
+          onClick={() => setHide(!hide)}
+        >
           <Image
             width={15}
             height={15}
@@ -80,8 +83,13 @@ const SelectedRecipes = ({
           />
         </button>
       )}
-      <div className={classNames(styles.container, {[styles.hiddenContainer]: hide})}>
-        <button className={styles.copyButton}
+      <div
+        className={classNames(styles.container, {
+          [styles.hiddenContainer]: hide,
+        })}
+      >
+        <button
+          className={styles.copyButton}
           onClick={() => {
             navigator.clipboard
               .writeText(
@@ -119,11 +127,16 @@ const SelectedRecipes = ({
         ) : (
           <div className={styles.items}>
             {shoppingList.map(({ key, element }) => (
-              <div className={styles.item} key={key}>{element}</div>
+              <div className={styles.item} key={key}>
+                {element}
+              </div>
             ))}
           </div>
         )}
-        <button className={buttonStyles.button} onClick={() => setSeeRecipes(!seeRecipes)}>
+        <button
+          className={buttonStyles.button}
+          onClick={() => setSeeRecipes(!seeRecipes)}
+        >
           Voir {seeRecipes ? 'la liste de course' : 'les recettes choisies'}
         </button>
       </div>

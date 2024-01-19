@@ -61,9 +61,10 @@ export const getRecipes = async (startDate?: string) => {
     })) as PlanningResponse
     const result = {
       startDate: planning.startDate,
-      recipes: planning.planningCategories
-        .find(({category}) => category.slug === CategorySlug.TO_COOK)
-        ?.products.filter((product) => product.nbPerson === 2) || [],
+      recipes:
+        planning.planningCategories
+          .find(({ category }) => category.slug === CategorySlug.TO_COOK)
+          ?.products.filter((product) => product.nbPerson === 2) || [],
     }
     recipes[planning.startDate || 'now'] = result
     return result
