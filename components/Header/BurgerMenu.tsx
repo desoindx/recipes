@@ -1,49 +1,48 @@
+
+'use client'
+
 import Link from 'next/link'
-import React, { useEffect } from 'react'
-import { Button, Container, Icon, Line, SidePanel } from './BurgerMenu.styles'
+import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
+import styles from './BurgerMenu.module.css'
 import menu from './menu.config'
 
-interface BurgerMenuProps {
-  burgerMenuCollapse: (value: boolean) => void
-  isBurgerMenuOpen: boolean
-}
 
-const BurgerMenu = ({
-  isBurgerMenuOpen,
-  burgerMenuCollapse,
-}: BurgerMenuProps): JSX.Element => {
+const BurgerMenu = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState(false)
+
   useEffect(() => {
-    if (isBurgerMenuOpen) {
+    if (isOpen) {
       document.body.style.overflowY = 'hidden'
     } else {
       document.body.style.overflowY = 'auto'
     }
-  }, [isBurgerMenuOpen])
+  }, [isOpen])
 
   return (
     <>
-      <Container>
+      <div className={styles.container}>
         <h1>Weekly recipes</h1>
-        <Button
+        <button className={styles.button}
           type="button"
-          onClick={() => burgerMenuCollapse(!isBurgerMenuOpen)}
-          aria-label={isBurgerMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-          aria-expanded={isBurgerMenuOpen ? 'true' : 'false'}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-expanded={isOpen ? 'true' : 'false'}
           aria-controls="menu-principal"
         >
-          <Icon isBurgerMenuOpen={isBurgerMenuOpen}>
-            <Line isBurgerMenuOpen={isBurgerMenuOpen} />
-          </Icon>
-        </Button>
-      </Container>
-      {isBurgerMenuOpen && (
-        <SidePanel onClick={() => burgerMenuCollapse(false)}>
+          <div className={classNames(styles.icon, { [styles.iconOpen]: isOpen })}>
+            <div className={classNames(styles.line, { [styles.lineOpen]: isOpen })} />
+          </div>
+        </button>
+      </div>
+      {isOpen && (
+        <div className={styles.sidePanel} onClick={() => setIsOpen(false)}>
           {menu.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
             </Link>
           ))}
-        </SidePanel>
+        </div>
       )}
     </>
   )

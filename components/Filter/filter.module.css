@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-export const Filters = styled.div`
+.filters {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -8,9 +6,10 @@ export const Filters = styled.div`
 
   label {
     cursor: pointer;
+
     input {
       cursor: pointer;
       margin-right: 8px;
     }
   }
-`
+}

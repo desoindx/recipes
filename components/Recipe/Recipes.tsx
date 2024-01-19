@@ -5,7 +5,7 @@ import Filter from 'components/Filter/Filter'
 import { facetOptions, facets } from 'components/Filter/facets'
 import EmptyRecipe from './EmptyRecipe'
 import Recipe from './index'
-import { AllRecipes, Container, Header } from './recipes.styles'
+import styles from './recipes.module.css'
 
 const Recipes = ({
   startDate,
@@ -33,8 +33,8 @@ const Recipes = ({
   }, [filter])
 
   return (
-    <Container>
-      <Header>
+    <div className={styles.container}>
+      <div className={styles.header}>
         <span>Recettes de la semaine du {getFrontDate(startDate)}</span>
         {withFilter && filter && (
           <Filter
@@ -55,8 +55,8 @@ const Recipes = ({
             }}
           />
         )}
-      </Header>
-      <AllRecipes>
+      </div>
+      <div className={styles.allRecipes}>
         {startDate ? (
           (withFilter
             ? recipes.filter((product) =>
@@ -81,8 +81,8 @@ const Recipes = ({
             <EmptyRecipe />
           </>
         )}
-      </AllRecipes>
-    </Container>
+      </div>
+    </div>
   )
 }
 

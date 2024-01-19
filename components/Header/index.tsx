@@ -1,26 +1,22 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import BurgerMenu from './BurgerMenu'
-import { BurgerContainer, Container, NavBar } from './header.styles'
+import styles from './header.module.css'
 import menu from './menu.config'
 
-export const Header = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <NavBar>
-      <Container>
+export const Header = () => (
+    <nav className={styles.navbar}>
+      <div className={styles.container}>
         {menu.map((item) => (
           <Link key={item.href} href={item.href}>
             {item.label}
           </Link>
         ))}
-      </Container>
-      <BurgerContainer>
-        <BurgerMenu isBurgerMenuOpen={isOpen} burgerMenuCollapse={setIsOpen} />
-      </BurgerContainer>
-    </NavBar>
+      </div>
+      <div className={styles.burgerContainer}>
+        <BurgerMenu  />
+      </div>
+    </nav>
   )
-}
 
 export default Header

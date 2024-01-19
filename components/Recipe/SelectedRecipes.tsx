@@ -1,17 +1,10 @@
 import Image from 'next/image'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Product } from 'types/Product'
-import Button from 'components/Button'
+import buttonStyles from 'components/Button/button.module.css'
+import classNames from 'classnames'
 import Recipe from '.'
-import {
-  Container,
-  Copied,
-  CopyButton,
-  HideButton,
-  Item,
-  Items,
-  Title,
-} from './selectedRecipes.styles'
+import styles from './selectedRecipes.module.css'
 
 const allQuantityTypes = ['g', 'mL', '']
 
@@ -74,7 +67,7 @@ const SelectedRecipes = ({
   return (
     <>
       {recipes.length > 0 && (
-        <HideButton hide={hide} onClick={() => setHide(!hide)}>
+        <button className={classNames(styles.button, {[styles.hiddenButton]: hide})}  onClick={() => setHide(!hide)}>
           <Image
             width={15}
             height={15}
@@ -85,10 +78,10 @@ const SelectedRecipes = ({
                 : 'Fermer les recettes choisies'
             }
           />
-        </HideButton>
+        </button>
       )}
-      <Container hide={hide}>
-        <CopyButton
+      <div className={classNames(styles.container, {[styles.hiddenContainer]: hide})}>
+        <button className={styles.copyButton}
           onClick={() => {
             navigator.clipboard
               .writeText(
@@ -106,14 +99,14 @@ const SelectedRecipes = ({
             src="./copy.svg"
             alt="copier la liste"
           />
-        </CopyButton>
-        {copied && <Copied>Copié</Copied>}
+        </button>
+        {copied && <div className={styles.copied}>Copié</div>}
         {seeRecipes ? (
           <>
-            <Title>
+            <span className={styles.title}>
               {recipes.length} recette{recipes.length > 1 && 's'} sélectionée
               {recipes.length > 1 && 's'}
-            </Title>
+            </span>
             {recipes.map((recipe) => (
               <Recipe
                 key={recipe.id}
@@ -124,16 +117,16 @@ const SelectedRecipes = ({
             ))}
           </>
         ) : (
-          <Items>
+          <div className={styles.items}>
             {shoppingList.map(({ key, element }) => (
-              <Item key={key}>{element}</Item>
+              <div className={styles.item} key={key}>{element}</div>
             ))}
-          </Items>
+          </div>
         )}
-        <Button onClick={() => setSeeRecipes(!seeRecipes)}>
+        <button className={buttonStyles.button} onClick={() => setSeeRecipes(!seeRecipes)}>
           Voir {seeRecipes ? 'la liste de course' : 'les recettes choisies'}
-        </Button>
-      </Container>
+        </button>
+      </div>
     </>
   )
 }

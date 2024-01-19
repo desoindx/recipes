@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'

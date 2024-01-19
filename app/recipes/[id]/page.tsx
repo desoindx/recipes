@@ -1,13 +1,16 @@
-import { useRouter } from 'next/router'
+'use client' 
+
+import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
-import { ButtonLink } from 'components/Button'
-import Buttons from 'components/Button/Buttons'
+import buttonStyles from 'components/Button/button.module.css'
 import Recipes from 'components/Recipe/Recipes'
+import Link from 'next/link'
 
 const WeeklyRecipes = () => {
+  const query = useParams()
   const router = useRouter()
   const [recipes, setRecipes] = useState<Product[]>([])
   const [startDate, setStartDate] = useState('')
@@ -17,8 +20,8 @@ const WeeklyRecipes = () => {
   const [previousPath, setPreviousPath] = useState<string>()
 
   useEffect(() => {
-    if (router.query.id) {
-      if (router.query.id === 'now') {
+    if (query && query.id) {
+      if (query.id === 'now') {
         const now = new Date()
         now.setDate(now.getDate() + 7)
         for (let i = 0; i < 200; i++) {
@@ -32,12 +35,12 @@ const WeeklyRecipes = () => {
 
       setRecipes([])
       setStartDate('')
-      fetchCached(`/api/recipes/${router.query.id}`).then((data) => {
+      fetchCached(`/api/recipes/${query.id}`).then((data) => {
         setRecipes(data.recipes)
         setStartDate(data.startDate)
       })
     }
-  }, [router])
+  }, [query, router])
 
   useEffect(() => {
     const weekRecipes = localStorage.getItem(
@@ -84,16 +87,14 @@ const WeeklyRecipes = () => {
         showRecipe
       />
       {(nextPath || previousPath) && (
-        <Buttons>
+        <div className={buttonStyles.buttons}>
           {previousPath && (
-            <ButtonLink href={previousPath}>
-              Voir la semaine précendante
-            </ButtonLink>
-          )}
+            <Link className={buttonStyles.linkButton} href={previousPath}>Voir la semaine précendante</Link>
+            )}
           {nextPath && (
-            <ButtonLink href={nextPath}>Voir la semaine suivante</ButtonLink>
+            <Link className={buttonStyles.linkButton} href={nextPath}>Voir la semaine suivante</Link>
           )}
-        </Buttons>
+        </div>
       )}
     </>
   )

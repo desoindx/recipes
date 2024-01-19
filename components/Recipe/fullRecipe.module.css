@@ -1,0 +1,67 @@
+.container {
+  width: calc(100% - 64px);
+  padding: 32px;
+  background-color: white;
+  color: black;
+  position: relative;
+  display: flex;
+  gap: 32px;
+
+  @media (min-width: 1001px) {
+    max-width: 900px;
+    margin: 48px auto;
+  }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    margin-bottom: 100px;
+  }
+}
+
+.image {
+  width: 250px;
+  margin-bottom: 16px;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+}
+
+.item {
+  margin: 2px 0;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.titleInfo {
+  color: #9b9b9b;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.description {
+  text-align: justify;
+}
+
+.previousButton {
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  font-size: 16px;
+
+  @media (max-width: 1000px) {
+    right: 32px;
+  }
+}

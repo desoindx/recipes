@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router'
+'use client'
+
+import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import { Recipe as RecipeType } from 'types/Recipe'
@@ -110,13 +112,13 @@ const defaultRecipe: RecipeType = {
 }
 
 const Recipe = () => {
-  const router = useRouter()
+  const params = useParams()
   const [recipe, setRecipe] = useState<RecipeType>(defaultRecipe)
   useEffect(() => {
-    if (router.query.id) {
-      fetchCached(`/api/recipe/${router.query.id}`).then(setRecipe)
+    if (params && params.id) {
+      fetchCached(`/api/recipe/${params.id}`).then(setRecipe)
     }
-  }, [router])
+  }, [params])
 
   return <FullRecipe recipe={recipe} blurred={recipe.id === 0} />
 }

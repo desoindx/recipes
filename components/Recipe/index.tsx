@@ -1,14 +1,8 @@
 import React from 'react'
 import { Product } from 'types/Product'
-import {
-  Box,
-  BoxLink,
-  Description,
-  Item,
-  Nutriscore,
-  ProductsList,
-  Title,
-} from './recipe.styles'
+import classNames from 'classnames'
+import Link from 'next/link'
+import styles from './recipe.module.css'
 
 const Recipe = ({
   recipe,
@@ -22,37 +16,36 @@ const Recipe = ({
   detailOnHover?: boolean
 }) => {
   const content = (
-    <Box
+    <div className={classNames(styles.box, styles.nonEmptyBox, { [styles.detailedBox]: detailOnHover})}
       key={recipe.name}
       onClick={() => onClick && onClick(recipe.id)}
-      detailOnHover={detailOnHover}
     >
       <img src={recipe.images[0]} alt={recipe.name} />
       {recipe.nutriscore && (
-        <Nutriscore
+        <img className={styles.nutriscore}
           src={`https://www.quitoque.fr/static/images/picto/nutri-score-${recipe.nutriscore.toLowerCase()}.svg`}
           alt={`Nutriscore: ${recipe.nutriscore}`}
         />
       )}
-      <Title>{recipe.name}</Title>
-      <Description detailOnHover={detailOnHover}>
+      <p className={styles.title}>{recipe.name}</p>
+      <p className={classNames(styles.description, {none: detailOnHover})}>
         {recipe.waitingTime}min ({recipe.cookingTime} de prépa),{' '}
         {recipe.nutritionalInformation.kiloCalorie} kcal
-      </Description>
-      <ProductsList withProducts={withProducts}>
+      </p>
+      <div className={classNames(styles.productsList, {none: !withProducts})}>
         {recipe.subProducts.map((product) => (
-          <Item key={product.product.name}>
+          <span className={styles.item} key={product.product.name}>
             <b>{product.product.name}</b> : {product.literalQuantity}
-          </Item>
+          </span>
         ))}
-      </ProductsList>
-    </Box>
+      </div>
+    </div>
   )
 
   return onClick ? (
     content
   ) : (
-    <BoxLink href={`/recipe/${recipe.id}`}>{content}</BoxLink>
+    <Link className={styles.boxLink} href={`/recipe/${recipe.id}`}>{content}</Link>
   )
 }
 

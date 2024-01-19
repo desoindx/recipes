@@ -1,0 +1,29 @@
+.navbar {
+  border-bottom: 1px solid white;
+  padding: 16px 32px;
+
+  a {
+    color: white;
+    text-decoration: none;
+    margin: 32px;
+    padding: 16px;
+
+    &:hover {
+      color: #c8c8c8;
+    }
+  }
+}
+
+.container {
+  @media (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.burgerContainer {
+  height: fit-content;
+
+  @media (min-width: 1001px) {
+    display: none;
+  }
+}

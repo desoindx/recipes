@@ -1,29 +1,28 @@
-import styled from 'styled-components'
-import { MediaDesktop, MediaMobile } from 'components/responsive'
-
-export const Container = styled.div`
+.container {
   overflow: auto;
   max-height: 100%;
-`
+}
 
-export const Header = styled.div`
+.header {
   margin: 32px;
   display: flex;
   gap: 16px 128px;
   justify-content: center;
   align-items: center;
-  ${MediaMobile} {
+
+  @media (max-width: 1000px) {
     flex-direction: column;
   }
-`
+}
 
-export const AllRecipes = styled.div`
+.allRecipes {
   padding: 0 32px;
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
   justify-content: center;
-  ${MediaDesktop} {
+
+  @media (min-width: 1001px) {
     justify-content: space-evenly;
   }
-`
+}

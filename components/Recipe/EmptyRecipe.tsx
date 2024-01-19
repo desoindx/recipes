@@ -1,11 +1,12 @@
 import React from 'react'
-import { Box, Title } from './recipe.styles'
+import classNames from 'classnames'
+import styles from './recipe.module.css'
 
 const EmptyRecipe = () => (
-  <Box empty>
+  <div className={styles.box}>
     <img src="/loading.jpg" alt="Chargement..." />
-    <Title blurred>Titre de recette en cours</Title>
-  </Box>
+    <p className={classNames(styles.title, 'blurred')}>Titre de recette en cours</p>
+  </div>
 )
 
 export default EmptyRecipe

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Select from 'react-select'
+import ReactSelect from 'react-select'
 import { Product } from 'types/Product'
 import Filter from 'components/Filter/Filter'
 import { facetOptions, facets } from 'components/Filter/facets'
 import Recipe from 'components/Recipe'
-import { AllRecipes } from 'components/Recipe/recipes.styles'
+import recipesStyles from 'components/Recipe/recipes.module.css'
 import selectStyles from 'components/Select/styles'
-import { Selects } from './leftover.styles'
+import styles from './leftover.module.css'
 
 const Leftover = ({
   plannings,
@@ -76,8 +76,8 @@ const Leftover = ({
     <>
       {allProducts.length > 0 ? (
         <>
-          <Selects>
-            <Select
+          <div className={styles.selects}>
+            <ReactSelect
               isMulti
               options={allProducts.map((product) => ({
                 label: product,
@@ -105,8 +105,8 @@ const Leftover = ({
                 }
               }}
             />
-          </Selects>
-          <AllRecipes>
+          </div>
+          <div className={recipesStyles.allRecipes}>
             {toDisplay.map(({ recipe }) => (
               <Recipe
                 key={recipe.id}
@@ -114,7 +114,7 @@ const Leftover = ({
                 withProducts
               />
             ))}
-          </AllRecipes>
+          </div>
         </>
       ) : (
         <h1>Chargement de votre placard en cours...</h1>

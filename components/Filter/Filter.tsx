@@ -1,9 +1,9 @@
 import React from 'react'
 import { facetOptions } from 'components/Filter/facets'
-import { Filters } from './filter.styles'
+import styles from './filter.module.css'
 
 const Filter = ({ values, setValues }) => (
-  <Filters>
+  <div className={styles.filters}>
     {facetOptions.map((facet) => (
       <label key={facet.value}>
         <input
@@ -15,7 +15,7 @@ const Filter = ({ values, setValues }) => (
         {facet.label}
       </label>
     ))}
-  </Filters>
+  </div>
 )
 
 export default Filter

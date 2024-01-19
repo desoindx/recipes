@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from 'react'
 import { fetchCached } from 'services/agent'
 import Leftover from 'components/Leftover'

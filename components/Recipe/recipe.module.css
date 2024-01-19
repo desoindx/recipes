@@ -1,0 +1,70 @@
+.productsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  color: #9b9b9b;
+  margin: 0 auto;
+  padding: 4px 0 16px 0;
+}
+
+.boxLink {
+  text-decoration: none;
+  display: flex;
+}
+
+.box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc((100vw - 225px) / 4);
+  padding-bottom: 16px;
+  min-width: 300px;
+  background-color: white;
+  color: black;
+}
+
+.nonEmptyBox {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #dddddd;
+  }
+}
+
+.detailedBox {
+  &:hover {
+    .productsList {
+      display: flex !important;
+    }
+
+    .description {
+      display: block;
+    }
+  }
+}
+
+.title {
+  font-size: 18px;
+  text-align: justify;
+  margin: 0 auto;
+  padding: 16px 16px 0 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.item {
+  margin: 2px 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.nutriscore {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}

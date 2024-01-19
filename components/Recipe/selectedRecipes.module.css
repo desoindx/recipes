@@ -1,11 +1,8 @@
-import styled from 'styled-components'
-import { MediaDesktop, MediaMobile } from 'components/responsive'
-
-export const Title = styled.span`
+.title {
   text-align: center;
-`
+}
 
-export const Container = styled.div<{ hide: boolean }>`
+.container {
   z-index: 2;
   background-color: black;
   overflow: auto;
@@ -17,41 +14,49 @@ export const Container = styled.div<{ hide: boolean }>`
   gap: 8px;
   padding: 32px;
   border-right: solid 1px white;
-  ${MediaMobile} {
-    ${({ hide }) => hide && 'display: none;'}
-  }
-`
+}
 
-export const Items = styled.div`
+.hiddenContainer {
+  @media (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.items {
   margin-bottom: 8px;
   width: calc((100vw - 225px) / 4);
   min-width: 300px;
   display: flex;
   flex-direction: column;
-`
+}
 
-export const Item = styled.span`
+.item {
   color: white;
   margin: 2px 0;
-`
+}
 
-export const HideButton = styled.button<{ hide: boolean }>`
+.button {
   cursor: pointer;
   z-index: 1;
   position: absolute;
   top: 50%;
-  left: ${({ hide }) => (hide ? '-25px' : '340px')};
+  left: 340px;
   padding-left: 25px;
   height: 50px;
   width: 50px;
   border-radius: 8px;
   background-color: white;
-  ${MediaDesktop} {
+
+  @media (min-width: 1001px) {
     display: none;
   }
-`
+}
 
-export const CopyButton = styled.button`
+.hiddenButton {
+  left: -25px;
+}
+
+.copyButton {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -59,9 +64,9 @@ export const CopyButton = styled.button`
   height: 32px;
   padding: 4px;
   cursor: pointer;
-`
+}
 
-export const Copied = styled.div`
+.copied {
   position: absolute;
   background-color: white;
   color: black;
@@ -70,4 +75,4 @@ export const Copied = styled.div`
   border-radius: 4px;
   top: 21px;
   right: 52px;
-`
+}

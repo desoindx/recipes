@@ -1,16 +1,8 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Cooking, Recipe } from 'types/Recipe'
-import {
-  Container,
-  Description,
-  Image,
-  Item,
-  PreviousButton,
-  Subtitle,
-  Title,
-  TitleInfo,
-} from './fullRecipe.styles'
+import classNames from 'classnames'
+import styles from './fullRecipe.module.css'
 
 const FullRecipe = ({
   recipe,
@@ -30,49 +22,49 @@ const FullRecipe = ({
   }, [recipe])
 
   return (
-    <Container>
+    <div className={styles.container}>
       <div>
-        <Image src={recipe.image} alt={recipe.name} />
+        <img className={styles.image} src={recipe.image} alt={recipe.name} />
         {cooking &&
           cooking.stacks.ingredients.map((ingredient) => (
-            <Item key={ingredient.product.name} blurred={blurred}>
+            <div className={classNames(styles.item, {blurred})} key={ingredient.product.name} >
               <b>{ingredient.product.name}</b> :{' '}
               {ingredient.literalQuantity.replace(' ', ' ')}
-            </Item>
+            </div>
           ))}
         {cooking &&
           cooking.stacks.cupboardIngredients.map((ingredient) => (
-            <Item key={ingredient.product.name} blurred={blurred}>
+            <div className={classNames(styles.item, {blurred})} key={ingredient.product.name} >
               <b>{ingredient.product.name}</b>
               {ingredient.literalQuantity === '0'
                 ? ''
                 : ` : ${ingredient.literalQuantity.replace(' ', ' ')}`}
-            </Item>
+            </div>
           ))}
       </div>
       <div>
-        <Title blurred={blurred}>{recipe.name}</Title>
+        <div className={classNames(styles.title, {blurred})} >{recipe.name}</div>
         {cooking && (
-          <TitleInfo blurred={blurred}>
+          <div className={classNames(styles.titleInfo, {blurred})}  >
             {cooking.waitingTime}min ({cooking.cookingTime} de prépa)
-          </TitleInfo>
+          </div>
         )}
         {cooking &&
           cooking.steps.map((step) => (
             <div key={step.title}>
-              <Subtitle blurred={blurred}>{step.title}</Subtitle>
-              <Description blurred={blurred}>{step.description}</Description>
+              <p className={classNames(styles.subtitle, {blurred})}  >{step.title}</p>
+              <p className={classNames(styles.description, {blurred})}  >{step.description}</p>
             </div>
           ))}
       </div>
-      <PreviousButton
+      <button className={styles.previousButton}
         onClick={() => {
           router.back()
         }}
       >
         Retour
-      </PreviousButton>
-    </Container>
+      </button>
+    </div>
   )
 }
 
