@@ -15,7 +15,7 @@ const WeeklyRecipes = () => {
   const [recipes, setRecipes] = useState<Product[]>([])
   const [startDate, setStartDate] = useState('')
 
-  const [selectedRecipes, setSelectedRecipes] = useState([])
+  const [selectedRecipes, setSelectedRecipes] = useState<string[]>([])
   const [nextPath, setNextPath] = useState<string>()
   const [previousPath, setPreviousPath] = useState<string>()
 

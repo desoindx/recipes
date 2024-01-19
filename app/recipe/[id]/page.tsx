@@ -23,17 +23,17 @@ const defaultRecipe: RecipeType = {
               {
                 literalQuantity: '0',
                 quantity: 0,
-                product: { name: 'Sel', weight: null },
+                product: { name: 'Sel', weight: 0 },
               },
               {
                 literalQuantity: '0',
                 quantity: 0,
-                product: { name: 'Poivre', weight: null },
+                product: { name: 'Poivre', weight: 0 },
               },
               {
                 literalQuantity: '0',
                 quantity: 0,
-                product: { name: "Huile d'olive", weight: null },
+                product: { name: "Huile d'olive", weight: 0 },
               },
             ],
             ingredients: [

@@ -16,10 +16,10 @@ const Leftover = ({
     startDate: string
   }[]
 }) => {
-  const [allProducts, setAllProducts] = useState([])
-  const [products, setProducts] = useState([])
-  const [filter, setFilter] = useState<string[]>()
-  const [toDisplay, setToDisplay] = useState([])
+  const [allProducts, setAllProducts] = useState<string[]>([])
+  const [products, setProducts] = useState<string[]>([])
+  const [filter, setFilter] = useState<string[]>([])
+  const [toDisplay, setToDisplay] = useState<{ recipe: Product; startDate: string; }[]>([])
 
   useEffect(() => {
     setFilter(localStorage.getItem('filter')?.split(',') || facets)

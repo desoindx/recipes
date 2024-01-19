@@ -8,7 +8,7 @@ import Recipes from 'components/Recipe/Recipes'
 import SelectedRecipes from 'components/Recipe/SelectedRecipes'
 
 const Home = () => {
-  const [selectedRecipes, setSelectedRecipes] = useState([])
+  const [selectedRecipes, setSelectedRecipes] = useState<string[]>([])
   const [recipes, setRecipes] = useState<Product[]>([])
   const [startDate, setStartDate] = useState('')
 
@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     const existingSelectedRecipes = localStorage.getItem(
       getLocalStorageItem(new Date(startDate)),
-    )
+    ) 
     if (existingSelectedRecipes) {
       setSelectedRecipes(existingSelectedRecipes.split(','))
     }

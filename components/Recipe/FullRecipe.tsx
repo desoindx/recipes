@@ -17,8 +17,10 @@ const FullRecipe = ({
   useEffect(() => {
     const cookingMode = recipe.pools
       .find((pool) => pool.nbPerson === 2)
-      .cookingModes.find((mode) => mode.name === 'Aucun')
-    setCooking(cookingMode)
+      ?.cookingModes.find((mode) => mode.name === 'Aucun')
+      if (cookingMode) {
+        setCooking(cookingMode)
+      }
   }, [recipe])
 
   return (

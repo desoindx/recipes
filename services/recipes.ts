@@ -62,13 +62,14 @@ export const getRecipes = async (startDate?: string) => {
     const result = {
       startDate: planning.startDate,
       recipes: planning.planningCategories
-        .find((planning) => planning.category.slug === CategorySlug.TO_COOK)
-        .products.filter((product) => product.nbPerson === 2),
+        .find(({category}) => category.slug === CategorySlug.TO_COOK)
+        ?.products.filter((product) => product.nbPerson === 2) || [],
     }
     recipes[planning.startDate || 'now'] = result
     return result
   } catch (err) {
     console.error('API has returned error', err)
+    return null
   }
 }
 
@@ -127,23 +128,31 @@ export const getRecipe = async (id: string) => {
     return result.recipe
   } catch (err) {
     console.error('API has returned error', err)
+    return null
   }
 }
 
 export const getAllRecipes = async () => {
   const initialRecipes = await getRecipes()
-  const recipes = [initialRecipes]
-  const now = new Date(initialRecipes.startDate)
-  now.setDate(now.getDate() - 28)
-  for (let i = 0; i < 6; i++) {
-    now.setDate(now.getDate() + 7)
-    if (i === 4) {
-      continue
+  if (initialRecipes) {
+    const allRecipes = [initialRecipes]
+    const now = new Date(initialRecipes.startDate)
+    now.setDate(now.getDate() - 28)
+    for (let i = 0; i < 6; i++) {
+      now.setDate(now.getDate() + 7)
+      if (i === 4) {
+        // eslint-disable-next-line no-continue
+        continue
+      }
+
+      // eslint-disable-next-line no-await-in-loop
+      const result = await getRecipes(now.toISOString())
+      if (result) {
+        allRecipes.push(result)
+      }
     }
 
-    const result = await getRecipes(now.toISOString())
-    recipes.push(result)
+    return allRecipes.filter((x) => x)
   }
-
-  return recipes.filter((recipe) => recipe)
+  return []
 }
