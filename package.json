@@ -22,7 +22,6 @@
     "postcss-import": "^16.0.0",
     "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^9.3.0",
-    "preact": "^10.19.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-select": "^5.8.0"
