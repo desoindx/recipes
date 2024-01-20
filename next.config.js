@@ -10,26 +10,13 @@ const csp = {
   'img-src': ["'self'", 'https:', 'data:'],
   'script-src': [
     "'self'",
+    "'unsafe-inline''",
     'https://va.vercel-scripts.com/',
-    "'sha256-Q+8tPsjVtiDsjF/Cv8FMOpg2Yg91oKFKDAJat1PPb2g='",
-    "'sha256-wJPTcY0317Wfnhrtmak6lC37ip1CXYO1raEWBqJ7dSs='",
-    "'sha256-7KIXZrVM9+s5pT7vkg2iTVgRHAe5zfbAYALaCZHm19E='",
-    "'sha256-fi/0sGQ3Cq/XG0PdMYJFwC79n+3NGhIC1lucH3E0kU8='",
-    "'sha256-ZRv8HTrMVnNHf70quDxFFJV6Lk6nKqfTXHD6gJvPweo='",
-    "'sha256-UOGnrXfsfe9Qdac8iw1TmICp8Hk+mpUzpVQmIWIuVOw='",
-    "'sha256-qY8XemT8xX29miWFsWCTR7C3jDQTKnFoVrjnCYgzPwE='",
-    "'sha256-5Wvbg7AsDPx0qYw9Th6Od02vXgMrEuPDKWiMFwAV3oU='",
-    "'sha256-Viov9wk7s8IL6a2ZUs4jhqzbGOzBO7nVgmkMxlIb9n8='",
-    "'sha256-YoiTZbP35ftJSuqcXHIQKR0GkOgvwuSrIESq73qEh+4='",
-    "'sha256-I9UM7hr39q3jJflJb/kiSP0srJvcVMebr0jNetYbxBI='",
-    "'sha256-0YP7JyPxy/+tLKnmuT5AosK9xHeZdrg5RFwcNAA/tXI='",
-    "'sha256-5WJEkss6zNdc3V9WW2jJybB0nxIRkEJN03FBBk5L0KU='",
   ],
 }
 
 if (process.env.UNSAFE_EVAL === 'true') {
   csp['script-src'].push("'unsafe-eval'")
-  csp['script-src'].push("'unsafe-inline'")
 }
 
 const nextConfig = {
