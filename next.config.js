@@ -8,10 +8,7 @@ const helmet = require('helmet')
 const csp = {
   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
   'img-src': ["'self'", 'https:', 'data:'],
-  'script-src': [
-    "'self'",
-    'https://va.vercel-scripts.com/',
-  ],
+  'script-src': ["'self'", 'https://va.vercel-scripts.com/'],
 }
 
 if (process.env.UNSAFE_EVAL === 'true') {
@@ -29,6 +26,14 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
           {
             key: 'Content-Security-Policy',
             value: Object.keys(csp)
