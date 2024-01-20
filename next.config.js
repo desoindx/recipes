@@ -10,7 +10,7 @@ const csp = {
   'img-src': ["'self'", 'https:', 'data:'],
   'script-src': [
     "'self'",
-    "'unsafe-inline''",
+    "'unsafe-inline'",
     'https://va.vercel-scripts.com/',
   ],
 }
