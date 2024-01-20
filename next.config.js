@@ -21,6 +21,9 @@ const csp = {
     "'sha256-5Wvbg7AsDPx0qYw9Th6Od02vXgMrEuPDKWiMFwAV3oU='",
     "'sha256-Viov9wk7s8IL6a2ZUs4jhqzbGOzBO7nVgmkMxlIb9n8='",
     "'sha256-YoiTZbP35ftJSuqcXHIQKR0GkOgvwuSrIESq73qEh+4='",
+    "'sha256-I9UM7hr39q3jJflJb/kiSP0srJvcVMebr0jNetYbxBI='",
+    "'sha256-0YP7JyPxy/+tLKnmuT5AosK9xHeZdrg5RFwcNAA/tXI='",
+    "'sha256-5WJEkss6zNdc3V9WW2jJybB0nxIRkEJN03FBBk5L0KU='",
   ],
 }
 
