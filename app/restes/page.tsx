@@ -1,16 +1,26 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
-import { fetchCached } from 'services/agent'
+import React from 'react'
+import { getAllRecipes } from 'services/recipes'
 import Leftover from 'components/Leftover'
 
-const Restes = () => {
-  const [plannings, setPlannings] = useState([])
-  useEffect(() => {
-    fetchCached('/api/restes').then(setPlannings)
-  }, [])
+export const revalidate = 3600 * 24
 
-  return <Leftover plannings={plannings} />
+const Restes = async () => {
+  const plannings = await getAllRecipes()
+
+  const planningsProduct = plannings.flatMap((planning) =>
+    planning.recipes.flatMap((recipe) =>
+      recipe.subProducts.map((product) => product.product.name),
+    ),
+  )
+
+  return (
+    <Leftover
+      plannings={plannings}
+      products={[...new Set(planningsProduct)].sort((a, b) =>
+        a.localeCompare(b),
+      )}
+    />
+  )
 }
 
 export default Restes

@@ -1,23 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { fetchCached } from 'services/agent'
+import React, { useEffect, useState } from 'react'
 import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
-import Recipes from 'components/Recipe/Recipes'
-import SelectedRecipes from 'components/Recipe/SelectedRecipes'
+import Recipes from './Recipes'
+import SelectedRecipes from './SelectedRecipes'
 
-const Home = () => {
+const SelectableRecipes = ({
+  recipes,
+  startDate,
+}: {
+  recipes: Product[]
+  startDate: string
+}) => {
   const [selectedRecipes, setSelectedRecipes] = useState<string[]>([])
-  const [recipes, setRecipes] = useState<Product[]>([])
-  const [startDate, setStartDate] = useState('')
-
-  useEffect(() => {
-    fetchCached('/api/recipes').then((data) => {
-      setRecipes(data.recipes)
-      setStartDate(data.startDate)
-    })
-  }, [])
 
   useEffect(() => {
     const existingSelectedRecipes = localStorage.getItem(
@@ -36,7 +32,7 @@ const Home = () => {
   }, [startDate, selectedRecipes])
 
   return (
-    <div className="main-container">
+    <>
       {recipes.length > 0 && selectedRecipes.length > 0 && (
         <SelectedRecipes
           recipes={recipes.filter((recipe) =>
@@ -55,10 +51,9 @@ const Home = () => {
         selectRecipe={(recipe) => {
           setSelectedRecipes([...selectedRecipes, recipe])
         }}
-        withFilter
       />
-    </div>
+    </>
   )
 }
 
-export default Home
+export default SelectableRecipes

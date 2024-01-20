@@ -3,18 +3,6 @@
   max-height: 100%;
 }
 
-.header {
-  margin: 32px;
-  display: flex;
-  gap: 16px 128px;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 1000px) {
-    flex-direction: column;
-  }
-}
-
 .allRecipes {
   padding: 0 32px;
   display: flex;
@@ -25,4 +13,13 @@
   @media (min-width: 1001px) {
     justify-content: space-evenly;
   }
+}
+
+.empty {
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
 }

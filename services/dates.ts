@@ -23,6 +23,5 @@ export const getBackDate = (startDate?: string): string => {
   return date.toISOString().split('T')[0]
 }
 
-export const getLocalStorageItem = (date: Date): string => {
-  return `recipes-${date.toDateString()}`
-}
+export const getLocalStorageItem = (date: Date): string =>
+  `recipes-${date.toDateString()}`

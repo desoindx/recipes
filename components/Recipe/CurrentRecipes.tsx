@@ -1,0 +1,62 @@
+'use client'
+
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { getLocalStorageItem } from 'services/dates'
+import { Product } from 'types/Product'
+import Recipe from '.'
+import buttonStyles from '../Button/button.module.css'
+import RecipesHeader from './RecipesHeader'
+import styles from './recipes.module.css'
+
+const CurrentRecipes = ({
+  recipes,
+  startDate,
+}: {
+  recipes: Product[]
+  startDate: string
+}) => {
+  const [selectedRecipes, setSelectedRecipes] = useState<Product[]>()
+
+  useEffect(() => {
+    const weekRecipes = localStorage.getItem(
+      getLocalStorageItem(new Date(startDate)),
+    )
+    if (weekRecipes) {
+      const chosenRecipes = weekRecipes.split(',')
+      setSelectedRecipes(
+        recipes.filter((recipe) => chosenRecipes.includes(recipe.id)),
+      )
+    } else {
+      setSelectedRecipes([])
+    }
+  }, [startDate, recipes])
+
+  return (
+    <div className={styles.container}>
+      <RecipesHeader startDate={startDate} />
+      {selectedRecipes && (
+        <div
+          className={
+            selectedRecipes.length > 0 ? styles.allRecipes : styles.empty
+          }
+        >
+          {selectedRecipes.length > 0 ? (
+            selectedRecipes.map((recipe) => (
+              <Recipe key={recipe.id} recipe={recipe} />
+            ))
+          ) : (
+            <>
+              Vous n&lsquo;avez pas encore choisi de recette pour cette semaine
+              <Link className={buttonStyles.button} href="/">
+                En choisir
+              </Link>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default CurrentRecipes

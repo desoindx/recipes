@@ -49,19 +49,3 @@
 .description {
   text-align: justify;
 }
-
-.previousButton {
-  cursor: pointer;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  background: none;
-  border: none;
-  color: blue;
-  text-decoration: underline;
-  font-size: 16px;
-
-  @media (max-width: 1000px) {
-    right: 32px;
-  }
-}

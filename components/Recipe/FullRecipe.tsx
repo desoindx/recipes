@@ -1,7 +1,7 @@
 import classNames from 'classnames'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import { Cooking, Recipe } from 'types/Recipe'
+import React, { useMemo } from 'react'
+import { Recipe } from 'types/Recipe'
+import BackButton from 'components/Button/BackButton'
 import styles from './fullRecipe.module.css'
 
 const FullRecipe = ({
@@ -9,19 +9,15 @@ const FullRecipe = ({
   blurred,
 }: {
   recipe: Recipe
-  blurred: boolean
+  blurred?: boolean
 }) => {
-  const router = useRouter()
-  const [cooking, setCooking] = useState<Cooking>()
-
-  useEffect(() => {
-    const cookingMode = recipe.pools
-      .find((pool) => pool.nbPerson === 2)
-      ?.cookingModes.find((mode) => mode.name === 'Aucun')
-    if (cookingMode) {
-      setCooking(cookingMode)
-    }
-  }, [recipe])
+  const cooking = useMemo(
+    () =>
+      recipe.pools
+        .find((pool) => pool.nbPerson === 2)
+        ?.cookingModes.find((mode) => mode.name === 'Aucun'),
+    [recipe],
+  )
 
   return (
     <div className={styles.container}>
@@ -71,14 +67,7 @@ const FullRecipe = ({
             </div>
           ))}
       </div>
-      <button
-        className={styles.previousButton}
-        onClick={() => {
-          router.back()
-        }}
-      >
-        Retour
-      </button>
+      <BackButton />
     </div>
   )
 }
