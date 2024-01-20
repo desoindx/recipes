@@ -15,9 +15,9 @@ const RecipesHeader = ({
   withFilter?: boolean
 }) => (
   <div className={styles.header}>
-    <span>
+    <h1>
       Recettes de la semaine du {startDate ? getFrontDate(startDate) : '...'}
-    </span>
+    </h1>
     {withFilter && filter && <Filter values={filter} setValues={setFilter} />}
   </div>
 )

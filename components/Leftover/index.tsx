@@ -67,7 +67,11 @@ const Leftover = ({
   return (
     <>
       <div className={styles.selects}>
+        <label htmlFor="produits" className={styles.hiddenLabel}>
+          Filtrer par produit
+        </label>
         <ReactSelect
+          inputId="produits"
           isMulti
           options={products.map((product) => ({
             label: product,

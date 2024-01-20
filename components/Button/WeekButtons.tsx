@@ -34,7 +34,7 @@ const WeekButtons = ({ startDate }: { startDate: string }) => {
   }, [startDate])
 
   return (
-    (nextPath || previousPath) && (
+    (nextPath || previousPath) ? (
       <div className={styles.buttons}>
         {previousPath && (
           <Link className={styles.linkButton} href={`/recipes/${previousPath}`}>
@@ -47,7 +47,7 @@ const WeekButtons = ({ startDate }: { startDate: string }) => {
           </Link>
         )}
       </div>
-    )
+    ) : null
   )
 }
 

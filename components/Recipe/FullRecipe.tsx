@@ -47,9 +47,7 @@ const FullRecipe = ({
           ))}
       </div>
       <div>
-        <div className={classNames(styles.title, { blurred })}>
-          {recipe.name}
-        </div>
+        <h1 className={classNames(styles.title, { blurred })}>{recipe.name}</h1>
         {cooking && (
           <div className={classNames(styles.titleInfo, { blurred })}>
             {cooking.waitingTime}min ({cooking.cookingTime} de prépa)
