@@ -1,6 +1,6 @@
 import React from 'react'
 import { facets } from 'components/Filter/facets'
-import RecipesHeader from '../RecipesHeader'
+import RecipesHeader from '../../Header/RecipesHeader'
 import styles from '../recipes.module.css'
 import EmptyRecipe from './EmptyRecipe'
 

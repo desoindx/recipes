@@ -1,0 +1,27 @@
+.container {
+  margin: 2rem;
+}
+
+.navigator {
+  margin: 2rem auto 4rem auto;
+  text-align: center;
+  width: fit-content;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.buttons {
+  position: relative;
+}
+
+.leftButton {
+  position: absolute;
+  left: 0;
+}
+
+.rightButton {
+  position: absolute;
+  right: 0;
+}

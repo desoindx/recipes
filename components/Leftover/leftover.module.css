@@ -8,7 +8,7 @@
   @media (min-width: 1001px) {
     flex-direction: row;
 
-    >div {
+    > div {
       width: 50%;
     }
   }

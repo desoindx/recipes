@@ -6,7 +6,7 @@ import { getLocalStorageItem } from 'services/dates'
 import { Product } from 'types/Product'
 import Recipe from '.'
 import buttonStyles from '../Button/button.module.css'
-import RecipesHeader from './RecipesHeader'
+import WeekNavigator from '../Header/WeekNavigator'
 import styles from './recipes.module.css'
 
 const CurrentRecipes = ({
@@ -34,7 +34,7 @@ const CurrentRecipes = ({
 
   return (
     <div className={styles.container}>
-      <RecipesHeader startDate={startDate} />
+      <WeekNavigator startDate={startDate} />
       {selectedRecipes && (
         <div
           className={

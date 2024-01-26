@@ -1,6 +1,5 @@
 import React from 'react'
 import { getRecipes } from 'services/recipes'
-import WeekButtons from 'components/Button/WeekButtons'
 import CurrentRecipes from 'components/Recipe/CurrentRecipes'
 
 const WeeklyRecipes = async ({
@@ -15,12 +14,7 @@ const WeeklyRecipes = async ({
 
   const { startDate, recipes } = result
 
-  return (
-    <>
-      <CurrentRecipes startDate={startDate} recipes={recipes} />
-      <WeekButtons startDate={startDate} />
-    </>
-  )
+  return <CurrentRecipes startDate={startDate} recipes={recipes} />
 }
 
 export default WeeklyRecipes

@@ -3,8 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 import { Product } from 'types/Product'
 import { getEmoji } from 'components/Filter/facets'
-import Tags from 'components/Tag/Tags'
 import Nutriscore from 'components/Tag/Nutriscore'
+import Tags from 'components/Tag/Tags'
 import styles from './recipe.module.css'
 
 const Recipe = ({
@@ -28,7 +28,10 @@ const Recipe = ({
     >
       <img src={recipe.images[0]} alt={recipe.name} />
       {recipe.nutriscore && (
-        <Nutriscore className={styles.nutriscore} nutriscore={recipe.nutriscore}/>
+        <Nutriscore
+          className={styles.nutriscore}
+          nutriscore={recipe.nutriscore}
+        />
       )}
       <div className={styles.recipeType}>{getEmoji(recipe.facets)}</div>
       <p className={styles.title}>{recipe.name}</p>

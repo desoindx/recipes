@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Product } from 'types/Product'
 import { facets } from 'components/Filter/facets'
-import RecipesHeader from './RecipesHeader'
+import RecipesHeader from '../Header/RecipesHeader'
 import Recipe from './index'
 import styles from './recipes.module.css'
 
