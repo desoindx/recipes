@@ -1,0 +1,29 @@
+.green,
+.grey,
+.yellow,
+.red {
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: fit-content;
+  font-size: 0.825rem;
+}
+
+.green {
+  background-color: #cceac4;
+  color: #268232;
+}
+
+.grey {
+  background-color: #eae5e8;
+  color: #6a5f66;
+}
+
+.yellow {
+  background-color: #feecc7;
+  color: #a06b00;
+}
+
+.red {
+  background-color: #fecec7;
+  color: #b31800;
+}

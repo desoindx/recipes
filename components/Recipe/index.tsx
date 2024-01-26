@@ -2,6 +2,9 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 import { Product } from 'types/Product'
+import { getEmoji } from 'components/Filter/facets'
+import Tags from 'components/Tag/Tags'
+import Nutriscore from 'components/Tag/Nutriscore'
 import styles from './recipe.module.css'
 
 const Recipe = ({
@@ -25,17 +28,11 @@ const Recipe = ({
     >
       <img src={recipe.images[0]} alt={recipe.name} />
       {recipe.nutriscore && (
-        <img
-          className={styles.nutriscore}
-          src={`https://www.quitoque.fr/static/images/picto/nutri-score-${recipe.nutriscore.toLowerCase()}.svg`}
-          alt={`Nutriscore: ${recipe.nutriscore}`}
-        />
+        <Nutriscore className={styles.nutriscore} nutriscore={recipe.nutriscore}/>
       )}
+      <div className={styles.recipeType}>{getEmoji(recipe.facets)}</div>
       <p className={styles.title}>{recipe.name}</p>
-      <p className={classNames(styles.description, { none: detailOnHover })}>
-        {recipe.waitingTime}min ({recipe.cookingTime} de prépa),{' '}
-        {recipe.nutritionalInformation.kiloCalorie} kcal
-      </p>
+      <Tags recipe={recipe} />
       <div className={classNames(styles.productsList, { none: !withProducts })}>
         {recipe.subProducts.map((product) => (
           <span className={styles.item} key={product.product.name}>

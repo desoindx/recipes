@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { useMemo } from 'react'
 import { Recipe } from 'types/Recipe'
 import BackButton from 'components/Button/BackButton'
+import { PreparationTag } from 'components/Tag/Tag'
 import styles from './fullRecipe.module.css'
 
 const FullRecipe = ({
@@ -49,8 +50,8 @@ const FullRecipe = ({
       <div>
         <h1 className={classNames(styles.title, { blurred })}>{recipe.name}</h1>
         {cooking && (
-          <div className={classNames(styles.titleInfo, { blurred })}>
-            {cooking.waitingTime}min ({cooking.cookingTime} de prépa)
+          <div className={blurred ? 'blurred' : ''}>
+            <PreparationTag recipe={cooking} />
           </div>
         )}
         {cooking &&

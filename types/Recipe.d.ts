@@ -1,5 +1,4 @@
 import { Ingredient } from './Ingredient'
-import { Product } from './Product'
 
 export interface Cooking {
   name: string

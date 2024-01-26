@@ -8,11 +8,7 @@ const helmet = require('helmet')
 const csp = {
   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
   'img-src': ["'self'", 'https:', 'data:'],
-  'script-src': [
-    "'self'",
-    "'unsafe-inline'",
-    'https://va.vercel-scripts.com/',
-  ],
+  'script-src': ["'self'", "'unsafe-inline'", 'https://va.vercel-scripts.com/'],
 }
 
 if (process.env.UNSAFE_EVAL === 'true') {
