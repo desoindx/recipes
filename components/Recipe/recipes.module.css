@@ -4,10 +4,10 @@
 }
 
 .allRecipes {
-  padding: 0 32px;
+  padding: 0 2rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 2rem;
   justify-content: center;
 
   @media (min-width: 1001px) {
@@ -16,10 +16,10 @@
 }
 
 .empty {
-  padding: 0 32px;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 2rem;
   align-items: center;
 }

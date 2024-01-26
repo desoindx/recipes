@@ -15,8 +15,8 @@
 .icon {
   cursor: pointer;
   position: relative;
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
   transition: transform 0.5s;
   transform: none;
   background-color: black;

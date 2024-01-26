@@ -1,7 +1,7 @@
 .header {
-  margin: 32px;
+  margin: 2rem;
   display: flex;
-  gap: 16px 128px;
+  gap: 1rem 128px;
   justify-content: center;
   align-items: center;
 

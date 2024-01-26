@@ -1,12 +1,12 @@
 .navbar {
   border-bottom: 1px solid white;
-  padding: 16px 32px;
+  padding: 1rem 2rem;
 
   a {
     color: white;
     text-decoration: none;
-    margin: 32px;
-    padding: 16px;
+    margin: 2rem;
+    padding: 1rem;
 
     &:hover {
       color: #c8c8c8;

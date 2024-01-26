@@ -1,7 +1,7 @@
 .buttons {
   display: flex;
-  margin: 32px;
-  gap: 16px;
+  margin: 2rem;
+  gap: 1rem;
 }
 
 .button {
@@ -9,7 +9,7 @@
   cursor: pointer;
   background-color: white;
   color: black;
-  padding: 16px;
+  padding: 1rem;
 
   &:hover {
     background-color: #c8c8c8;
@@ -21,7 +21,7 @@
   cursor: pointer;
   background-color: white;
   color: black;
-  padding: 16px;
+  padding: 1rem;
 
   &:hover {
     background-color: #c8c8c8;
@@ -37,9 +37,9 @@
   border: none;
   color: blue;
   text-decoration: underline;
-  font-size: 16px;
+  font-size: 1rem;
 
   @media (max-width: 1000px) {
-    right: 32px;
+    right: 2rem;
   }
 }

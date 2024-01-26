@@ -1,11 +1,11 @@
 .container {
   width: calc(100% - 64px);
-  padding: 32px;
+  padding: 2rem;
   background-color: white;
   color: black;
   position: relative;
   display: flex;
-  gap: 32px;
+  gap: 2rem;
 
   @media (min-width: 1001px) {
     max-width: 900px;
@@ -20,7 +20,7 @@
 
 .image {
   width: 250px;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 
   @media (max-width: 1000px) {
     width: 100%;
@@ -32,9 +32,9 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .titleInfo {
@@ -42,7 +42,7 @@
 }
 
 .subtitle {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
