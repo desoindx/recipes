@@ -39,7 +39,7 @@ const Recipe = ({
       <div className={classNames(styles.productsList, { none: !withProducts })}>
         {recipe.subProducts.map((product) => (
           <span className={styles.item} key={product.product.name}>
-            <b>{product.product.name}</b> : {product.literalQuantity}
+            {product.product.name} : <span className={styles.quantity}>{product.literalQuantity}</span>
           </span>
         ))}
       </div>
