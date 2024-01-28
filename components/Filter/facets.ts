@@ -7,6 +7,7 @@ export const getEmoji = (facets: { name: string }[]) => {
   if (names.includes('Poisson')) {
     return '🐟'
   }
+
   if (names.includes('Viande')) {
     return '🍖'
   }
