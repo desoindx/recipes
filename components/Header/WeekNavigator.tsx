@@ -48,7 +48,7 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
               className={classNames(styles.leftButton, buttonStyles.linkButton)}
               href={`/recipes/${previousPath}`}
             >
-              Précendante
+              Précendente
             </Link>
           )}
           {nextPath && (
