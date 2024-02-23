@@ -29,15 +29,19 @@ export const PreparationTag = ({
 
 export const KCalTag = ({ recipe }: { recipe: Product }) => {
   let color = 'grey'
-  if (recipe.nutritionalInformation.kiloCalorie < 400) {
-    color = 'green'
-  } else if (recipe.nutritionalInformation.kiloCalorie > 799) {
-    color = 'red'
-  } else if (recipe.nutritionalInformation.kiloCalorie > 599) {
-    color = 'yellow'
+  if (recipe.nutritionalInformation) {
+    if (recipe.nutritionalInformation.kiloCalorie < 400) {
+      color = 'green'
+    } else if (recipe.nutritionalInformation.kiloCalorie > 799) {
+      color = 'red'
+    } else if (recipe.nutritionalInformation.kiloCalorie > 599) {
+      color = 'yellow'
+    }
   }
 
   return (
-    <Tag color={color}>{recipe.nutritionalInformation.kiloCalorie} kcal</Tag>
+    <Tag color={color}>
+      {recipe.nutritionalInformation?.kiloCalorie || '???'} kcal
+    </Tag>
   )
 }
