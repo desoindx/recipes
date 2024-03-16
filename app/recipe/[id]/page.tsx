@@ -10,18 +10,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const recipe = await getRecipe(id as string)
 
-  return {
-    title: recipe.name,
-    description: 'Votre recette du jour !',
-    openGraph: {
-      images: recipe.image,
-    },
-  }
+  return recipe
+    ? {
+        title: recipe.name,
+        description: 'Votre recette du jour !',
+        openGraph: {
+          images: recipe.image,
+        },
+      }
+    : {}
 }
 const Recipe = async ({ params: { id } }: { params: { id: string } }) => {
   const recipe = await getRecipe(id as string)
 
-  return <FullRecipe recipe={recipe} />
+  return recipe ? <FullRecipe recipe={recipe} /> : null
 }
 
 export default Recipe
