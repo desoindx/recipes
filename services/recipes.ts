@@ -75,7 +75,7 @@ export const getRecipes = async (startDate?: string) => {
 }
 
 const recipe: Record<string, Recipe> = {}
-export const getRecipe = async (id: string) => {
+export const getRecipe = async (id: string): Promise<Recipe> => {
   const cachedRecipe = recipe[id]
   if (cachedRecipe) {
     return cachedRecipe

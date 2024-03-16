@@ -7,6 +7,9 @@ import '../styles/globals.css'
 export const metadata: Metadata = {
   title: 'Weekly recipes',
   description: 'Vos recettes hebdomadaires, de saison :)',
+  openGraph: {
+    images: `${process.env.URL}/loading.jpeg`,
+  },
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
