@@ -27,7 +27,11 @@ export const PreparationTag = ({
   )
 }
 
-export const KCalTag = ({ recipe }: { recipe: Product }) => {
+export const KCalTag = ({
+  recipe,
+}: {
+  recipe: Pick<Product, 'nutritionalInformation'>
+}) => {
   let color = 'grey'
   if (recipe.nutritionalInformation) {
     if (recipe.nutritionalInformation.kiloCalorie < 400) {

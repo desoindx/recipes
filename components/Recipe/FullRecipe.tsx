@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import { Recipe } from 'types/Recipe'
 import BackButton from 'components/Button/BackButton'
 import FavoriteButton from 'components/Button/FavoriteButton'
-import { PreparationTag } from 'components/Tag/Tag'
+import Tags from 'components/Tag/Tags'
 import styles from './fullRecipe.module.css'
 
 const FullRecipe = ({
@@ -18,6 +18,14 @@ const FullRecipe = ({
       recipe.pools
         .find((pool) => pool.nbPerson === 2)
         ?.cookingModes.find((mode) => mode.name === 'Aucun'),
+    [recipe],
+  )
+
+  const nutrition = useMemo(
+    () =>
+      recipe.nutritionalInformations.find(
+        (nutrition) => nutrition.nbPerson === 2,
+      ),
     [recipe],
   )
 
@@ -52,7 +60,11 @@ const FullRecipe = ({
         <h1 className={classNames(styles.title, { blurred })}>{recipe.name}</h1>
         {cooking && (
           <div className={blurred ? 'blurred' : ''}>
-            <PreparationTag recipe={cooking} />
+            {nutrition && (
+              <Tags
+                recipe={{ ...cooking, nutritionalInformation: nutrition }}
+              />
+            )}
           </div>
         )}
         {cooking &&
