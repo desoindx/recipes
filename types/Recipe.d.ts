@@ -21,8 +21,14 @@ export interface Pool {
 }
 
 export interface Recipe {
-  id: number
+  id: string
   name: string
+  nutriscore: string
   image: string
   pools: Pool[]
+  facets: { name: string }[]
+  nutritionalInformations: {
+    nbPerson: number
+    kiloCalorie: number
+  }[]
 }

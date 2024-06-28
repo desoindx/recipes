@@ -45,6 +45,7 @@ const SelectableRecipes = ({
       )}
       <Recipes
         startDate={startDate}
+        withHeader
         recipes={recipes.filter(
           (recipe) => !selectedRecipes.includes(recipe.id),
         )}

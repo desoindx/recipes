@@ -3,6 +3,11 @@
   max-height: 100%;
 }
 
+.title {
+  text-align: center;
+  margin: 2rem;
+}
+
 .allRecipes {
   padding: 0 2rem;
   display: flex;

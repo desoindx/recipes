@@ -87,6 +87,14 @@ export const getRecipe = async (id: string): Promise<Recipe | null> => {
         id
         name
         image
+        nutriscore
+        facets {
+          name
+        }
+        nutritionalInformations {
+          nbPerson
+          kiloCalorie
+        }
         pools {
           nbPerson
           cookingModes {

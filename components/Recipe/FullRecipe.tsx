@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { useMemo } from 'react'
 import { Recipe } from 'types/Recipe'
 import BackButton from 'components/Button/BackButton'
+import FavoriteButton from 'components/Button/FavoriteButton'
 import { PreparationTag } from 'components/Tag/Tag'
 import styles from './fullRecipe.module.css'
 
@@ -22,7 +23,7 @@ const FullRecipe = ({
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.ingredients}>
         <img className={styles.image} src={recipe.image} alt={recipe.name} />
         {cooking &&
           cooking.stacks.ingredients.map((ingredient) => (
@@ -66,6 +67,7 @@ const FullRecipe = ({
             </div>
           ))}
       </div>
+      <FavoriteButton recipe={recipe.id} />
       <BackButton />
     </div>
   )

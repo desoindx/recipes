@@ -11,10 +11,12 @@ const Recipes = ({
   startDate,
   recipes,
   selectRecipe,
+  withHeader,
 }: {
-  startDate: string
+  startDate?: string
   recipes: Product[]
   selectRecipe?: (id: string) => void
+  withHeader?: boolean
 }) => {
   const [filter, setFilter] = useState<string[]>(facets)
 
@@ -33,12 +35,14 @@ const Recipes = ({
 
   return (
     <div className={styles.container}>
-      <RecipesHeader
-        startDate={startDate}
-        withFilter
-        filter={filter}
-        setFilter={setFilter}
-      />
+      {withHeader && (
+        <RecipesHeader
+          startDate={startDate}
+          withFilter
+          filter={filter}
+          setFilter={setFilter}
+        />
+      )}
       <div className={styles.allRecipes}>
         {recipes
           .filter((product) =>

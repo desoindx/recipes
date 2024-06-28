@@ -3,9 +3,12 @@ import { Recipe } from 'types/Recipe'
 import FullRecipe from '../FullRecipe'
 
 const defaultRecipe: Recipe = {
-  id: 0,
+  id: '0',
   name: 'Chargement en cours',
   image: '/loading.jpg',
+  nutriscore: 'A',
+  facets: [],
+  nutritionalInformations: [],
   pools: [
     {
       nbPerson: 2,

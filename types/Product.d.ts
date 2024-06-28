@@ -5,7 +5,7 @@ export interface Product {
   nbPerson: number
   name: string
   images: string[]
-  nutriscore?: string
+  nutriscore: string
   cookingTime: number
   waitingTime: number
   nutritionalInformation: {
