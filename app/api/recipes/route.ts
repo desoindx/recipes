@@ -17,7 +17,6 @@ export async function GET(req: NextRequest) {
     const id = allIds[i]
     const recipe = await getRecipe(`recipe-${id}-2`)
     if (recipe) {
-      console.log(recipe)
       const pool = recipe.pools.find((pool) => pool.nbPerson === 2) as Pool
       const cooking = pool.cookingModes.find(
         (cooking) => cooking.name === 'Aucun',
