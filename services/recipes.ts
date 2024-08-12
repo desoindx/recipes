@@ -102,7 +102,7 @@ export const getRecipes = async (startDate: Date) => {
   }
 }
 
-export const getAllRecipes = async () => {
+export const getAllRecipes = async (): Promise<Product[][]> => {
   const now = new Date()
   const initialRecipes = await getRecipes(now)
   if (initialRecipes) {

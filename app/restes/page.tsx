@@ -15,14 +15,14 @@ const Restes = async () => {
   const plannings = await getAllRecipes()
 
   const planningsProduct = plannings.flatMap((planning) =>
-    planning.recipes.flatMap((recipe) =>
+    planning.flatMap((recipe) =>
       recipe.subProducts.map((product) => product.product.name),
     ),
   )
 
   return (
     <Leftover
-      plannings={plannings}
+      plannings={plannings.flatMap((planning) => planning)}
       products={[...new Set(planningsProduct)].sort((a, b) =>
         a.localeCompare(b),
       )}
