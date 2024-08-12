@@ -16,7 +16,7 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
     for (let i = 0; i < 200; i++) {
       now.setDate(now.getDate() + 7)
       if (localStorage.getItem(getLocalStorageItem(now))) {
-        setNextPath(now.toISOString())
+        setNextPath(now.toISOString().split('T')[0])
         return
       }
     }
@@ -28,7 +28,7 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
     for (let i = 0; i < 200; i++) {
       now.setDate(now.getDate() - 7)
       if (localStorage.getItem(getLocalStorageItem(now))) {
-        setPreviousPath(now.toISOString())
+        setPreviousPath(now.toISOString().split('T')[0])
         return
       }
     }

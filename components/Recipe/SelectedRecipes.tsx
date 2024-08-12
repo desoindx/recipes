@@ -28,15 +28,13 @@ const SelectedRecipes = ({
     recipes.forEach((recipe) =>
       recipe.subProducts.forEach((product) => {
         const existingQuantity = products[product.product.name] || 0
-        products[product.product.name] =
-          existingQuantity + product.quantity / product.product.weight
+        products[product.product.name] = existingQuantity + product.quantity
 
         const quantityType = allQuantityTypes.find((type) =>
           product.literalQuantity.includes(type),
         )
         quantityTypes[product.product.name] = {
           type: quantityType,
-          base: product.product.weight,
         }
       }),
     )
@@ -45,13 +43,8 @@ const SelectedRecipes = ({
         .sort((a, b) => a[0].localeCompare(b[0]))
         .map(([name, weight]) => {
           const existingType = quantityTypes[name]
-          const roundedWeight = +parseFloat(weight.toString()).toFixed(2)
-          const roundedBase = +parseFloat(
-            (existingType.base * weight).toString(),
-          ).toFixed(2)
-          const quantity = existingType.type
-            ? `${roundedBase} ${existingType.type}`
-            : `${roundedWeight} (${roundedBase} g)`
+          const roundedBase = +parseFloat(weight.toString()).toFixed(2)
+          const quantity = `${roundedBase} ${existingType.type}`
           return {
             key: name,
             stringValue: `${name} : ${quantity}`,

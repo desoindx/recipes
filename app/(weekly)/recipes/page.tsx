@@ -5,13 +5,14 @@ import CurrentRecipes from 'components/Recipe/CurrentRecipes'
 export const revalidate = 3600 * 24
 
 const WeeklyRecipes = async () => {
-  const result = await getRecipes()
+  const result = await getRecipes(new Date())
   if (!result) {
     return null
   }
 
-  const { startDate, recipes } = result
-  return <CurrentRecipes startDate={startDate} recipes={recipes} />
+  return (
+    <CurrentRecipes startDate={new Date().toISOString()} recipes={result} />
+  )
 }
 
 export default WeeklyRecipes

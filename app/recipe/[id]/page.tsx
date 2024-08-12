@@ -8,20 +8,24 @@ export async function generateMetadata({
 }: {
   params: { id: string }
 }): Promise<Metadata> {
-  const recipe = await getRecipe(id as string)
+  const recipe = await getRecipe(
+    `https://www.hellofresh.fr/recipes/${id as string}`,
+  )
 
   return recipe
     ? {
         title: recipe.name,
         description: 'Votre recette du jour !',
         openGraph: {
-          images: recipe.image,
+          images: recipe.images[0],
         },
       }
     : {}
 }
 const Recipe = async ({ params: { id } }: { params: { id: string } }) => {
-  const recipe = await getRecipe(id as string)
+  const recipe = await getRecipe(
+    `https://www.hellofresh.fr/recipes/${id as string}`,
+  )
 
   return recipe ? <FullRecipe recipe={recipe} /> : null
 }

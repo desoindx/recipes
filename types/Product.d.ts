@@ -15,4 +15,9 @@ export interface Product {
   facets: {
     name: string
   }[]
+  steps: {
+    position: number
+    title: string
+    description: string
+  }[]
 }

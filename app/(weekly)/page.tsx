@@ -4,14 +4,14 @@ import SelectableRecipes from 'components/Recipe/SelectableRecipes'
 export const revalidate = 3600 * 24
 
 const Home = async () => {
-  const result = await getRecipes()
+  const result = await getRecipes(new Date())
 
   return (
     <div className="main-container">
       {result && (
         <SelectableRecipes
-          recipes={result.recipes}
-          startDate={result.startDate}
+          recipes={result}
+          startDate={new Date().toISOString()}
         />
       )}
     </div>
