@@ -16,6 +16,7 @@ if (process.env.UNSAFE_EVAL === 'true') {
 }
 
 const nextConfig = {
+  staticPageGenerationTimeout: 200,
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
