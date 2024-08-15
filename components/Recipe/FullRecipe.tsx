@@ -1,5 +1,3 @@
-'use client'
-
 import classNames from 'classnames'
 import React from 'react'
 import { Product } from 'types/Product'
@@ -40,7 +38,10 @@ const FullRecipe = ({
         </div>
         {recipe &&
           recipe.steps.map((step) => (
-            <div key={step.title}>
+            <div key={step.title} className={styles.step}>
+              {step.image && (
+                <img className={styles.stepImage} src={step.image} alt="" />
+              )}
               <p
                 className={classNames(styles.description, { blurred })}
                 dangerouslySetInnerHTML={{ __html: step.description }}

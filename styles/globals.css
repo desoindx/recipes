@@ -5,8 +5,12 @@ body {
   margin: 0;
 }
 
-h1, p {
+h1, p, ul {
   margin: 0;
+}
+
+ul:not(:last-child) {
+  margin-bottom: 0.5rem;
 }
 
 .main-container {

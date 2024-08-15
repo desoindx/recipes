@@ -19,5 +19,6 @@ export interface Product {
     position: number
     title: string
     description: string
+    image?: string
   }[]
 }

@@ -4,6 +4,8 @@ import { Product } from 'types/Product'
 
 const recipes: Record<string, Product> = {}
 
+const usefullFacets = ['Végétarien', 'Crustacés', 'Poisson']
+
 const timeRegex = /PT((\d*)H)?((\d*)M)?/
 const getTime = (value: string) => {
   const totalTime = value.match(timeRegex)
@@ -35,6 +37,9 @@ export const getRecipe = async (url: string) => {
 
     const image = cheerio('[data-test-id=recipe-hero-image] img')
 
+    const tags = data.tags.concat(data.allergens).map((tag) => tag.name)
+    const facets = usefullFacets.filter((facet) => tags.includes(facet))
+
     const recipe = {
       id: `${data.slug}-${data.id}`,
       nbPerson: 2,
@@ -57,11 +62,17 @@ export const getRecipe = async (url: string) => {
           },
         }
       }),
-      facets: [{ name: 'Viande' }],
+      facets: (facets.length === 0 ? ['Viande'] : facets).map((facet) => ({
+        name: facet,
+      })),
       steps: data.steps.map((step) => ({
         position: step.index,
         title: '',
         description: step.instructionsHTML,
+        image:
+          step.images && step.images.length > 0
+            ? `https://img.hellofresh.com/w_750,q_auto,f_auto,c_limit,fl_lossy/hellofresh_s3${step.images[0].path}`
+            : undefined,
       })),
     }
 
@@ -84,7 +95,7 @@ export const getRecipes = async (startDate: Date) => {
 
     //@ts-expect-error: Expect number
     var dayOfYear = (today - onejan + 86400000) / 86400000
-    const week = Math.ceil(dayOfYear / 7)
+    const week = Math.ceil(dayOfYear / 7) + 1
 
     const page = await axios.get(
       `https://www.hellofresh.fr/menus/${startDate.getFullYear()}-W${week}`,

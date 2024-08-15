@@ -58,3 +58,25 @@
 .etiquette {
   margin: 2rem;
 }
+
+.step {
+  display: flex;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem 0;
+  align-items: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.stepImage {
+  width: 20%;
+  min-width: 250px;
+  height: auto;
+  object-fit: contain;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+}
