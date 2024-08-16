@@ -4,7 +4,6 @@ export const getFrontDate = (startDate: string): string => {
   }
 
   const idDate = new Date(startDate)
-  idDate.setDate(idDate.getDate() - 7)
   return idDate.toISOString().split('T')[0].split('-').reverse().join('/')
 }
 

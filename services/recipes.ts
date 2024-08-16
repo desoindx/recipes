@@ -87,14 +87,9 @@ export const getRecipe = async (url: string) => {
 export const getRecipes = async (startDate: Date) => {
   try {
     var onejan = new Date(startDate.getFullYear(), 0, 1)
-    var today = new Date(
-      startDate.getFullYear(),
-      startDate.getMonth(),
-      startDate.getDate(),
-    )
 
     //@ts-expect-error: Expect number
-    var dayOfYear = (today - onejan + 86400000) / 86400000
+    var dayOfYear = (startDate - onejan + 86400000) / 86400000
     const week = Math.ceil(dayOfYear / 7)
 
     const page = await axios.get(
@@ -106,7 +101,14 @@ export const getRecipes = async (startDate: Date) => {
       (course) => course.recipe.websiteUrl,
     )
     const recipes = await Promise.all(urls.map(getRecipe))
-    return recipes.filter((x) => x)
+    const day = startDate.getDay()
+
+    return {
+      recipes: recipes.filter((x) => x),
+      startDate: new Date(
+        startDate.setDate(startDate.getDate() - day + (day == 0 ? -6 : 1)),
+      ).toISOString(),
+    }
   } catch (err) {
     console.error('API has returned error', err)
     return null
@@ -117,7 +119,7 @@ export const getAllRecipes = async (): Promise<Product[][]> => {
   const now = new Date()
   const initialRecipes = await getRecipes(now)
   if (initialRecipes) {
-    const allRecipes = [initialRecipes]
+    const allRecipes = initialRecipes.recipes
     now.setDate(now.getDate() - 14)
     for (let i = 0; i < 6; i++) {
       now.setDate(now.getDate() + 7)

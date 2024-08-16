@@ -11,7 +11,7 @@ const WeeklyRecipes = async () => {
   }
 
   return (
-    <CurrentRecipes startDate={new Date().toISOString()} recipes={result} />
+    <CurrentRecipes startDate={result.startDate} recipes={result.recipes} />
   )
 }
 

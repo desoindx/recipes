@@ -13,7 +13,9 @@ const WeeklyRecipes = async ({
     return null
   }
 
-  return <CurrentRecipes startDate={date.toISOString()} recipes={result} />
+  return (
+    <CurrentRecipes startDate={result.startDate} recipes={result.recipes} />
+  )
 }
 
 export default WeeklyRecipes

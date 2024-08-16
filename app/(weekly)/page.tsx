@@ -10,8 +10,8 @@ const Home = async () => {
     <div className="main-container">
       {result && (
         <SelectableRecipes
-          recipes={result}
-          startDate={new Date().toISOString()}
+          recipes={result.recipes}
+          startDate={result.startDate}
         />
       )}
     </div>
