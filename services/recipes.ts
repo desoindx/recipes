@@ -119,7 +119,7 @@ export const getAllRecipes = async (): Promise<Product[][]> => {
   const now = new Date()
   const initialRecipes = await getRecipes(now)
   if (initialRecipes) {
-    const allRecipes = initialRecipes.recipes
+    const allRecipes = [initialRecipes.recipes]
     now.setDate(now.getDate() - 14)
     for (let i = 0; i < 6; i++) {
       now.setDate(now.getDate() + 7)
@@ -131,7 +131,7 @@ export const getAllRecipes = async (): Promise<Product[][]> => {
       // eslint-disable-next-line no-await-in-loop
       const result = await getRecipes(now)
       if (result) {
-        allRecipes.push(result)
+        allRecipes.push(result.recipes)
       }
     }
 
