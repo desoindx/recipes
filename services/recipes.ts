@@ -95,7 +95,7 @@ export const getRecipes = async (startDate: Date) => {
 
     //@ts-expect-error: Expect number
     var dayOfYear = (today - onejan + 86400000) / 86400000
-    const week = Math.ceil(dayOfYear / 7) + 1
+    const week = Math.ceil(dayOfYear / 7)
 
     const page = await axios.get(
       `https://www.hellofresh.fr/menus/${startDate.getFullYear()}-W${week}`,
