@@ -22,6 +22,7 @@ export async function generateMetadata({
       }
     : {}
 }
+
 const Recipe = async ({ params: { id } }: { params: { id: string } }) => {
   const recipe = await getRecipe(
     `https://www.hellofresh.fr/recipes/${id as string}`,

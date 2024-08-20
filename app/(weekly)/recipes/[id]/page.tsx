@@ -2,6 +2,8 @@ import React from 'react'
 import { getRecipes } from 'services/recipes'
 import CurrentRecipes from 'components/Recipe/CurrentRecipes'
 
+export const maxDuration = 60
+
 const WeeklyRecipes = async ({
   params: { id },
 }: {
