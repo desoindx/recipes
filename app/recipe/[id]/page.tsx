@@ -3,7 +3,7 @@ import React from 'react'
 import { getRecipe } from 'services/recipes'
 import FullRecipe from 'components/Recipe/FullRecipe'
 
-export const revalidate = 3600 * 24
+export const revalidate = 0
 
 export async function generateMetadata({
   params: { id },

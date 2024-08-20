@@ -45,6 +45,7 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
         <div className={styles.buttons}>
           {previousPath && (
             <Link
+              prefetch={false}
               className={classNames(styles.leftButton, buttonStyles.linkButton)}
               href={`/recipes/${previousPath}`}
             >
@@ -53,6 +54,7 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
           )}
           {nextPath && (
             <Link
+              prefetch={false}
               className={classNames(
                 styles.rightButton,
                 buttonStyles.linkButton,
