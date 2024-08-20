@@ -3,7 +3,11 @@ import React from 'react'
 import { getRecipe } from 'services/recipes'
 import FullRecipe from 'components/Recipe/FullRecipe'
 
-export const revalidate = 0
+export const maxDuration = 60
+export const dynamic = 'force-static'
+export async function generateStaticParams() {
+  return []
+}
 
 export async function generateMetadata({
   params: { id },
