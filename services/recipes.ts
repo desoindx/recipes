@@ -19,12 +19,8 @@ const getTime = (value: string) => {
 }
 
 export const getRecipe = async (url: string) => {
-  console.time(`recipe-${url}`)
-
   const cached = recipes[url]
   if (cached) {
-    console.log(url, 'cached')
-    console.timeEnd(`recipe-${url}`)
     return cached
   }
 
@@ -81,7 +77,6 @@ export const getRecipe = async (url: string) => {
     }
 
     recipes[url] = recipe
-    console.timeEnd(`recipe-${url}`)
     return recipe
   } catch (e) {
     return null
@@ -90,7 +85,6 @@ export const getRecipe = async (url: string) => {
 
 export const getRecipes = async (startDate: Date) => {
   try {
-    console.time(`recipes-${startDate.toISOString()}`)
     var onejan = new Date(startDate.getFullYear(), 0, 1)
 
     //@ts-expect-error: Expect number
@@ -107,8 +101,6 @@ export const getRecipes = async (startDate: Date) => {
     )
     const recipes = await Promise.all(urls.map(getRecipe))
     const day = startDate.getDay()
-
-    console.timeEnd(`recipes-${startDate.toISOString()}`)
 
     return {
       recipes: recipes.filter((x) => x),
