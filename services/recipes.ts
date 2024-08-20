@@ -79,7 +79,6 @@ export const getRecipe = async (url: string) => {
     recipes[url] = recipe
     return recipe
   } catch (e) {
-    console.log(e)
     return null
   }
 }
@@ -110,7 +109,6 @@ export const getRecipes = async (startDate: Date) => {
       ).toISOString(),
     }
   } catch (err) {
-    console.error('API has returned error', err)
     return null
   }
 }
