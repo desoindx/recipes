@@ -5,6 +5,7 @@ export const revalidate = 3600 * 24
 export const maxDuration = 60
 
 const Home = async () => {
+  console.log('revalidate home')
   const result = await getRecipes(new Date())
 
   return (
