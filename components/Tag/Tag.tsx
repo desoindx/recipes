@@ -34,11 +34,11 @@ export const KCalTag = ({
 }) => {
   let color = 'grey'
   if (recipe.nutritionalInformation) {
-    if (recipe.nutritionalInformation.kiloCalorie < 400) {
+    if (recipe.nutritionalInformation.kiloCalorie < 625) {
       color = 'green'
-    } else if (recipe.nutritionalInformation.kiloCalorie > 799) {
+    } else if (recipe.nutritionalInformation.kiloCalorie > 900) {
       color = 'red'
-    } else if (recipe.nutritionalInformation.kiloCalorie > 599) {
+    } else if (recipe.nutritionalInformation.kiloCalorie > 750) {
       color = 'yellow'
     }
   }

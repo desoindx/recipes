@@ -45,9 +45,8 @@ export const getRecipe = async (url: string) => {
       nbPerson: 2,
       images: [image.attr('src') as string],
       name: data.name,
-      nutriscore: 'A',
-      cookingTime: prepTime,
-      waitingTime: totalTime,
+      cookingTime: totalTime,
+      waitingTime: prepTime,
       nutritionalInformation: {
         kiloCalorie: data.nutrition.find((x) => x.unit === 'kcal').amount,
       },
