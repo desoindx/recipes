@@ -102,21 +102,26 @@ const SelectedRecipes = ({
           />
         </button>
         {copied && <div className={styles.copied}>Copié</div>}
+        <span className={styles.title}>
+          {recipes.length} recette{recipes.length > 1 && 's'} sélectionée
+          {recipes.length > 1 && 's'}
+        </span>
+        <button
+          className={buttonStyles.button}
+          onClick={() => setSeeRecipes(!seeRecipes)}
+        >
+          Voir {seeRecipes ? 'la liste de course' : 'les recettes choisies'}
+        </button>
+
         {seeRecipes ? (
-          <>
-            <span className={styles.title}>
-              {recipes.length} recette{recipes.length > 1 && 's'} sélectionée
-              {recipes.length > 1 && 's'}
-            </span>
-            {recipes.map((recipe) => (
-              <Recipe
-                key={recipe.id}
-                recipe={recipe}
-                onClick={() => unselectRecipe(recipe.id)}
-                detailOnHover
-              />
-            ))}
-          </>
+          recipes.map((recipe) => (
+            <Recipe
+              key={recipe.id}
+              recipe={recipe}
+              onClick={() => unselectRecipe(recipe.id)}
+              detailOnHover
+            />
+          ))
         ) : (
           <div className={styles.items}>
             {shoppingList.map(({ key, element }) => (
@@ -126,12 +131,6 @@ const SelectedRecipes = ({
             ))}
           </div>
         )}
-        <button
-          className={buttonStyles.button}
-          onClick={() => setSeeRecipes(!seeRecipes)}
-        >
-          Voir {seeRecipes ? 'la liste de course' : 'les recettes choisies'}
-        </button>
       </div>
     </>
   )
