@@ -19,8 +19,12 @@ const getTime = (value: string) => {
 }
 
 export const getRecipe = async (url: string) => {
+  console.log('Get', url)
+  console.time(url)
   const cached = recipes[url]
   if (cached) {
+    console.log('Cached', url)
+    console.timeEnd(url)
     return cached
   }
 
@@ -76,6 +80,8 @@ export const getRecipe = async (url: string) => {
     }
 
     recipes[url] = recipe
+    console.log('Downloaded', url)
+    console.timeEnd(url)
     return recipe
   } catch (e) {
     return null
