@@ -8,7 +8,7 @@ export const Header = () => (
   <nav className={styles.navbar}>
     <div className={styles.container}>
       {menu.map((item) => (
-        <Link key={item.href} href={item.href} prefetch={item.prefetch}>
+        <Link key={item.href} href={item.href} prefetch={false}>
           {item.label}
         </Link>
       ))}

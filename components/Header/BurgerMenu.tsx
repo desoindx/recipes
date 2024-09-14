@@ -12,7 +12,7 @@ const BurgerMenu = (): JSX.Element => (
       <ul className={styles.menu}>
         {menu.map((item) => (
           <li key={item.href}>
-            <Link href={item.href} prefetch={item.prefetch}>
+            <Link href={item.href} prefetch={false}>
               {item.label}
             </Link>
           </li>
