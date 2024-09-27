@@ -1,0 +1,20 @@
+name: Save recipes
+on:
+  schedule:
+    - cron: '0 4 * * *'
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Get Recipes
+        run: yarn run recipes
+        env:
+          SECRET: ${{ secrets.SECRET}}

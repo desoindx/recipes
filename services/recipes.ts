@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { load } from 'cheerio'
-import prisma from 'prisma/client'
-import { FullRecipe } from 'types/Recipe'
+import prisma from '../prisma/client'
+import { FullRecipe } from '../types/Recipe'
 
 const usefullFacets = ['Végétarien', 'Crustacés', 'Poisson']
 
@@ -18,15 +18,27 @@ const getTime = (value: string) => {
   )
 }
 
-export const getRecipe = async (url: string, checkDB: boolean) => {
+export const getRecipeInDB = async (url: string) => {
+  const data = urlRegex.exec(url)
+  const id = data ? data[1] : ''
+
+  const existingRecipe = await prisma.recipe.findFirst({
+    include: { ingredients: true, steps: true },
+    where: { id },
+  })
+  return existingRecipe
+}
+
+export const getRecipe = async (
+  url: string,
+  checkDB: boolean,
+  save: boolean,
+) => {
   const data = urlRegex.exec(url)
   const id = data ? data[1] : ''
 
   if (checkDB) {
-    const existingRecipe = await prisma.recipe.findFirst({
-      include: { ingredients: true, steps: true },
-      where: { id },
-    })
+    const existingRecipe = await getRecipeInDB(url)
     if (existingRecipe) {
       return existingRecipe
     }
@@ -74,25 +86,27 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
             : undefined,
       })),
     }
-    try {
-      await prisma.recipe.upsert({
-        where: {
-          id,
-        },
-        update: {},
-        create: {
-          ...recipe,
-          ingredients: {
-            create: recipe.ingredients,
+    if (save) {
+      try {
+        await prisma.recipe.upsert({
+          where: {
+            id,
           },
-          steps: {
-            create: recipe.steps,
+          update: {},
+          create: {
+            ...recipe,
+            ingredients: {
+              create: recipe.ingredients,
+            },
+            steps: {
+              create: recipe.steps,
+            },
           },
-        },
-      })
-    } catch (e) {
-      console.log(e)
-      return recipe
+        })
+      } catch (e) {
+        console.log(e)
+        return recipe
+      }
     }
 
     return recipe
@@ -102,23 +116,26 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
   }
 }
 
+export const getUrls = async (startDate: Date) => {
+  var onejan = new Date(startDate.getFullYear(), 0, 1)
+
+  //@ts-expect-error: Expect number
+  var dayOfYear = (startDate - onejan + 86400000) / 86400000
+  const week = Math.ceil(dayOfYear / 7)
+
+  const page = await axios.get(
+    `https://www.hellofresh.fr/menus/${startDate.getFullYear()}-W${week}`,
+  )
+  const cheerio = load(page.data)
+  const data = JSON.parse(cheerio('#__NEXT_DATA__').text())
+  return data.props.pageProps.ssrPayload.courses.map(
+    (course) => course.recipe.websiteUrl,
+  ) as string[]
+}
+
 export const getRecipes = async (startDate: Date) => {
   try {
-    var onejan = new Date(startDate.getFullYear(), 0, 1)
-
-    //@ts-expect-error: Expect number
-    var dayOfYear = (startDate - onejan + 86400000) / 86400000
-    const week = Math.ceil(dayOfYear / 7)
-
-    const page = await axios.get(
-      `https://www.hellofresh.fr/menus/${startDate.getFullYear()}-W${week}`,
-    )
-    const cheerio = load(page.data)
-    const data = JSON.parse(cheerio('#__NEXT_DATA__').text())
-    const urls = data.props.pageProps.ssrPayload.courses.map(
-      (course) => course.recipe.websiteUrl,
-    )
-
+    const urls = await getUrls(startDate)
     const existingRecipes = await prisma.recipe.findMany({
       include: { ingredients: true, steps: true },
       where: {
@@ -136,7 +153,7 @@ export const getRecipes = async (startDate: Date) => {
         const existingRecipe = existingRecipes.find(
           (recipe) => recipe.id === url,
         )
-        return existingRecipe || getRecipe(url, false)
+        return existingRecipe || getRecipe(url, false, true)
       }),
     )
 
@@ -158,7 +175,7 @@ export const getAllRecipes = async (): Promise<FullRecipe[][]> => {
   const now = new Date()
   const initialRecipes = await getRecipes(now)
   if (initialRecipes) {
-    const allRecipes = [initialRecipes.recipes]
+    const allRecipes = [initialRecipes.recipes as FullRecipe[]]
     now.setDate(now.getDate() - 14)
     for (let i = 0; i < 6; i++) {
       now.setDate(now.getDate() + 7)
@@ -170,7 +187,7 @@ export const getAllRecipes = async (): Promise<FullRecipe[][]> => {
       // eslint-disable-next-line no-await-in-loop
       const result = await getRecipes(now)
       if (result) {
-        allRecipes.push(result.recipes)
+        allRecipes.push(result.recipes as FullRecipe[])
       }
     }
 
