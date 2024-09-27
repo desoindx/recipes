@@ -4,7 +4,6 @@ import FullRecipe from '../FullRecipe'
 
 const defaultRecipe: FullRecipeType = {
   slug: 'todo',
-  id: '0',
   image: '/loading.jpg',
   facets: [],
   name: 'Aucun',
