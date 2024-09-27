@@ -33,14 +33,14 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
     console.time(`get ${url}`)
     const page = await axios.get(url)
     console.log('axios', url)
-    console.timeStamp(`get ${url}`)
+    console.timeLog(`get ${url}`)
     const cheerio = load(page.data)
     console.log('cheerio', url)
-    console.timeStamp(`get ${url}`)
+    console.timeLog(`get ${url}`)
     const data = JSON.parse(cheerio('#__NEXT_DATA__').text()).props.pageProps
       .ssrPayload.recipe
     console.log('parse', url)
-    console.timeStamp(`get ${url}`)
+    console.timeLog(`get ${url}`)
     const totalTime = getTime(data.totalTime)
     const prepTime = getTime(data.prepTime)
 
@@ -51,7 +51,7 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
     const tags = data.tags.concat(data.allergens).map((tag) => tag.name)
     const facets = usefullFacets.filter((facet) => tags.includes(facet))
     console.log('data', url)
-    console.timeStamp(`get ${url}`)
+    console.timeLog(`get ${url}`)
 
     const recipe = {
       id: url,
@@ -81,11 +81,14 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
       })),
     }
     console.log('dto', url)
-    console.timeStamp(`get ${url}`)
-
+    console.timeLog(`get ${url}`)
     try {
-      await prisma.recipe.create({
-        data: {
+      await prisma.recipe.upsert({
+        where: {
+          id: url,
+        },
+        update: {},
+        create: {
           ...recipe,
           ingredients: {
             create: recipe.ingredients,
