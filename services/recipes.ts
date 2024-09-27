@@ -5,6 +5,7 @@ import { FullRecipe } from 'types/Recipe'
 
 const usefullFacets = ['Végétarien', 'Crustacés', 'Poisson']
 
+const urlRegex = /https:\/\/www.hellofresh.fr\/recipes\/(.*)-[a-z|0-9]*$/
 const timeRegex = /PT((\d*)H)?((\d*)M)?/
 const getTime = (value: string) => {
   const totalTime = value.match(timeRegex)
@@ -18,10 +19,13 @@ const getTime = (value: string) => {
 }
 
 export const getRecipe = async (url: string, checkDB: boolean) => {
+  const data = urlRegex.exec(url)
+  const id = data ? data[1] : ''
+
   if (checkDB) {
     const existingRecipe = await prisma.recipe.findFirst({
       include: { ingredients: true, steps: true },
-      where: { id: url },
+      where: { id },
     })
     if (existingRecipe) {
       return existingRecipe
@@ -29,18 +33,10 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
   }
 
   try {
-    console.log('init', url)
-    console.time(`get ${url}`)
     const page = await axios.get(url)
-    console.log('axios', url)
-    console.timeLog(`get ${url}`)
     const cheerio = load(page.data)
-    console.log('cheerio', url)
-    console.timeLog(`get ${url}`)
     const data = JSON.parse(cheerio('#__NEXT_DATA__').text()).props.pageProps
       .ssrPayload.recipe
-    console.log('parse', url)
-    console.timeLog(`get ${url}`)
     const totalTime = getTime(data.totalTime)
     const prepTime = getTime(data.prepTime)
 
@@ -50,11 +46,9 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
 
     const tags = data.tags.concat(data.allergens).map((tag) => tag.name)
     const facets = usefullFacets.filter((facet) => tags.includes(facet))
-    console.log('data', url)
-    console.timeLog(`get ${url}`)
 
     const recipe = {
-      id: url,
+      id,
       slug: `${data.slug}-${data.id}`,
       image: image.attr('src') as string,
       name: data.name,
@@ -80,12 +74,10 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
             : undefined,
       })),
     }
-    console.log('dto', url)
-    console.timeLog(`get ${url}`)
     try {
       await prisma.recipe.upsert({
         where: {
-          id: url,
+          id,
         },
         update: {},
         create: {
@@ -103,8 +95,6 @@ export const getRecipe = async (url: string, checkDB: boolean) => {
       return recipe
     }
 
-    console.log('prisma', url)
-    console.timeEnd(`get ${url}`)
     return recipe
   } catch (e) {
     console.log(e)
@@ -131,7 +121,14 @@ export const getRecipes = async (startDate: Date) => {
 
     const existingRecipes = await prisma.recipe.findMany({
       include: { ingredients: true, steps: true },
-      where: { id: { in: urls } },
+      where: {
+        id: {
+          in: urls.map((url) => {
+            const data = urlRegex.exec(url)
+            return data ? data[1] : ''
+          }),
+        },
+      },
     })
 
     const recipes = await Promise.all(
