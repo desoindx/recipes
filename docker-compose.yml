@@ -1,0 +1,9 @@
+version: '3'
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: recipes
+      POSTGRES_PASSWORD: recipes
+    ports:
+      - '5432:5432'

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { getLocalStorageItem } from 'services/dates'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import Recipes from './Recipes'
 import SelectedRecipes from './SelectedRecipes'
 
@@ -10,7 +10,7 @@ const SelectableRecipes = ({
   recipes,
   startDate,
 }: {
-  recipes: Product[]
+  recipes: FullRecipe[]
   startDate: string
 }) => {
   const [selectedRecipes, setSelectedRecipes] = useState<string[]>([])

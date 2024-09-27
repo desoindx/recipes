@@ -1,6 +1,6 @@
+import { Recipe } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 import { getRecipe } from 'services/recipes'
-import { Product } from 'types/Product'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -10,13 +10,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json([])
   }
 
-  const recipes: Product[] = []
+  const recipes: Recipe[] = []
   const allIds = ids.split(',')
 
   for (let i = 0; i < allIds.length; i++) {
     const id = allIds[i]
     const recipe = await getRecipe(
       `https://www.hellofresh.fr/recipes/${id as string}`,
+      true,
     )
     if (recipe) {
       recipes.push(recipe)

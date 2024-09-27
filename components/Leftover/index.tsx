@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import ReactSelect from 'react-select'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import Filter from 'components/Filter/Filter'
 import { facets } from 'components/Filter/facets'
 import Recipe from 'components/Recipe'
@@ -14,12 +14,12 @@ const Leftover = ({
   plannings,
   products,
 }: {
-  plannings: Product[]
+  plannings: FullRecipe[]
   products: string[]
 }) => {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([])
 
-  const [toDisplay, setToDisplay] = useState<Product[]>([])
+  const [toDisplay, setToDisplay] = useState<FullRecipe[]>([])
 
   const [filter, setFilter] = useState<string[]>(facets)
   useEffect(() => {
@@ -39,12 +39,12 @@ const Leftover = ({
     setToDisplay(
       plannings
         .filter((product) =>
-          product.facets.some((facet) => filter.includes(facet.name)),
+          product.facets.some((facet) => filter.includes(facet)),
         )
         .filter((recipe) =>
           selectedProducts.every((product) =>
-            recipe.subProducts.find(
-              (recipeProduct) => recipeProduct.product.name === product,
+            recipe.ingredients.find(
+              (ingredient) => ingredient.name === product,
             ),
           ),
         )

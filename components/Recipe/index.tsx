@@ -1,9 +1,8 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import { getEmoji } from 'components/Filter/facets'
-import Nutriscore from 'components/Tag/Nutriscore'
 import Tags from 'components/Tag/Tags'
 import styles from './recipe.module.css'
 
@@ -13,7 +12,7 @@ const Recipe = ({
   withProducts,
   detailOnHover,
 }: {
-  recipe: Product
+  recipe: FullRecipe
   onClick?: (id: string) => void
   withProducts?: boolean
   detailOnHover?: boolean
@@ -26,21 +25,17 @@ const Recipe = ({
       key={recipe.name}
       onClick={() => onClick && onClick(recipe.id)}
     >
-      <img src={recipe.images[0]} alt={recipe.name} />
-      {recipe.nutriscore && (
-        <Nutriscore
-          className={styles.nutriscore}
-          nutriscore={recipe.nutriscore}
-        />
-      )}
+      <img src={recipe.image} alt={recipe.name} />
       <div className={styles.recipeType}>{getEmoji(recipe.facets)}</div>
       <p className={styles.title}>{recipe.name}</p>
       <Tags recipe={recipe} />
       <div className={classNames(styles.productsList, { none: !withProducts })}>
-        {recipe.subProducts.map((product) => (
-          <span className={styles.item} key={product.product.name}>
-            {product.product.name} :{' '}
-            <span className={styles.quantity}>{product.literalQuantity}</span>
+        {recipe.ingredients.map((ingredient) => (
+          <span className={styles.item} key={ingredient.name}>
+            {ingredient.name} :{' '}
+            <span className={styles.quantity}>
+              {ingredient.literalQuantity}
+            </span>
           </span>
         ))}
       </div>
@@ -50,7 +45,7 @@ const Recipe = ({
   return onClick ? (
     content
   ) : (
-    <Link className={styles.boxLink} href={`/recipe/${recipe.id}`}>
+    <Link className={styles.boxLink} href={`/recipe/${recipe.slug}`}>
       {content}
     </Link>
   )

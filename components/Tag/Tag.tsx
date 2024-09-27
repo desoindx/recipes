@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import styles from './Tag.module.css'
 
 const Tag = ({ color, children }: { color: string; children: ReactNode }) => (
@@ -9,7 +9,7 @@ const Tag = ({ color, children }: { color: string; children: ReactNode }) => (
 export const PreparationTag = ({
   recipe,
 }: {
-  recipe: Pick<Product, 'waitingTime' | 'cookingTime'>
+  recipe: Pick<FullRecipe, 'waitingTime' | 'cookingTime'>
 }) => {
   let color = 'grey'
   if (recipe.waitingTime < 30) {
@@ -30,22 +30,18 @@ export const PreparationTag = ({
 export const KCalTag = ({
   recipe,
 }: {
-  recipe: Pick<Product, 'nutritionalInformation'>
+  recipe: Pick<FullRecipe, 'kiloCalorie'>
 }) => {
   let color = 'grey'
-  if (recipe.nutritionalInformation) {
-    if (recipe.nutritionalInformation.kiloCalorie < 625) {
+  if (recipe.kiloCalorie) {
+    if (recipe.kiloCalorie < 625) {
       color = 'green'
-    } else if (recipe.nutritionalInformation.kiloCalorie > 900) {
+    } else if (recipe.kiloCalorie > 900) {
       color = 'red'
-    } else if (recipe.nutritionalInformation.kiloCalorie > 750) {
+    } else if (recipe.kiloCalorie > 750) {
       color = 'yellow'
     }
   }
 
-  return (
-    <Tag color={color}>
-      {recipe.nutritionalInformation?.kiloCalorie || '???'} kcal
-    </Tag>
-  )
+  return <Tag color={color}>{recipe.kiloCalorie || '???'} kcal</Tag>
 }

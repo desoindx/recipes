@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import { facets } from 'components/Filter/facets'
 import RecipesHeader from '../Header/RecipesHeader'
 import Recipe from './index'
@@ -14,7 +14,7 @@ const Recipes = ({
   withHeader,
 }: {
   startDate?: string
-  recipes: Product[]
+  recipes: FullRecipe[]
   selectRecipe?: (id: string) => void
   withHeader?: boolean
 }) => {
@@ -46,9 +46,7 @@ const Recipes = ({
       <div className={styles.allRecipes}>
         {recipes
           .filter((product) =>
-            product.facets.some(
-              (facet) => filter && filter.includes(facet.name),
-            ),
+            product.facets.some((facet) => filter && filter.includes(facet)),
           )
           .map((recipe) => (
             <Recipe

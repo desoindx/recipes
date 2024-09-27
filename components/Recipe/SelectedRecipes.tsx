@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { ReactNode, useEffect, useState } from 'react'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import buttonStyles from 'components/Button/button.module.css'
 import Recipe from '.'
 import styles from './selectedRecipes.module.css'
@@ -12,7 +12,7 @@ const SelectedRecipes = ({
   recipes,
   unselectRecipe,
 }: {
-  recipes: Product[]
+  recipes: FullRecipe[]
   unselectRecipe: (id: string) => void
 }) => {
   const [seeRecipes, setSeeRecipes] = useState(true)
@@ -26,14 +26,14 @@ const SelectedRecipes = ({
     const products: Record<string, number> = {}
     const quantityTypes = {}
     recipes.forEach((recipe) =>
-      recipe.subProducts.forEach((product) => {
-        const existingQuantity = products[product.product.name] || 0
-        products[product.product.name] = existingQuantity + product.quantity
+      recipe.ingredients.forEach((ingredient) => {
+        const existingQuantity = products[ingredient.name] || 0
+        products[ingredient.name] = existingQuantity + ingredient.quantity
 
         const quantityType = allQuantityTypes.find((type) =>
-          product.literalQuantity.includes(type),
+          ingredient.literalQuantity.includes(type),
         )
-        quantityTypes[product.product.name] = {
+        quantityTypes[ingredient.name] = {
           type: quantityType,
         }
       }),

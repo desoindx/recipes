@@ -17,10 +17,9 @@ const Restes = async () => {
 
   const planningsProduct = plannings.flatMap((planning) =>
     planning.flatMap((recipe) =>
-      recipe.subProducts.map((product) => product.product.name),
+      recipe.ingredients.map((product) => product.name),
     ),
   )
-
   return (
     <Leftover
       plannings={plannings.flatMap((planning) => planning)}

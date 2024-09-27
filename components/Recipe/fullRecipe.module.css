@@ -55,10 +55,6 @@
   text-align: justify;
 }
 
-.etiquette {
-  margin: 2rem;
-}
-
 .step {
   display: flex;
   gap: 0.5rem 1rem;

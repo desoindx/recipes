@@ -1,14 +1,12 @@
-export const getEmoji = (facets: { name: string }[]) => {
-  const names = facets.map(({ name }) => name)
-
-  if (names.includes('Crustacés')) {
+export const getEmoji = (facets: string[]) => {
+  if (facets.includes('Crustacés')) {
     return '🐚'
   }
-  if (names.includes('Poisson')) {
+  if (facets.includes('Poisson')) {
     return '🐟'
   }
 
-  if (names.includes('Viande')) {
+  if (facets.includes('Viande')) {
     return '🍖'
   }
   return '🌱'

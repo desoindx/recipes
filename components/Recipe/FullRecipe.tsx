@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
-import { Product } from 'types/Product'
+import { FullRecipe as FullRecipeType } from 'types/Recipe'
 import BackButton from 'components/Button/BackButton'
 import FavoriteButton from 'components/Button/FavoriteButton'
 import Tags from 'components/Tag/Tags'
@@ -10,23 +10,19 @@ const FullRecipe = ({
   recipe,
   blurred,
 }: {
-  recipe: Product
+  recipe: FullRecipeType
   blurred?: boolean
 }) => {
   return (
     <div className={styles.container}>
       <div className={styles.ingredients}>
-        <img
-          className={styles.image}
-          src={recipe.images[0]}
-          alt={recipe.name}
-        />
-        {recipe.subProducts.map((ingredient) => (
+        <img className={styles.image} src={recipe.image} alt={recipe.name} />
+        {recipe.ingredients.map((ingredient) => (
           <div
             className={classNames(styles.item, { blurred })}
-            key={ingredient.product.name}
+            key={ingredient.name}
           >
-            <b>{ingredient.product.name}</b> :{' '}
+            <b>{ingredient.name}</b> :{' '}
             {ingredient.literalQuantity.replace(' ', ' ')}
           </div>
         ))}
@@ -38,7 +34,7 @@ const FullRecipe = ({
         </div>
         {recipe &&
           recipe.steps.map((step) => (
-            <div key={step.title} className={styles.step}>
+            <div key={step.id} className={styles.step}>
               {step.image && (
                 <img className={styles.stepImage} src={step.image} alt="" />
               )}
@@ -49,7 +45,7 @@ const FullRecipe = ({
             </div>
           ))}
       </div>
-      <FavoriteButton recipe={recipe.id} />
+      <FavoriteButton recipe={recipe.slug} />
       <BackButton />
     </div>
   )

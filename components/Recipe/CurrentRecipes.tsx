@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { getLocalStorageItem } from 'services/dates'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import Recipe from '.'
 import buttonStyles from '../Button/button.module.css'
 import WeekNavigator from '../Header/WeekNavigator'
@@ -13,10 +13,10 @@ const CurrentRecipes = ({
   recipes,
   startDate,
 }: {
-  recipes: Product[]
+  recipes: FullRecipe[]
   startDate: string
 }) => {
-  const [selectedRecipes, setSelectedRecipes] = useState<Product[]>()
+  const [selectedRecipes, setSelectedRecipes] = useState<FullRecipe[]>()
 
   useEffect(() => {
     const weekRecipes = localStorage.getItem(

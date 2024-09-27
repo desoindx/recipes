@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react'
 import { getFavorites } from 'services/favorites'
-import { Product } from 'types/Product'
+import { FullRecipe } from 'types/Recipe'
 import Recipe from '.'
 import EmptyRecipe from './Empty/EmptyRecipe'
 import styles from './recipes.module.css'
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useState<Product[]>([])
+  const [favorites, setFavorites] = useState<FullRecipe[]>([])
 
   useEffect(() => {
     const ids = getFavorites()
