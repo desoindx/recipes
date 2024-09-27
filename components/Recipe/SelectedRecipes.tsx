@@ -116,9 +116,9 @@ const SelectedRecipes = ({
         {seeRecipes ? (
           recipes.map((recipe) => (
             <Recipe
-              key={recipe.id}
+              key={recipe.slug}
               recipe={recipe}
-              onClick={() => unselectRecipe(recipe.id)}
+              onClick={() => unselectRecipe(recipe.slug)}
               detailOnHover
             />
           ))

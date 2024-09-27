@@ -50,7 +50,7 @@ const Recipes = ({
           )
           .map((recipe) => (
             <Recipe
-              key={recipe.id}
+              key={recipe.slug}
               recipe={recipe}
               onClick={selectRecipe}
               withProducts

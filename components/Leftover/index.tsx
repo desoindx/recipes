@@ -50,7 +50,7 @@ const Leftover = ({
         )
         .filter(
           (recipe, index, recipes) =>
-            recipes.findIndex((r) => r.id === recipe.id) === index,
+            recipes.findIndex((r) => r.slug === recipe.slug) === index,
         ),
     )
   }, [plannings, filter, selectedProducts])
@@ -77,7 +77,7 @@ const Leftover = ({
       </div>
       <div className={recipesStyles.allRecipes}>
         {toDisplay.map((recipe) => (
-          <Recipe key={recipe.id} recipe={recipe} withProducts />
+          <Recipe key={recipe.slug} recipe={recipe} withProducts />
         ))}
       </div>
     </>

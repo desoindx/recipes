@@ -25,7 +25,7 @@ const CurrentRecipes = ({
     if (weekRecipes) {
       const chosenRecipes = weekRecipes.split(',')
       setSelectedRecipes(
-        recipes.filter((recipe) => chosenRecipes.includes(recipe.id)),
+        recipes.filter((recipe) => chosenRecipes.includes(recipe.slug)),
       )
     } else {
       setSelectedRecipes([])
@@ -43,7 +43,7 @@ const CurrentRecipes = ({
         >
           {selectedRecipes.length > 0 ? (
             selectedRecipes.map((recipe) => (
-              <Recipe key={recipe.id} recipe={recipe} />
+              <Recipe key={recipe.slug} recipe={recipe} />
             ))
           ) : (
             <>

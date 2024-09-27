@@ -23,7 +23,7 @@ const Favorites = () => {
       <h1 className={styles.title}>Vos recettes favorite</h1>
       <div className={styles.allRecipes}>
         {favorites.map((favorite) => (
-          <Recipe key={favorite.id} recipe={favorite} />
+          <Recipe key={favorite.slug} recipe={favorite} />
         ))}
       </div>
     </>
