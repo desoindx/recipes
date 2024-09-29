@@ -157,12 +157,10 @@ export const getRecipes = async (startDate: Date) => {
       }),
     )
 
-    const day = startDate.getDay()
-
     return {
       recipes: recipes.filter((x) => x) as FullRecipe[],
       startDate: new Date(
-        startDate.setDate(startDate.getDate() - day + (day == 0 ? -6 : 1)),
+        startDate.setDate(startDate.getDate() - startDate.getDay()),
       ).toISOString(),
     }
   } catch (err) {
