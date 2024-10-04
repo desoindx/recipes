@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { FullRecipe } from 'types/Recipe'
-import { getRecipe, getUrls } from '../services/recipes'
+import { getRecipe, getUrls, urlRegex } from '../services/recipes'
 
 const saveRecipes = async () => {
   const urls = await getUrls(new Date())
@@ -8,20 +8,18 @@ const saveRecipes = async () => {
     url.replace('https://www.hellofresh.fr/recipes/', ''),
   )
 
-  const savedRecipes = await axios.get<FullRecipe[]>(
+  const savedRecipes = await axios.get<(FullRecipe & { id: string })[]>(
     `${process.env.URL || 'https://weekly-recipes.vercel.app'}/api/recipes?ids=${ids.join(',')}`,
   )
 
   const newRecipes = await Promise.all(
     urls
-      .filter(
-        (url) =>
-          !savedRecipes.data.find(
-            (savedRecipe) =>
-              savedRecipe.slug ===
-              url.replace('https://www.hellofresh.fr/recipes/', ''),
-          ),
-      )
+      .filter((url) => {
+        const data = urlRegex.exec(url)
+        const id = data ? data[1] : ''
+
+        return !savedRecipes.data.find((savedRecipe) => savedRecipe.id === id)
+      })
       .map((url) => getRecipe(url, false, false))
       .filter((x) => x),
   )

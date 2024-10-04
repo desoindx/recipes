@@ -5,7 +5,7 @@ import { FullRecipe } from '../types/Recipe'
 
 const usefullFacets = ['Végétarien', 'Crustacés', 'Poisson']
 
-const urlRegex = /https:\/\/www.hellofresh.fr\/recipes\/(.*)-[a-z|0-9]*$/
+export const urlRegex = /https:\/\/www.hellofresh.fr\/recipes\/(.*)-[a-z|0-9]*$/
 const timeRegex = /PT((\d*)H)?((\d*)M)?/
 const getTime = (value: string) => {
   const totalTime = value.match(timeRegex)
@@ -18,15 +18,26 @@ const getTime = (value: string) => {
   )
 }
 
-export const getRecipeInDB = async (url: string) => {
+const getRecipeInDB = async (url: string) => {
   const data = urlRegex.exec(url)
   const id = data ? data[1] : ''
 
-  const existingRecipe = await prisma.recipe.findFirst({
+  return prisma.recipe.findFirst({
     include: { ingredients: true, steps: true },
     where: { id },
   })
-  return existingRecipe
+}
+
+export const getRecipesInDB = async (urls: string[]) => {
+  const ids = urls.map((url) => {
+    const data = urlRegex.exec(url)
+    return data ? data[1] : ''
+  })
+
+  return prisma.recipe.findMany({
+    include: { ingredients: true, steps: true },
+    where: { id: { in: ids } },
+  })
 }
 
 export const getRecipe = async (
