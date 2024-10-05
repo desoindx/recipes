@@ -13,8 +13,8 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
 
   useEffect(() => {
     const now = new Date(startDate)
-    for (let i = 0; i < 200; i++) {
-      now.setDate(now.getDate() + 7)
+    for (let i = 0; i < 10000; i++) {
+      now.setDate(now.getDate() + 1)
       if (localStorage.getItem(getLocalStorageItem(now))) {
         setNextPath(now.toISOString().split('T')[0])
         return
@@ -25,8 +25,8 @@ const WeekNavigator = ({ startDate }: { startDate: string }) => {
 
   useEffect(() => {
     const now = new Date(startDate)
-    for (let i = 0; i < 200; i++) {
-      now.setDate(now.getDate() - 7)
+    for (let i = 0; i < 10000; i++) {
+      now.setDate(now.getDate() - 1)
       if (localStorage.getItem(getLocalStorageItem(now))) {
         setPreviousPath(now.toISOString().split('T')[0])
         return
