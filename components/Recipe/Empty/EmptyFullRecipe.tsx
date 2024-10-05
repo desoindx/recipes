@@ -3,6 +3,7 @@ import { FullRecipe as FullRecipeType } from 'types/Recipe'
 import FullRecipe from '../FullRecipe'
 
 const defaultRecipe: FullRecipeType = {
+  id: '1',
   slug: 'todo',
   image: '/loading.jpg',
   facets: [],
