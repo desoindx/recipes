@@ -147,22 +147,23 @@ export const getUrls = async (startDate: Date) => {
 export const getRecipes = async (startDate: Date) => {
   try {
     const urls = await getUrls(startDate)
+    const ids = urls.map((url) => {
+      const data = urlRegex.exec(url)
+      return { id: data ? data[1] : '', url }
+    })
     const existingRecipes = await prisma.recipe.findMany({
       include: { ingredients: true, steps: true },
       where: {
         id: {
-          in: urls.map((url) => {
-            const data = urlRegex.exec(url)
-            return data ? data[1] : ''
-          }),
+          in: ids.map(({ id }) => id),
         },
       },
     })
 
     const recipes = await Promise.all(
-      urls.map((url) => {
+      ids.map(({ id, url }) => {
         const existingRecipe = existingRecipes.find(
-          (recipe) => recipe.id === url,
+          (recipe) => recipe.id === id,
         )
         return existingRecipe || getRecipe(url, false, true)
       }),

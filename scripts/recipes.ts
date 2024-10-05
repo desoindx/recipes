@@ -8,7 +8,7 @@ const saveRecipes = async () => {
     url.replace('https://www.hellofresh.fr/recipes/', ''),
   )
 
-  const savedRecipes = await axios.get<(FullRecipe & { id: string })[]>(
+  const savedRecipes = await axios.get<FullRecipe[]>(
     `${process.env.URL || 'https://weekly-recipes.vercel.app'}/api/recipes?ids=${ids.join(',')}`,
   )
 

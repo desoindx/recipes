@@ -12,10 +12,12 @@ const Favorites = () => {
 
   useEffect(() => {
     const ids = getFavorites()
-    fetch(`/api/recipes?ids=${ids.join(',')}`).then(async (response) => {
-      const recipes = await response.json()
-      setFavorites(recipes)
-    })
+    fetch(`/api/recipes?ids=${ids.map((id) => `${id}-000`).join(',')}`).then(
+      async (response) => {
+        const recipes = await response.json()
+        setFavorites(recipes)
+      },
+    )
   }, [])
 
   return favorites.length > 0 ? (

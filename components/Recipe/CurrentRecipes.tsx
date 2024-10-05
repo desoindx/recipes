@@ -25,7 +25,7 @@ const CurrentRecipes = ({
     if (weekRecipes) {
       const chosenRecipes = weekRecipes.split(',')
       setSelectedRecipes(
-        recipes.filter((recipe) => chosenRecipes.includes(recipe.slug)),
+        recipes.filter((recipe) => chosenRecipes.includes(recipe.id)),
       )
     } else {
       setSelectedRecipes([])

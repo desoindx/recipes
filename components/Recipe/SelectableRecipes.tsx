@@ -36,7 +36,7 @@ const SelectableRecipes = ({
       {recipes.length > 0 && selectedRecipes.length > 0 && (
         <SelectedRecipes
           recipes={recipes.filter((recipe) =>
-            selectedRecipes.includes(recipe.slug),
+            selectedRecipes.includes(recipe.id),
           )}
           unselectRecipe={(recipe) =>
             setSelectedRecipes(selectedRecipes.filter((r) => r !== recipe))
@@ -47,7 +47,7 @@ const SelectableRecipes = ({
         startDate={startDate}
         withHeader
         recipes={recipes.filter(
-          (recipe) => !selectedRecipes.includes(recipe.slug),
+          (recipe) => !selectedRecipes.includes(recipe.id),
         )}
         selectRecipe={(recipe) => {
           setSelectedRecipes([...selectedRecipes, recipe])

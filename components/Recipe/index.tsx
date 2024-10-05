@@ -23,7 +23,7 @@ const Recipe = ({
         [styles.detailedBox]: detailOnHover,
       })}
       key={recipe.name}
-      onClick={() => onClick && onClick(recipe.slug)}
+      onClick={() => onClick && onClick(recipe.id)}
     >
       <img src={recipe.image} alt={recipe.name} />
       <div className={styles.recipeType}>{getEmoji(recipe.facets)}</div>

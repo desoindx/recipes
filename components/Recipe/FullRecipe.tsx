@@ -34,7 +34,7 @@ const FullRecipe = ({
         </div>
         {recipe &&
           recipe.steps.map((step) => (
-            <div key={step.id} className={styles.step}>
+            <div key={step.position} className={styles.step}>
               {step.image && (
                 <img className={styles.stepImage} src={step.image} alt="" />
               )}
@@ -45,7 +45,7 @@ const FullRecipe = ({
             </div>
           ))}
       </div>
-      <FavoriteButton recipe={recipe.slug} />
+      <FavoriteButton recipe={recipe.id} />
       <BackButton />
     </div>
   )

@@ -13,15 +13,13 @@ const WeeklyRecipes = async ({
 }: {
   params: { id: string }
 }) => {
-  const date = id ? new Date(decodeURIComponent(id)) : new Date()
+  const date = new Date(decodeURIComponent(id))
   const result = await getRecipes(date)
   if (!result) {
     return null
   }
 
-  return (
-    <CurrentRecipes startDate={result.startDate} recipes={result.recipes} />
-  )
+  return <CurrentRecipes startDate={id} recipes={result.recipes} />
 }
 
 export default WeeklyRecipes

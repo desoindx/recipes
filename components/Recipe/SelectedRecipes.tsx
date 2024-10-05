@@ -118,7 +118,7 @@ const SelectedRecipes = ({
             <Recipe
               key={recipe.slug}
               recipe={recipe}
-              onClick={() => unselectRecipe(recipe.slug)}
+              onClick={() => unselectRecipe(recipe.id)}
               detailOnHover
             />
           ))
