@@ -53,12 +53,20 @@
 
 .description {
   text-align: justify;
+
+  ul {
+    padding-left: 1rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
 }
 
 .step {
   display: flex;
   gap: 0.5rem 1rem;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
   align-items: center;
 
   @media (max-width: 600px) {

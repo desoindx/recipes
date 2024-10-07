@@ -38,10 +38,10 @@ const FullRecipe = ({
               {step.image && (
                 <img className={styles.stepImage} src={step.image} alt="" />
               )}
-              <p
+              <div
                 className={classNames(styles.description, { blurred })}
                 dangerouslySetInnerHTML={{ __html: step.description }}
-              ></p>
+              ></div>
             </div>
           ))}
       </div>
