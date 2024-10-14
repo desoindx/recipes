@@ -13,8 +13,7 @@ const WeeklyRecipes = async ({
 }: {
   params: { id: string }
 }) => {
-  const date = new Date(decodeURIComponent(id))
-  const result = await getRecipes(date)
+  const result = await getRecipes(decodeURIComponent(id))
   if (!result) {
     return null
   }

@@ -144,9 +144,10 @@ export const getUrls = async (startDate: Date) => {
   ) as string[]
 }
 
-export const getRecipes = async (startDate: Date) => {
+export const getRecipes = async (startDate?: string) => {
   try {
-    const urls = await getUrls(startDate)
+    const date = startDate ? new Date(startDate) : new Date()
+    const urls = await getUrls(date)
     const ids = urls.map((url) => {
       const data = urlRegex.exec(url)
       return { id: data ? data[1] : '', url }
@@ -172,7 +173,7 @@ export const getRecipes = async (startDate: Date) => {
     return {
       recipes: recipes.filter((x) => x) as FullRecipe[],
       startDate: new Date(
-        startDate.setDate(startDate.getDate() - startDate.getDay()),
+        date.setDate(date.getDate() - date.getDay()),
       ).toISOString(),
     }
   } catch (err) {
@@ -183,7 +184,7 @@ export const getRecipes = async (startDate: Date) => {
 
 export const getAllRecipes = async (): Promise<FullRecipe[][]> => {
   const now = new Date()
-  const initialRecipes = await getRecipes(now)
+  const initialRecipes = await getRecipes()
   if (initialRecipes) {
     const allRecipes = [initialRecipes.recipes as FullRecipe[]]
     now.setDate(now.getDate() - 14)
@@ -195,7 +196,7 @@ export const getAllRecipes = async (): Promise<FullRecipe[][]> => {
       }
 
       // eslint-disable-next-line no-await-in-loop
-      const result = await getRecipes(now)
+      const result = await getRecipes(now.toDateString())
       if (result) {
         allRecipes.push(result.recipes as FullRecipe[])
       }
