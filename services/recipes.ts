@@ -129,7 +129,7 @@ export const getRecipe = async (
 
 export const getUrls = async (startDate: Date) => {
   var onejan = new Date(startDate.getFullYear(), 0, 1)
-
+  startDate.setDate(startDate.getDate() + 1)
   //@ts-expect-error: Expect number
   var dayOfYear = (startDate - onejan + 86400000) / 86400000
   const week = Math.ceil(dayOfYear / 7)
