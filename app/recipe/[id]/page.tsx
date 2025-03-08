@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import React from 'react'
 import { getRecipe } from 'services/recipes'
 import FullRecipe from 'components/Recipe/FullRecipe'
 
 export const maxDuration = 60
 export const dynamic = 'force-static'
+
+type Props = { params: Promise<{ id: string }> }
+
 export async function generateStaticParams() {
   return []
 }
 
-export async function generateMetadata({
-  params: { id },
-}: {
-  params: { id: string }
-}): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params
   const recipe = await getRecipe(
-    `https://www.hellofresh.fr/recipes/${id as string}`,
+    `https://www.hellofresh.fr/recipes/${params.id as string}`,
     true,
     true,
   )
@@ -31,9 +30,10 @@ export async function generateMetadata({
     : {}
 }
 
-const Recipe = async ({ params: { id } }: { params: { id: string } }) => {
+const Recipe = async (props: Props) => {
+  const params = await props.params
   const recipe = await getRecipe(
-    `https://www.hellofresh.fr/recipes/${id as string}`,
+    `https://www.hellofresh.fr/recipes/${params.id as string}`,
     true,
     true,
   )

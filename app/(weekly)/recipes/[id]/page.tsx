@@ -1,4 +1,3 @@
-import React from 'react'
 import { getRecipes } from 'services/recipes'
 import CurrentRecipes from 'components/Recipe/CurrentRecipes'
 
@@ -7,18 +6,17 @@ export const dynamic = 'force-static'
 export async function generateStaticParams() {
   return []
 }
+type Props = { params: Promise<{ id: string }> }
 
-const WeeklyRecipes = async ({
-  params: { id },
-}: {
-  params: { id: string }
-}) => {
-  const result = await getRecipes(decodeURIComponent(id))
+const WeeklyRecipes = async (props: Props) => {
+  const params = await props.params
+
+  const result = await getRecipes(decodeURIComponent(params.id))
   if (!result) {
     return null
   }
 
-  return <CurrentRecipes startDate={id} recipes={result.recipes} />
+  return <CurrentRecipes startDate={params.id} recipes={result.recipes} />
 }
 
 export default WeeklyRecipes

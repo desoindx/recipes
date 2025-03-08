@@ -128,14 +128,13 @@ export const getRecipe = async (
 }
 
 export const getUrls = async (startDate: Date) => {
-  var onejan = new Date(startDate.getFullYear(), 0, 1)
+  const onejan = new Date(startDate.getFullYear(), 0, 1)
   startDate.setDate(startDate.getDate() + 1)
-  //@ts-expect-error: Expect number
-  var dayOfYear = (startDate - onejan + 86400000) / 86400000
-  const week = Math.ceil(dayOfYear / 7)
-
+  // @ts-expect-error: Expect number
+  const dayOfYear = (startDate - onejan + 86400000) / 86400000
+  const week = Math.ceil(dayOfYear / 7) + 1
   const page = await axios.get(
-    `https://www.hellofresh.fr/menus/${startDate.getFullYear()}-W${week}`,
+    `https://www.hellofresh.fr/menus/${startDate.getFullYear()}-W${week < 10 ? `0${week}` : week}`,
   )
   const cheerio = load(page.data)
   const data = JSON.parse(cheerio('#__NEXT_DATA__').text())
