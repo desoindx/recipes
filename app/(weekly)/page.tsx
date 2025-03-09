@@ -1,7 +1,7 @@
 import { getRecipes } from 'services/recipes'
 import SelectableRecipes from 'components/Recipe/SelectableRecipes'
 
-export const revalidate = 3600 * 24
+export const revalidate = 86400
 export const maxDuration = 60
 
 const Home = async () => {
