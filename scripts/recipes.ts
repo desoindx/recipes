@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { urlRegex } from 'services/config'
 import { FullRecipe } from 'types/Recipe'
-import { getRecipe, getUrls } from '../services/recipes'
+import { getRecipe, getUrls, urlRegex } from '../services/recipes'
 
 const saveRecipes = async () => {
   const urls = await getUrls(new Date())

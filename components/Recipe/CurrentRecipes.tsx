@@ -1,19 +1,22 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getLocalStorageItem } from 'services/dates'
-import { getRecipesInDB } from 'services/recipes'
 import { FullRecipe } from 'types/Recipe'
 import Recipe from '.'
 import buttonStyles from '../Button/button.module.css'
 import WeekNavigator from '../Header/WeekNavigator'
 import styles from './recipes.module.css'
 
-const CurrentRecipes = ({ startDate }: { startDate: string }) => {
-  const [selectedRecipes, setSelectedRecipes] = useState<FullRecipe[] | null>(
-    null,
-  )
+const CurrentRecipes = ({
+  recipes,
+  startDate,
+}: {
+  recipes: FullRecipe[]
+  startDate: string
+}) => {
+  const [selectedRecipes, setSelectedRecipes] = useState<FullRecipe[]>()
 
   useEffect(() => {
     const weekRecipes = localStorage.getItem(
@@ -21,15 +24,13 @@ const CurrentRecipes = ({ startDate }: { startDate: string }) => {
     )
     if (weekRecipes) {
       const chosenRecipes = weekRecipes.split(',')
-      getRecipesInDB(
-        chosenRecipes.map(
-          (recipe) => `https://www.hellofresh.fr/recipes/${recipe}`,
-        ),
-      ).then((recipes) => setSelectedRecipes(recipes))
+      setSelectedRecipes(
+        recipes.filter((recipe) => chosenRecipes.includes(recipe.id)),
+      )
     } else {
-      setSelectedRecipes(null)
+      setSelectedRecipes([])
     }
-  }, [startDate])
+  }, [startDate, recipes])
 
   return (
     <div className={styles.container}>
