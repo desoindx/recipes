@@ -19,6 +19,8 @@ const getTime = (value: string) => {
 }
 
 const getRecipeInDB = async (url: string) => {
+  'use cache'
+
   const data = urlRegex.exec(url)
   const id = data ? data[1] : ''
 
@@ -45,8 +47,8 @@ export const getRecipe = async (
   checkDB: boolean,
   save: boolean,
 ) => {
-  const data = urlRegex.exec(url)
-  const id = data ? data[1] : ''
+  const urlData = urlRegex.exec(url)
+  const id = urlData ? urlData[1] : ''
 
   if (checkDB) {
     const existingRecipe = await getRecipeInDB(url)
@@ -144,6 +146,8 @@ export const getUrls = async (startDate: Date) => {
 }
 
 export const getRecipes = async (startDate?: string) => {
+  'use cache'
+
   try {
     const date = startDate ? new Date(startDate) : new Date()
     const urls = await getUrls(date)

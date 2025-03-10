@@ -16,6 +16,9 @@ if (process.env.UNSAFE_EVAL === 'true') {
 }
 
 const nextConfig = {
+  experimental: {
+    useCache: true,
+  },
   staticPageGenerationTimeout: 200,
   reactStrictMode: true,
   eslint: {
