@@ -3,7 +3,6 @@ import { getAllRecipes } from 'services/recipes'
 import Leftover from 'components/Leftover'
 
 export const revalidate = 86400
-export const maxDuration = 60
 
 export const metadata: Metadata = {
   title: 'Utiliser ses restes | Weekly recipes',

@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import { getRecipe } from 'services/recipes'
 import FullRecipe from 'components/Recipe/FullRecipe'
 
-export const maxDuration = 60
 export const dynamic = 'force-static'
 
 type Props = { params: Promise<{ id: string }> }

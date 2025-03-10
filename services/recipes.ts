@@ -1,11 +1,13 @@
+'use server'
+
 import axios from 'axios'
 import { load } from 'cheerio'
 import prisma from '../prisma/client'
 import { FullRecipe } from '../types/Recipe'
+import { urlRegex } from './config'
 
 const usefullFacets = ['Végétarien', 'Crustacés', 'Poisson']
 
-export const urlRegex = /https:\/\/www.hellofresh.fr\/recipes\/(.*)-[a-z|0-9]*$/
 const timeRegex = /PT((\d*)H)?((\d*)M)?/
 const getTime = (value: string) => {
   const totalTime = value.match(timeRegex)
@@ -45,8 +47,8 @@ export const getRecipe = async (
   checkDB: boolean,
   save: boolean,
 ) => {
-  const data = urlRegex.exec(url)
-  const id = data ? data[1] : ''
+  const urlData = urlRegex.exec(url)
+  const id = urlData ? urlData[1] : ''
 
   if (checkDB) {
     const existingRecipe = await getRecipeInDB(url)
