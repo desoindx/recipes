@@ -1,10 +1,9 @@
 import Link from 'next/link'
-import React from 'react'
 import styles from './BurgerMenu.module.css'
 import BurgerMenuCheckBox from './BurgerMenuCheckBox'
 import menu from './menu.config'
 
-const BurgerMenu = (): JSX.Element => (
+const BurgerMenu = () => (
   <>
     <div className={styles.container}>
       <span>Weekly recipes</span>
