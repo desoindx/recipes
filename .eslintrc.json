@@ -1,10 +1,11 @@
 {
-  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "prettier"
+  ],
   "extends": [
     "next",
-    "airbnb/base",
-    "airbnb-typescript/base",
-    "airbnb/hooks",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
