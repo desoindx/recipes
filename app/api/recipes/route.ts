@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import prisma from 'prisma/client'
 import { getRecipesInDB } from 'services/recipes'
+import { prismaClient } from '../../../prisma/client'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   }
   await Promise.all(
     body.recipes.map((recipe) =>
-      prisma.recipe.upsert({
+      prismaClient.recipe.upsert({
         where: {
           id: recipe.id,
         },

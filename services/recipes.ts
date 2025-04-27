@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { load } from 'cheerio'
-import prisma from '../prisma/client'
+import { prismaClient } from '../prisma/client'
 import { FullRecipe } from '../types/Recipe'
 
 const usefullFacets = ['Végétarien', 'Crustacés', 'Poisson']
@@ -24,7 +24,7 @@ const getRecipeInDB = async (url: string) => {
   const data = urlRegex.exec(url)
   const id = data ? data[1] : ''
 
-  return prisma.recipe.findFirst({
+  return prismaClient.recipe.findFirst({
     include: { ingredients: true, steps: true },
     where: { id },
   })
@@ -36,7 +36,7 @@ export const getRecipesInDB = async (urls: string[]) => {
     return data ? data[1] : ''
   })
 
-  return prisma.recipe.findMany({
+  return prismaClient.recipe.findMany({
     include: { ingredients: true, steps: true },
     where: { id: { in: ids } },
   })
@@ -101,7 +101,7 @@ export const getRecipe = async (
     }
     if (save) {
       try {
-        await prisma.recipe.upsert({
+        await prismaClient.recipe.upsert({
           where: {
             id,
           },
@@ -155,7 +155,7 @@ export const getRecipes = async (startDate?: string) => {
       const data = urlRegex.exec(url)
       return { id: data ? data[1] : '', url }
     })
-    const existingRecipes = await prisma.recipe.findMany({
+    const existingRecipes = await prismaClient.recipe.findMany({
       include: { ingredients: true, steps: true },
       where: {
         id: {
