@@ -83,9 +83,10 @@ export const getRecipe = async (
       ingredients: data.ingredients.map((ingredient) => {
         const quantity = yields.find((x) => x.id === ingredient.id)
         return {
-          literalQuantity:
-            (quantity.amount ? `${quantity.amount * 2} ` : '') + quantity.unit,
-          quantity: quantity.amount ? quantity.amount * 2 : 1,
+          literalQuantity: quantity
+            ? (quantity.amount ? `${quantity.amount * 2} ` : '') + quantity.unit
+            : '',
+          quantity: quantity ? (quantity.amount ? quantity.amount * 2 : 1) : '',
           name: ingredient.name,
         }
       }),
