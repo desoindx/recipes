@@ -75,7 +75,7 @@ export const getRecipe = async (
     const recipe = {
       id,
       slug: `${data.slug}-${data.id}`,
-      image: image.attr('src') as string,
+      image: (image.attr('src') || '') as string,
       name: data.name,
       cookingTime: totalTime,
       waitingTime: prepTime,
@@ -86,7 +86,7 @@ export const getRecipe = async (
           literalQuantity: quantity
             ? (quantity.amount ? `${quantity.amount * 2} ` : '') + quantity.unit
             : '',
-          quantity: quantity ? (quantity.amount ? quantity.amount * 2 : 1) : '',
+          quantity: quantity ? (quantity.amount ? quantity.amount * 2 : 1) : 0,
           name: ingredient.name,
         }
       }),
@@ -97,7 +97,7 @@ export const getRecipe = async (
         image:
           step.images && step.images.length > 0
             ? `https://img.hellofresh.com/w_750,q_auto,f_auto,c_limit,fl_lossy/hellofresh_s3${step.images[0].path}`
-            : undefined,
+            : '',
       })),
     }
     if (save) {

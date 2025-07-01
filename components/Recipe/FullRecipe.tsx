@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import React from 'react'
 import { FullRecipe as FullRecipeType } from 'types/Recipe'
 import BackButton from 'components/Button/BackButton'
 import FavoriteButton from 'components/Button/FavoriteButton'
@@ -16,7 +15,9 @@ const FullRecipe = ({
   return (
     <div className={styles.container}>
       <div className={styles.ingredients}>
-        <img className={styles.image} src={recipe.image} alt={recipe.name} />
+        {recipe.image && (
+          <img className={styles.image} src={recipe.image} alt={recipe.name} />
+        )}
         {recipe.ingredients.map((ingredient) => (
           <div
             className={classNames(styles.item, { blurred })}

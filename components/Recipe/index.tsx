@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 import { FullRecipe } from 'types/Recipe'
 import { getEmoji } from 'components/Filter/facets'
 import Tags from 'components/Tag/Tags'
@@ -25,7 +24,7 @@ const Recipe = ({
       key={recipe.name}
       onClick={() => onClick && onClick(recipe.id)}
     >
-      <img src={recipe.image} alt={recipe.name} />
+      {recipe.image && <img src={recipe.image} alt={recipe.name} />}
       <div className={styles.recipeType}>{getEmoji(recipe.facets)}</div>
       <p className={styles.title}>{recipe.name}</p>
       <Tags recipe={recipe} />
